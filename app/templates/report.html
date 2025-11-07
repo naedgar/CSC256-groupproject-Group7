@@ -1,0 +1,68 @@
+<!-- templates/report.html -->
+  {% extends 'base.html' %}
+
+  {% block title %}Task Report{% endblock %}
+
+  {% block content %}
+  <!-- 
+  📚 DATA AGGREGATION & ANALYTICS EXPLAINED:
+
+  🔄 HOW REPORT DATA IS CALCULATED:
+  1. User visits /tasks/report → Flask routes to ui.py → task_report()
+  2. ui.py calls current_app.task_service.get_tasks() to fetch ALL tasks
+  3. Python code aggregates the data:
+    - total = len(tasks) → Count all tasks
+    - completed = len([t for t in tasks if t.get("completed", False)]) → Count completed
+    - remaining = total - completed → Calculate remaining tasks
+  4. Data passed to template: render_template("report.html", total=total, completed=completed, remaining=remaining)
+  5. Template displays the calculated statistics using {{ variable }} syntax
+
+  🎯 BACKEND COMPONENTS FOR ANALYTICS:
+  - routes/ui.py: task_report() function - handles report logic
+  - services/task_service.py: get_tasks() - provides raw data
+  - Python list comprehensions: Efficient data filtering and counting
+  - Jinja2 templating: {{ total }}, {{ completed }}, {{ remaining }} display
+
+  💡 REAL-WORLD APPLICATIONS:
+  - Dashboard analytics in business apps
+  - KPI (Key Performance Indicator) tracking
+  - Data aggregation for charts and graphs
+  - Performance metrics and reporting
+
+  🔍 DATA PROCESSING PATTERN:
+  Raw Data → Filter/Transform → Aggregate → Display
+  This is a fundamental pattern in data analytics and business intelligence!
+
+  📊 FUTURE ENHANCEMENTS:
+  - Add percentage calculations (completed/total * 100)
+  - Time-based analytics (tasks completed this week/month)
+  - Charts and visualizations using JavaScript libraries
+  - Export reports to PDF or Excel
+  -->
+
+  <section>
+    <header>
+      <h1>Task Summary Report</h1>
+    </header>
+    
+    <article class="report-data">
+      <h2 class="sr-only">Task Statistics</h2>
+      <!-- Description list (dl) is semantically correct for key-value pairs -->
+      <dl class="task-stats">
+        <!-- Each statistic calculated in ui.py and passed to template -->
+        <div class="stat-item">
+          <dt>Total Tasks:</dt>
+          <dd>{{ total }}</dd> <!-- len(tasks) from backend -->
+        </div>
+        <div class="stat-item">
+          <dt>Completed Tasks:</dt>
+          <dd>{{ completed }}</dd> <!-- len([t for t in tasks if t.completed]) -->
+        </div>
+        <div class="stat-item">
+          <dt>Remaining Tasks:</dt>
+          <dd>{{ remaining }}</dd> <!-- total - completed calculation -->
+        </div>
+      </dl>
+    </article>
+  </section>
+  {% endblock %}

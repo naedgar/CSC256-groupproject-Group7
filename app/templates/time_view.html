@@ -1,0 +1,23 @@
+<!-- app/templates/time_view.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>🕒 Current UTC Time</h2>
+
+{% if time_data.utc_datetime %}
+    <div class="alert alert-success">
+        <p><strong>UTC Time:</strong> {{ time_data.utc_datetime }}</p>
+        <small>{% if time_data.source %}Source: {{ time_data.source }}{% else %}Time retrieved successfully{% endif %}</small>
+    </div>
+{% elif time_data.error %}
+    <div class="alert alert-error">
+        <p><strong>Error:</strong> {{ time_data.error }}</p>
+    </div>
+{% else %}
+    <div class="alert alert-warning">
+        <p>⚠️ Unexpected response from TimeService.</p>
+    </div>
+{% endif %}
+
+<a href="/" class="btn btn-secondary">Back to Home</a>
+{% endblock %}

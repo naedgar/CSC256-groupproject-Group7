@@ -1,0 +1,77 @@
+<!--templates/task_list.html-->
+  {% extends 'base.html' %}
+
+  {% block title %}Task List{% endblock %}
+
+  {% block content %}
+  <!-- 
+  📚 FULL-STACK DATA FLOW EXPLAINED:
+
+  🔄 HOW THIS PAGE GETS ITS DATA:
+  1. User visits /tasks URL → Flask routes this to ui.py
+  2. ui.py calls current_app.task_service.get_tasks()
+  3. TaskService in services/task_service.py loads data via:
+    - Either: Direct file I/O (load_tasks() from task_storage.py)
+    - Or: Database calls (DatabaseTaskRepository)
+  4. Data flows back: Repository → Service → UI Route → Template
+  5. Template renders the 'tasks' variable passed from the route
+
+  🎯 BACKEND COMPONENTS THIS PAGE USES:
+  - routes/ui.py: Web UI endpoints (/tasks route)
+  - services/task_service.py: Business logic layer
+  - repositories/database_task_repository.py: Data access layer
+  - models/task.py: Task data structure/validation
+
+  💡 FORM ACTIONS EXPLAINED:
+  - Complete button: POST to /tasks/{id}/complete → ui.py → task_service.complete_task()
+  - Delete button: POST to /tasks/{id}/delete → ui.py → task_service.delete_task()
+  - Both actions reload this same page to show updated task list
+
+  🔗 API INTEGRATION NOTE:
+  This UI shares the same backend services as the REST API in routes/tasks.py
+  Both web forms and API calls use identical business logic!
+  -->
+
+  <section>
+    <header>
+      <h1>All Tasks</h1>
+    </header>
+    
+    {% if tasks %}
+      <!-- Task list populated by TaskService.get_tasks() from backend -->
+      <section class="task-list" role="list" aria-label="Task list">
+        {% for task in tasks %}
+          <!-- Each task object comes from models/task.py via the service layer -->
+          <article class="task-item {% if task.completed %}task-completed{% endif %}" role="listitem">
+            <header class="task-header">
+              <div class="task-content">
+                <h2 class="task-title">{{ task.title }}</h2>
+                {% if task.description %}
+                  <p class="task-description">{{ task.description }}</p>
+                {% endif %}
+              </div>
+              <!-- Action buttons: Each form submits to backend routes in ui.py -->
+              <div class="task-actions" role="group" aria-label="Task actions for {{ task.title }}">
+                {% if not task.completed %}
+                  <!-- Complete action: POST → ui.py → TaskService.complete_task() → saves to storage -->
+                  <form action="/tasks/{{ task.id }}/complete" method="post" style="display:inline-block">
+                    <button type="submit" class="btn-small btn-complete" aria-label="Mark {{ task.title }} as complete">Complete</button>
+                  </form>
+                {% endif %}
+                <!-- Delete action: POST → ui.py → TaskService.delete_task() → removes from storage -->
+                <form action="/tasks/{{ task.id }}/delete" method="post" style="display:inline-block">
+                  <button type="submit" class="btn-small btn-delete" aria-label="Delete {{ task.title }}">Delete</button>
+                </form>
+              </div>
+            </header>
+          </article>
+        {% endfor %}
+      </section>
+    {% else %}
+      <!-- Empty state: Shown when TaskService.get_tasks() returns empty list -->
+      <section class="empty-state" role="status" aria-live="polite">
+        <p>No tasks yet! <a href="{{ url_for('ui.task_submit') }}">Create your first task</a></p>
+      </section>
+    {% endif %}
+  </section>
+  {% endblock %}
