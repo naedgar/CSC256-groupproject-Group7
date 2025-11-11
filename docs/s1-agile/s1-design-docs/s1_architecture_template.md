@@ -1,24 +1,33 @@
 # Architecture Diagram
 
-## Sprint 1 Monolithic
+## Sprint 1 – Group Project (Refactored Flask App)
 ```mermaid
 graph TD
   A[main.py] --> B[Flask App Instance]
   B --> C[GET /api/health]
   B --> D[GET /api/tasks]
   B --> E[POST /api/tasks]
-  B --> F[PUT /api/tasks/id]
-  B --> G[DELETE /api/tasks/id]
+  B --> F[PUT /api/tasks/<id>]
+  B --> G[DELETE /api/tasks/<id>]
+  B --> H[GET /api/time]
   
-  CLI[cli_app.py] --> H[Menu: Add/View Tasks]
+  CLI[cli_app.py] --> I[Menu: Add/View Tasks]
   
-  C --> I[In-Memory Task List]
-  D --> I
-  E --> I
-  F --> I
-  G --> I
-  H --> I
-```
-> [!TIP]
-> This CLI interface is intentionally simple in Sprint 1. It supports only adding and viewing tasks and shares the in-memory store with the API. In Sprint 2, the CLI will be extended slightly to reflect new features (US005 – Delete, US006 – Mark Complete) but will remain procedural. Full CLI feature parity is deferred to the Web UI in Sprint 4.
+  C --> J[TaskService]
+  D --> J
+  E --> J
+  F --> J
+  G --> J
+  H --> K[TimeService]
+  
+  J --> L[Pydantic Validation]
+  J --> M[JSON / SQLite Storage]
+  I --> J
 
+  subgraph Testing
+    T1[pytest]
+    T2[Robot Framework]
+  end
+
+  Testing --> B
+  Testing --> J
