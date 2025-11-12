@@ -120,13 +120,15 @@ This document provides an overview of the API endpoints planned and/or implement
 
 ```mermaid
 flowchart TD
-    A[Postman / Browser / CI Tool] --> B[Flask App]
-    B --> C1["/api/health"]
-    B --> C2["/api/tasks POST"]
-    B --> C3["/api/tasks GET"]
-    C1 --> D1["{status: 'ok'}"]
-    C2 --> D2["New Task JSON"]
-    C3 --> D3["List of Tasks"]
+    A[Postman / CLI / CI Tool] --> B[Flask App]
+    B --> C1["GET /api/health"]
+    B --> C2["POST /api/tasks"]
+    B --> C3["GET /api/tasks"]
+    B --> C4["GET /api/time"]
+    C1 --> R1["{ status: 'ok' }"]
+    C2 --> R2["New Task JSON"]
+    C3 --> R3["List of Tasks"]
+    C4 --> R4["Time JSON"]
 ```
 
 > This diagram will evolve each sprint to include additional endpoints (e.g. complete, delete).
