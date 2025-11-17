@@ -11,6 +11,11 @@ from app.repositories.database_task_repository import DatabaseTaskRepository
 
 # ✅ TC-RF010-001: Add and Retrieve Tasks from DB (in-memory SQLite)
 
+import pytest
+
+pytestmark = pytest.mark.integration
+
+
 def test_add_and_get_tasks_in_memory(in_memory_repo):
     in_memory_repo.add_task("Test", "SQA Task")
     tasks = in_memory_repo.get_all_tasks()

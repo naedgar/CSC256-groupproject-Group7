@@ -1,0 +1,93 @@
+name: E2E tests
+
+on:
+  push:
+    paths:
+      - 'app/**'
+      - 'tests/ui/**'
+      - 'tests/**/e2e/**'
+  pull_request:
+    # NOTE: omitting paths here lets us decide in-job whether to run E2E
+    # so we can support PR-label override and changed-path detection.
+  workflow_dispatch:
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13.5'
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          # If using playwright:
+          python -m playwright install --with-deps
+          # If using selenium and chromedriver, ensure driver is available or use webdriver-manager
+
+      - name: Should run E2E? (decide by changed paths or PR label)
+        id: should_run
+        run: |
+          run=false
+          # If manual dispatch, run
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            run=true
+          fi
+
+          # If push, check if any changed files match the e2e paths
+          if [ "${{ github.event_name }}" = "push" ]; then
+            git fetch --depth=1 origin ${{ github.ref }}
+            # Compare against main; adjust base if needed
+            changed=$(git diff --name-only HEAD origin/main)
+            echo "changed files: $changed"
+            echo "$changed" | grep -E '^(app/|tests/ui/|tests/.*/e2e/)' && run=true || true
+          fi
+
+          # If pull_request, check labels (use pull_request_target if you need labels securely)
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            # read labels from event payload
+            labels=$(jq -r '.pull_request.labels[]?.name' $GITHUB_EVENT_PATH || true)
+            echo "PR labels: $labels"
+            echo "$labels" | grep -q "run-e2e" && run=true || true
+
+            # Also check changed files in the PR (safer)
+            git --no-pager diff --name-only origin/${{ github.base_ref }}...${{ github.sha }} | \
+              grep -E '^(app/|tests/ui/|tests/.*/e2e/)' && run=true || true
+          fi
+
+          echo "run=$run" >> $GITHUB_OUTPUT
+
+      - name: Exit early if not needed
+        if: steps.should_run.outputs.run != 'true'
+        run: |
+          echo "No relevant changes and no run-e2e label; skipping E2E job."
+          exit 0
+
+      - name: Run e2e tests
+        run: |
+          pytest -q -m e2e
+
+      - name: Upload e2e artifacts
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: e2e-results
+          path: |
+            results/**
+            htmlcov/**
+            docs/screenshots/**

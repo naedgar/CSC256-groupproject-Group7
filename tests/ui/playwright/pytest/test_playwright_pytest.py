@@ -41,6 +41,8 @@ import pytest
 import time
 import os
 
+pytestmark = pytest.mark.e2e
+
 # Configuration - these can now be removed since they're in conftest.py
 # but keeping for backward compatibility and local overrides
 #learning_mode = os.environ.get('learning_mode', 'false').lower() == 'true'

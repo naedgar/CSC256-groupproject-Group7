@@ -122,6 +122,11 @@ def driver():
     print("✅ Browser cleanup completed")
 
 
+import pytest
+
+pytestmark = pytest.mark.e2e
+
+
 def test_add_task_happy_path(driver):
     """
     RF014-US003-UI: Verify adding a task through the web UI.(happy path)

@@ -1,6 +1,8 @@
 import pytest
 from app.services.task_service import TaskService
 
+pytestmark = pytest.mark.unit
+
 def test_add_task_creates_new_task(tmp_path):
     """
     TC-US002-001

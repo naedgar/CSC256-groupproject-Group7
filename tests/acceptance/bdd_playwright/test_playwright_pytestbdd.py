@@ -16,6 +16,8 @@ except Exception:  # pragma: no cover - optional dependency
     import pytest
     pytest.skip("pytest-bdd not installed; skip pytest-bdd adapter", allow_module_level=True)
 
+pytestmark = pytest.mark.e2e
+
 
 # This adapter expects a pytest fixture named `page` (provided by pytest-playwright
 # or a project `conftest.py`). We use the Playwright `page` directly rather than
