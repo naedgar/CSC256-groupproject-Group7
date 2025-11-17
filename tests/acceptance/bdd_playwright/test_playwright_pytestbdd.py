@@ -7,7 +7,7 @@ shared pw_helpers so test logic remains DRY.
 Run with: pytest -q tests/acceptance/bdd_playwright/test_playwright_pytestbdd.py
 """
 from __future__ import annotations
-
+import pytest
 import requests
 import time
 try:
