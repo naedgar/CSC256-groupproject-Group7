@@ -10,6 +10,11 @@ def clean_task_service():
     # If using a singleton, re-instantiate or reset its state here
     TaskService._instance = None
 
+import pytest
+
+pytestmark = pytest.mark.integration
+
+
 def test_get_tasks_when_none_exist_integration():
     """
     TC-RF004-002 (integration)

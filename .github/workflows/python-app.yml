@@ -59,12 +59,11 @@ on:
             pip install -r requirements.txt      # Install all Python packages listed in requirements.txt
   
         # Step 4: Run tests with coverage tracking
-        - name: Run tests with coverage
+        - name: Run tests with coverage (unit + integration)
           run: |
-            pytest --cov=app --cov-report=term-missing
-            #  This runs pytest and measures how much of the 'app' folder is tested
-            # --cov=app → tracks coverage in the 'app' directory
-            # --cov-report=term-missing → shows which lines were not tested
+            # Run only unit and integration tests for the primary workflow
+            pytest -m "unit or integration" --cov=app --cov-report=term-missing
+            # This measures coverage only for unit+integration tests
   
         # (Optional) Step 5: Enforce a minimum test coverage percentage
         # - name: Enforce minimum coverage
@@ -79,28 +78,6 @@ on:
         #     name: coverage-html
         #     path: htmlcov/
         #     # 📁 This allows you to download and view the full HTML coverage report after CI runs
-        - name: Run Unit Tests (Excludes API, UI, and External Tests)
-          run: |
-            # Set environment variables for testing
-            export TESTING=true
-            export CI=true
-            export PYTHONDONTWRITEBYTECODE=1
-            export PYTHONWARNINGS="ignore:unclosed:ResourceWarning,ignore::pytest.PytestReturnNotNoneWarning"
-            
-            # Run unit tests excluding:
-            # - API integration tests
-            # - UI (Selenium/Playwright) tests
-            # - External tests (e.g., time API)
-            pytest --cov=app \
-                  --cov-report=term-missing \
-                  --cov-report=html \
-                  --junitxml=results.xml \
-                  --ignore=tests/api/ \
-                  --ignore=tests/ui/test_selenium_pytest.py \
-                  --ignore=tests/ui/test_playwright_pytest.py \
-                  -m "not external"
-          env:
-            TESTING: true
-            CI: true
-            PYTHONDONTWRITEBYTECODE: 1
-            PYTHONWARNINGS: "ignore:unclosed:ResourceWarning,ignore::pytest.PytestReturnNotNoneWarning"
+        # Note: Unit + integration tests are already executed by the coverage step above.
+        # E2E/UI tests (Playwright/Selenium/Robot) should run in separate workflow files
+        # (e.g. .github/workflows/e2e-tests.yml) with path filters and manual dispatch.

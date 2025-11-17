@@ -12,6 +12,11 @@ def clean_task_service():
     # If using a singleton, re-instantiate or reset its state here
     TaskService._instance = None
 
+import pytest
+
+pytestmark = pytest.mark.integration
+
+
 def test_complete_task_marks_task_completed_integration():
     """
     TC-RF004-003 (integration)

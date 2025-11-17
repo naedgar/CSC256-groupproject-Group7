@@ -20,6 +20,11 @@ def reset_tasks():
     yield
     save_tasks([])
 
+import pytest
+
+pytestmark = pytest.mark.integration
+
+
 def test_invalid_json_returns_400(client):
     """
     Test Case: TC-US015-001

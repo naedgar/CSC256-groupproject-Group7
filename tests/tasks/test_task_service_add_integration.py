@@ -9,6 +9,11 @@ def clean_task_service():
     # If using a singleton, re-instantiate or reset its state here
     TaskService._instance = None
 
+import pytest
+
+pytestmark = pytest.mark.integration
+
+
 def test_add_task_creates_and_stores_task_object():
     """
     TC-RF005-001: TaskService.add_task() stores and returns a new Task object internally.
