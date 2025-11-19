@@ -4,11 +4,6 @@
 import pytest
 from flask import current_app
 
-import pytest
-
-pytestmark = pytest.mark.integration
-
-
 def test_get_tasks_when_none_exist_database_integration(database_client):
     """
     TC-RF004-002 (database integration)

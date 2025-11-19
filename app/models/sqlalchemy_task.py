@@ -8,7 +8,6 @@ SQLAlchemy handles the translation between Python objects and database tables, a
 You can use this model with any SQLAlchemy-supported database, but SQLite is used for this project development and testing because it requires no setup.
 """
 # SQLAlchemy 2.0+ uses DeclarativeBase for models, which is fully compatible with mypy and avoids type errors.
-
 from sqlalchemy.orm import DeclarativeBase
 
 class Base(DeclarativeBase):

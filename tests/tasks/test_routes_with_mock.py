@@ -10,11 +10,6 @@ def app_with_mock():
     app.config['TESTING'] = True
     return app
 
-import pytest
-
-pytestmark = pytest.mark.unit
-
-
 def test_add_task_route_uses_service(app_with_mock):
     # TC-RF008-006: Add Task Using MockTaskService
     client = app_with_mock.test_client()

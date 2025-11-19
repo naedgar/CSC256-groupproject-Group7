@@ -1,25 +1,7 @@
+# tests/tasks/test_delete_task.py
 import pytest
 from app.main import app
 from app.services.task_storage import save_tasks
-
-
-def client():
-    """
-    Provides a test client for the application.
-    """
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
-
-
-def reset_tasks():
-    """
-    Reset the tasks before each test to ensure test isolation.
-    """
-    save_tasks([])
-    yield
-    save_tasks([])
-  
 def test_delete_task_success(client):
     """
     Test Case: TC-US007-001

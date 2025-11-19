@@ -1,0 +1,151 @@
+{% extends "base.html" %}
+
+{% block title %}Request History{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1>📊 HTTP Request History</h1>
+    
+    <!-- Statistics Section -->
+    <div class="stats-section" style="margin-bottom: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 8px;">
+        <h2>Statistics</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 15px;">
+            <!-- Total Requests -->
+            <div style="padding: 15px; background-color: white; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; color: #495057;">Total Requests</h3>
+                <p style="font-size: 32px; font-weight: bold; color: #007bff; margin: 10px 0;">{{ stats.total_requests }}</p>
+            </div>
+            
+            <!-- Requests by Method -->
+            <div style="padding: 15px; background-color: white; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; color: #495057;">By Method</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    {% for method, count in stats.by_method.items() %}
+                        <li style="padding: 5px 0; display: flex; justify-content: space-between;">
+                            <span style="font-weight: 500;">{{ method }}:</span>
+                            <span style="color: #007bff; font-weight: bold;">{{ count }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            
+            <!-- Status Codes -->
+            <div style="padding: 15px; background-color: white; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                <h3 style="margin-top: 0; color: #495057;">By Status Code</h3>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                    {% for status, count in stats.by_status.items()|sort %}
+                        <li style="padding: 5px 0; display: flex; justify-content: space-between;">
+                            <span style="font-weight: 500;">{{ status }}:</span>
+                            <span style="color: {% if status < 300 %}#28a745{% elif status < 400 %}#ffc107{% elif status < 500 %}#fd7e14{% else %}#dc3545{% endif %}; font-weight: bold;">{{ count }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Request History Table -->
+    <div class="history-section">
+        <h2>Request Log</h2>
+        {% if requests %}
+            <div style="overflow-x: auto;">
+                <table style="width: 100%; border-collapse: collapse; background-color: white; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                    <thead>
+                        <tr style="background-color: #f8f9fa; border-bottom: 2px solid #dee2e6;">
+                            <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Timestamp</th>
+                            <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">Method</th>
+                            <th style="padding: 12px; text-align: left; border: 1px solid #dee2e6;">Endpoint</th>
+                            <th style="padding: 12px; text-align: center; border: 1px solid #dee2e6;">Status</th>
+                            <th style="padding: 12px; text-align: right; border: 1px solid #dee2e6;">Response Time (ms)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for request in requests %}
+                            <tr style="border-bottom: 1px solid #dee2e6; hover: background-color: #f8f9fa;">
+                                <td style="padding: 12px; border: 1px solid #dee2e6; font-size: 0.9em;">
+                                    {{ request.timestamp }}
+                                </td>
+                                <td style="padding: 12px; border: 1px solid #dee2e6; text-align: center; font-weight: bold;">
+                                    <span style="padding: 4px 8px; border-radius: 3px; 
+                                        {% if request.method == 'GET' %}background-color: #cfe2ff; color: #084298;
+                                        {% elif request.method == 'POST' %}background-color: #d1e7dd; color: #0f5132;
+                                        {% elif request.method == 'PUT' %}background-color: #fff3cd; color: #664d03;
+                                        {% elif request.method == 'DELETE' %}background-color: #f8d7da; color: #842029;
+                                        {% else %}background-color: #e7d4f5; color: #3d1f6b;
+                                        {% endif %}">
+                                        {{ request.method }}
+                                    </span>
+                                </td>
+                                <td style="padding: 12px; border: 1px solid #dee2e6; font-family: monospace; font-size: 0.9em;">
+                                    {{ request.endpoint }}
+                                </td>
+                                <td style="padding: 12px; border: 1px solid #dee2e6; text-align: center;">
+                                    <span style="padding: 4px 8px; border-radius: 3px; font-weight: bold;
+                                        {% if request.status_code < 300 %}background-color: #d1e7dd; color: #0f5132;
+                                        {% elif request.status_code < 400 %}background-color: #cff4fc; color: #055160;
+                                        {% elif request.status_code < 500 %}background-color: #fff3cd; color: #664d03;
+                                        {% else %}background-color: #f8d7da; color: #842029;
+                                        {% endif %}">
+                                        {{ request.status_code or 'N/A' }}
+                                    </span>
+                                </td>
+                                <td style="padding: 12px; border: 1px solid #dee2e6; text-align: right;">
+                                    {% if request.response_time_ms %}
+                                        {{ "%.2f"|format(request.response_time_ms) }}
+                                    {% else %}
+                                        N/A
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <div style="padding: 20px; background-color: #f8f9fa; border-radius: 8px; text-align: center;">
+                <p style="color: #6c757d; margin: 0;">No requests recorded yet. Start using the application to see request history.</p>
+            </div>
+        {% endif %}
+    </div>
+    
+    <!-- Navigation Links -->
+    <div style="margin-top: 30px; text-align: center;">
+        <a href="/" style="margin: 10px; padding: 10px 20px; background-color: #007bff; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">← Back to Home</a>
+        <a href="/tasks" style="margin: 10px; padding: 10px 20px; background-color: #6c757d; color: white; text-decoration: none; border-radius: 5px; display: inline-block;">View Tasks</a>
+    </div>
+</div>
+
+<style>
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+    }
+    
+    h1 {
+        color: #333;
+        border-bottom: 3px solid #007bff;
+        padding-bottom: 10px;
+        margin-bottom: 30px;
+    }
+    
+    h2 {
+        color: #495057;
+        margin-top: 0;
+    }
+    
+    table tr:hover {
+        background-color: #f8f9fa;
+    }
+    
+    @media (max-width: 768px) {
+        table {
+            font-size: 0.85em;
+        }
+        
+        th, td {
+            padding: 8px !important;
+        }
+    }
+</style>
+{% endblock %}

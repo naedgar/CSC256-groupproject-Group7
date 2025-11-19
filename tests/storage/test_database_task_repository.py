@@ -11,17 +11,12 @@ from app.repositories.database_task_repository import DatabaseTaskRepository
 
 # ✅ TC-RF010-001: Add and Retrieve Tasks from DB (in-memory SQLite)
 
-import pytest
-
-pytestmark = pytest.mark.integration
-
-
 def test_add_and_get_tasks_in_memory(in_memory_repo):
     in_memory_repo.add_task("Test", "SQA Task")
     tasks = in_memory_repo.get_all_tasks()
     assert len(tasks) == 1
     assert tasks[0].title == "Test"
-
+    
 # ✅ TC-RF010-002: Add and Retrieve Tasks from DB (test file SQLite)
 
 def test_add_and_get_tasks_file_based():
@@ -53,8 +48,8 @@ def test_add_and_get_tasks_file_based():
         except PermissionError:
             # If still can't delete, it's not a critical failure for the test
             pass
-
-    # ✅ TC-RF010-003: Add and Retrieve Tasks from DB (Flask app-injected session)
+    
+# ✅ TC-RF010-003: Add and Retrieve Tasks from DB (Flask app-injected session)
 
 def test_add_and_get_tasks(session_factory):
     repo = DatabaseTaskRepository(session_factory)
@@ -63,4 +58,4 @@ def test_add_and_get_tasks(session_factory):
     assert len(tasks) == 1
     assert tasks[0].title == "Test"
   
-# ⚠️ Note: This test will raise NameError until session_factory is configured via the Flask app. You’ll revisit this in later phases.
+# ⚠️ Note: This test will raise NameError until session_factory is configured via the Flask app. You’ll revisit this in later phases.    

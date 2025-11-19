@@ -27,7 +27,7 @@ import shutil
 
 # Configuration
 LEARNING_MODE = True  # Set to True to see browser window (great for learning!)
-BASE_URL = "http://localhost:5000"
+BASE_URL = "http://127.0.0.1:5000"
 
 # Detect if running in CI environment (robust, case-insensitive)
 import os
@@ -120,11 +120,6 @@ def driver():
                 # Best-effort cleanup; don't fail the test because cleanup failed.
                 pass
     print("✅ Browser cleanup completed")
-
-
-import pytest
-
-pytestmark = pytest.mark.e2e
 
 
 def test_add_task_happy_path(driver):

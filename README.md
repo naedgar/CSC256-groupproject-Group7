@@ -1,4 +1,4 @@
-# Task Tracker Application - Group Project Sprint 2
+# Task Tracker Application - Sprint 4
 
 A comprehensive Flask-based task management application demonstrating modern software engineering practices, including Test-Driven Development (TDD), Behavior-Driven Development (BDD), and comprehensive automated testing.
 
@@ -117,48 +117,6 @@ pytest --cov=app --cov-report=html --cov-report=term-missing
 - ✅ **Optimizes Performance**: Main test suite runs fast (80+ tests in ~30 seconds)
 - ✅ **Professional Practice**: Different test types serve different purposes
 - ✅ **Clear Boundaries**: Unit/integration tests vs. end-to-end acceptance tests
-
-### Hybrid Test Organization (PR-3)
-
-This repository uses a hybrid test organization: tests are grouped by concern (folder structure) and by scope using pytest markers. That makes tests easy to find and quick to run by scope.
-
-- Folder structure (examples): `tests/api/`, `tests/storage/`, `tests/ui/playwright/`, `tests/ui/selenium/`, `tests/time/`.
-- Pytest markers: `unit`, `integration`, `e2e` (registered in `pytest.ini`).
-
-Add the following to `pytest.ini` (already present in this project) to register markers:
-
-```ini
-[pytest]
-markers =
-   unit: fast, isolated function/class tests
-   integration: database, file, or service interaction tests
-   e2e: end-to-end UI/browser tests (Playwright, Selenium, Robot)
-```
-
-Run tests by scope (examples):
-
-```bash
-# run only unit tests
-pytest -m unit
-
-# run only integration tests
-pytest -m integration
-
-# run only end-to-end (UI) tests
-pytest -m e2e
-
-# run unit OR integration
-pytest -m "unit or integration"
-```
-
-Documentation and evidence:
-- Save text outputs, HTML reports or terminal screenshots in `docs/screenshots/` (e.g., `pytest-unit-output.txt`, `unit-report.html`, `pytest-unit-terminal.png`).
-- Reference these artifacts in your Test Plan and PR description.
-
-CI behavior (recommended):
-- Primary workflow (`.github/workflows/python-app.yml`) runs only `unit` + `integration` tests (this repo runs `pytest -m "unit or integration"` in the coverage step).
-- E2E/UI and Robot workflows should be in separate workflow files (e.g. `.github/workflows/e2e-tests.yml`) with path filters, `workflow_dispatch` for manual runs, and an optional PR-label override to force runs when needed.
-
 
 ## 📁 Project Structure
 
@@ -413,3 +371,4 @@ For issues or questions:
 
 ---
 
+**Sprint 4 - Complete Test Automation Suite with Professional Test Separation** 🎯

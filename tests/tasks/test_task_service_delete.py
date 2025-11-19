@@ -1,14 +1,6 @@
+# test/tasks/test_task_service_delete.py
 import pytest
 from app.services.task_service import TaskService
-
-pytestmark = pytest.mark.unit
-
-
-@pytest.fixture(autouse=True)
-def clean_task_service():
-    # If _tasks is a list, clear it before each test
-    TaskService()._tasks.clear()
-    # If using a singleton, re-instantiate or reset its state here
 
 def test_delete_task_success():
     """

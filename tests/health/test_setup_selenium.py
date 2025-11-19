@@ -20,11 +20,6 @@ import os
 import time
 from typing import Optional
 
-import pytest
-
-pytestmark = pytest.mark.e2e
-
-
 def test_selenium_imports():
     """Test 1: Verify all required Selenium modules can be imported"""
     print("🧪 Test 1: Import Test")

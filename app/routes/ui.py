@@ -1,3 +1,5 @@
+# app/routes/ui/py
+
 from flask import Blueprint, render_template, request, redirect, url_for, current_app
 
 """
@@ -158,3 +160,34 @@ def task_report():
     completed = len([t for t in tasks if t.get("completed", False)])
     remaining = total - completed
     return render_template("report.html", total=total, completed=completed, remaining=remaining)
+
+@ui_bp.route("/history")
+def history():
+    """
+    Display HTTP request history.
+    
+    📚 REQUEST TRACKING PATTERN:
+    This route demonstrates how to display tracked HTTP requests and responses:
+    1. Fetch request history from the history service
+    2. Get statistics about requests (by method, endpoint, status)
+    3. Pass data to template for presentation
+    
+    🔍 FEATURES:
+    - Tracks all incoming requests (GET, POST, PUT, DELETE, etc.)
+    - Records response status codes and processing time
+    - Shows request history in reverse chronological order (newest first)
+    - Provides statistics about request patterns
+    
+    📊 REAL-WORLD APPLICATIONS:
+    - API request monitoring and debugging
+    - Request pattern analysis
+    - Performance monitoring
+    - Audit trails for compliance
+    """
+    history_service = current_app.history_service
+    request_history = history_service.get_history()
+    stats = history_service.get_stats()
+    
+    return render_template("history.html", 
+                         requests=request_history, 
+                         stats=stats)

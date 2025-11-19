@@ -1,35 +1,35 @@
 <!-- templates/base.html -->
-  <!-- 
-  📚 JINJA2 TEMPLATING EXPLAINED:
+<!-- 
+📚 JINJA2 TEMPLATING EXPLAINED:
 
-  🎯 TEMPLATE INHERITANCE PATTERN:
-  This is the "base" or "parent" template that other templates extend.
-  Think of it like a blueprint that child templates can customize.
+🎯 TEMPLATE INHERITANCE PATTERN:
+This is the "base" or "parent" template that other templates extend.
+Think of it like a blueprint that child templates can customize.
 
-  🔧 JINJA2 SYNTAX YOU'LL SEE:
-  - {extend "base.html"} → Child templates inherit this layout
-  - {block title}...{/block} → Placeholder that child templates can override
-  - {block content}...{/block} → Main content area for child templates
-  - {{url_for('static', filename='...')}} → Flask function to generate URLs
-  - {{variable_name}} → Display data passed from Python routes
+🔧 JINJA2 SYNTAX YOU'LL SEE:
+- {extend "base.html"} → Child templates inherit this layout
+- {block title}...{/block} → Placeholder that child templates can override
+- {block content}...{/block} → Main content area for child templates
+- {{url_for('static', filename='...')}} → Flask function to generate URLs
+- {{variable_name}} → Display data passed from Python routes
 
-  🌟 TEMPLATE INHERITANCE BENEFITS:
-  1. DRY (Don't Repeat Yourself) - Common HTML structure defined once
-  2. Consistent styling - All pages share same CSS, nav, layout
-  3. Easy maintenance - Change header/nav/footer in one place
-  4. Modular design - Each page focuses only on its unique content
+🌟 TEMPLATE INHERITANCE BENEFITS:
+1. DRY (Don't Repeat Yourself) - Common HTML structure defined once
+2. Consistent styling - All pages share same CSS, nav, layout
+3. Easy maintenance - Change header/nav/footer in one place
+4. Modular design - Each page focuses only on its unique content
 
-  📂 HOW THIS WORKS WITH OUR APP:
-  - add_task.html extends this → Gets nav + container + CSS
-  - task_list.html extends this → Gets nav + container + CSS  
-  - report.html extends this → Gets nav + container + CSS
-  - Each child only defines what's unique (their {block content})
+📂 HOW THIS WORKS WITH OUR APP:
+- add_task.html extends this → Gets nav + container + CSS
+- task_list.html extends this → Gets nav + container + CSS  
+- report.html extends this → Gets nav + container + CSS
+- Each child only defines what's unique (their {block content})
 
-  💡 FLASK INTEGRATION:
-  - url_for() generates proper URLs that work in development and production
-  - CSS file path automatically resolves to /static/styles/style.css
-  - Flask serves static files (CSS, JS, images) from the /static/ folder
-  -->
+💡 FLASK INTEGRATION:
+- url_for() generates proper URLs that work in development and production
+- CSS file path automatically resolves to /static/styles/style.css
+- Flask serves static files (CSS, JS, images) from the /static/ folder
+-->
 
 <!doctype html>
 <html lang="en">
@@ -49,8 +49,9 @@
         <a href="/tasks/new">Add Task</a>
         <a href="/tasks">Task List</a>
         <a href="/tasks/report">Report</a>
-        <!-- Time UI link (added for Sprint 5) -->
+        <!-- Add this to your navigation menu in base.html -->
         <a href="{{ url_for('ui_time.show_time') }}">🕒 Time (UTC)</a>
+        <a href="/history">History</a>
       </nav>
     </header>
     <main>

@@ -1,3 +1,4 @@
+# app/services/task_service.py
 from app.services.task_storage import load_tasks, save_tasks
 from app.models.task import Task
 
@@ -19,20 +20,15 @@ class TaskService:
         self.storage = storage
         # Load tasks from storage and convert to Task objects
         self._tasks = []
-
-        # Only load from external storage if an injected storage adapter is provided.
-        # When storage is None we start with an empty in-memory list (avoids reading
-        # a shared file that causes cross-test pollution).
-        if self.storage:
-            for t in self._load_tasks():
-                self._tasks.append(
-                    Task(
-                        t["id"],
-                        t["title"],
-                        t.get("description", ""),
-                        t.get("completed", False),
-                    )
+        for t in self._load_tasks():
+            self._tasks.append(
+                Task(
+                    t["id"],
+                    t["title"],
+                    t.get("description", ""),
+                    t.get("completed", False),
                 )
+            )
 
     def _load_tasks(self):
         """Load tasks using either injected storage or direct functions.
@@ -80,14 +76,15 @@ class TaskService:
     
     def get_tasks(self):
         """Return a list of all tasks (alias for get_all_tasks).
-
+        
         Returns:
             list: List of all task dictionaries
-
+            
         Test Coverage: TC-RF005-002 (Read Tasks)
         """
         # Returns all tasks - same as get_all_tasks()
         return self.get_all_tasks()
+
     def complete_task(self, task_id):
         """Mark a task as completed.
 
@@ -107,6 +104,7 @@ class TaskService:
                 self._save_tasks([t.to_dict() for t in self._tasks])
                 return task.to_dict()  # Return as dict for backward compatibility
         return None     
+
     def delete_task(self, task_id):
         """Delete a task from the system.
         

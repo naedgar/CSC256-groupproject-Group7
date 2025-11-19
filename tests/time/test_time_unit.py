@@ -1,10 +1,7 @@
 # ✅ TC-US031-001: Unit test with mocked time service
 
-import pytest
 from app.services.time_service import TimeService
 from unittest.mock import patch
-
-pytestmark = pytest.mark.unit
 
 def test_get_current_time_returns_mocked_value():
     mock_response = {

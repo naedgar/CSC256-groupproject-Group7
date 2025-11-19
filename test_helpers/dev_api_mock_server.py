@@ -1,3 +1,4 @@
+# test_helpers/dev_api_mock_server.py
 """
 Development server with MockTimeService for testing with curl.
 
@@ -8,8 +9,8 @@ Usage:
     python test_helpers/dev_api_mock_server.py
     
 Then test with curl:
-    curl http://localhost:5000/api/time
-    curl http://localhost:5000/time
+    curl http://127.0.0.1:5000/api/time
+    curl http://127.0.0.1:5000/time
 """
 import sys
 import os
@@ -41,9 +42,9 @@ def create_mock_app():
     print("🚀 Development server started with MockTimeService")
     print("⚠️  WARNING: Using MOCK data, not real external API!")
     print("📋 Test endpoints:")
-    print("   • curl http://localhost:5000/api/time")
-    print("   • curl http://localhost:5000/time") 
-    print("   • Open http://localhost:5000/time in browser")
+    print("   • curl http://127.0.0.1:5000/api/time")
+    print("   • curl http://127.0.0.1:5000/time") 
+    print("   • Open http://127.0.0.1:5000/time in browser")
     print("🎯 Expected response: Fixed mock time (2025-08-06T17:40:00.000Z [MOCK DATA])")
     print("📝 Source will show: 'MockTimeService (Development Testing)'")
     print()

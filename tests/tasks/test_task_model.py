@@ -1,7 +1,6 @@
+# tests/tasks/test_task_model.py
 import pytest
 from app.models.task import Task  # (assuming Task class will reside in app/models/)
-
-pytestmark = pytest.mark.unit
 
 def test_task_instantiation():
     """TC-RF004-001/003: Task object instantiates with correct fields"""

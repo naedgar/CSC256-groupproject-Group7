@@ -1,8 +1,8 @@
+# tests/time/test_time_integration.py
+
 import pytest
 from app import create_app
 from flask import Flask
-
-pytestmark = pytest.mark.integration
 
 # Import MockTimeService from the tests conftest module
 # This mock service is defined in tests/conftest.py for predictable testing
