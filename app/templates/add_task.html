@@ -1,89 +1,89 @@
 <!--add_task.html-->
-  {% extends "base.html" %}
+{% extends "base.html" %}
 
-  {% block title %}Add Task{% endblock %}
+{% block title %}Add Task{% endblock %}
 
-  {% block content %}
+{% block content %}
+<!-- 
+📚 FORM SUBMISSION & BACKEND FLOW:
+
+🔄 WHAT HAPPENS WHEN USER SUBMITS THIS FORM:
+1. Browser sends POST request to /tasks/new (action attribute)
+2. Flask routes this to ui.py → create_task() function
+3. ui.py extracts form data: request.form.get("title"), request.form.get("description")
+4. ui.py validates data and calls current_app.task_service.add_task(title, description)
+5. TaskService validates data and creates new Task object (models/task.py)
+6. TaskService saves via storage layer (file I/O or database)
+7. User gets redirected back to task list to see their new task
+
+🎯 BACKEND COMPONENTS INVOLVED:
+- routes/ui.py: Handles the form submission (/tasks/new POST route)
+- services/task_service.py: Business logic (validation, ID generation)
+- models/task.py: Task object creation and validation
+- repositories/: Data persistence (file or database storage)
+
+💡 FORM VALIDATION LAYERS:
+- HTML5: 'required' attribute prevents empty submission (front-end)
+- Flask: request.form validation in ui.py (back-end)
+- TaskService: Business rule validation (back-end)
+- Database: Schema constraints if using DB storage (data layer)
+
+🔗 API EQUIVALENT:
+This same backend logic is also available via REST API:
+POST /api/tasks with JSON data → Same TaskService.add_task() method!
+-->
+
+<section>
+  <header>
+    <h1>Create a Task</h1>
+  </header>
+  
   <!-- 
-  📚 FORM SUBMISSION & BACKEND FLOW:
+  📚 STUDENT NOTE: Validation happens at TWO levels in this form:
 
-  🔄 WHAT HAPPENS WHEN USER SUBMITS THIS FORM:
-  1. Browser sends POST request to /tasks/new (action attribute)
-  2. Flask routes this to ui.py → create_task() function
-  3. ui.py extracts form data: request.form.get("title"), request.form.get("description")
-  4. ui.py validates data and calls current_app.task_service.add_task(title, description)
-  5. TaskService validates data and creates new Task object (models/task.py)
-  6. TaskService saves via storage layer (file I/O or database)
-  7. User gets redirected back to task list to see their new task
+  🌐 FRONT-END VALIDATION (HTML):
+  - The 'required' attribute on the title input prevents form submission if empty
+  - This provides immediate user feedback (browser shows error before form submits)
+  - BUT: This can be bypassed! Users can disable JavaScript or modify HTML
 
-  🎯 BACKEND COMPONENTS INVOLVED:
-  - routes/ui.py: Handles the form submission (/tasks/new POST route)
-  - services/task_service.py: Business logic (validation, ID generation)
-  - models/task.py: Task object creation and validation
-  - repositories/: Data persistence (file or database storage)
+  🔒 BACK-END VALIDATION (Python):
+  - The Flask route in ui.py checks request.form.get("title") 
+  - The TaskService and API routes also validate data server-side
+  - This is the REAL security - never trust front-end validation alone!
 
-  💡 FORM VALIDATION LAYERS:
-  - HTML5: 'required' attribute prevents empty submission (front-end)
-  - Flask: request.form validation in ui.py (back-end)
-  - TaskService: Business rule validation (back-end)
-  - Database: Schema constraints if using DB storage (data layer)
-
-  🔗 API EQUIVALENT:
-  This same backend logic is also available via REST API:
-  POST /api/tasks with JSON data → Same TaskService.add_task() method!
+  💡 BEST PRACTICE: Always use BOTH for great UX and security:
+  - Front-end: Fast feedback, better user experience
+  - Back-end: Security, data integrity, cannot be bypassed
   -->
-
-  <section>
-    <header>
-      <h1>Create a Task</h1>
-    </header>
-    
-    <!-- 
-    📚 STUDENT NOTE: Validation happens at TWO levels in this form:
-
-    🌐 FRONT-END VALIDATION (HTML):
-    - The 'required' attribute on the title input prevents form submission if empty
-    - This provides immediate user feedback (browser shows error before form submits)
-    - BUT: This can be bypassed! Users can disable JavaScript or modify HTML
-
-    🔒 BACK-END VALIDATION (Python):
-    - The Flask route in ui.py checks request.form.get("title") 
-    - The TaskService and API routes also validate data server-side
-    - This is the REAL security - never trust front-end validation alone!
-
-    💡 BEST PRACTICE: Always use BOTH for great UX and security:
-    - Front-end: Fast feedback, better user experience
-    - Back-end: Security, data integrity, cannot be bypassed
-    -->
-    
-    <!-- Display server-side validation errors -->
-    {% if error %}
-      <div class="alert alert-error" role="alert">
-        {{ error }}
+  
+  <!-- Display server-side validation errors -->
+  {% if error %}
+    <div class="alert alert-error" role="alert">
+      {{ error }}
+    </div>
+  {% endif %}
+  
+  <form action="{{ url_for('ui.task_submit') }}" method="post" role="form" aria-labelledby="form-heading">
+    <fieldset>
+      <legend class="sr-only">Task Details</legend>
+      
+      <div class="form-group">
+        <!-- Form data flows to ui.py via request.form.get("title") -->
+        <label for="task-title">Title:</label>
+        <input type="text" id="task-title" name="title" required aria-describedby="title-help">
+        <small id="title-help" class="sr-only">Enter a descriptive title for your task</small>
       </div>
-    {% endif %}
-    
-    <form action="{{ url_for('ui.task_submit') }}" method="post" role="form" aria-labelledby="form-heading">
-      <fieldset>
-        <legend class="sr-only">Task Details</legend>
-        
-        <div class="form-group">
-          <!-- Form data flows to ui.py via request.form.get("title") -->
-          <label for="task-title">Title:</label>
-          <input type="text" id="task-title" name="title" required aria-describedby="title-help">
-          <small id="title-help" class="sr-only">Enter a descriptive title for your task</small>
-        </div>
-        
-        <div class="form-group">
-          <!-- Optional field - flows to ui.py via request.form.get("description") -->
-          <label for="task-description">Description:</label>
-          <input type="text" id="task-description" name="description" aria-describedby="desc-help">
-          <small id="desc-help" class="sr-only">Optional additional details about the task</small>
-        </div>
-        
-        <!-- Button triggers POST to /tasks/new → ui.py → TaskService.add_task() -->
-        <button type="submit" class="btn-primary">Add Task</button>
-      </fieldset>
-    </form>
-  </section>
-  {% endblock %}
+      
+      <div class="form-group">
+        <!-- Optional field - flows to ui.py via request.form.get("description") -->
+        <label for="task-description">Description:</label>
+        <input type="text" id="task-description" name="description" aria-describedby="desc-help">
+        <small id="desc-help" class="sr-only">Optional additional details about the task</small>
+      </div>
+      
+      <!-- Button triggers POST to /tasks/new → ui.py → TaskService.add_task() -->
+      <button type="submit" class="btn-primary">Add Task</button>
+    </fieldset>
+  </form>
+</section>
+{% endblock %}

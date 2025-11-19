@@ -1,3 +1,5 @@
+# tests/acceptance/bdd_playwright/test_playwright_pytestbdd.py
+
 """Example pytest-bdd adapter using pytest-playwright-style helpers.
 
 This file shows a minimal migration from behave to pytest-bdd by reusing the
@@ -7,7 +9,7 @@ shared pw_helpers so test logic remains DRY.
 Run with: pytest -q tests/acceptance/bdd_playwright/test_playwright_pytestbdd.py
 """
 from __future__ import annotations
-import pytest
+
 import requests
 import time
 try:
@@ -15,8 +17,6 @@ try:
 except Exception:  # pragma: no cover - optional dependency
     import pytest
     pytest.skip("pytest-bdd not installed; skip pytest-bdd adapter", allow_module_level=True)
-
-pytestmark = pytest.mark.e2e
 
 
 # This adapter expects a pytest fixture named `page` (provided by pytest-playwright

@@ -36,7 +36,7 @@ class TaskRepository(ABC):
         
         Args:
             title (str): The task title
-            description (str, optional): The task description
+            description (Optional[str], optional): The task description
             
         Returns:
             Task: The created task object

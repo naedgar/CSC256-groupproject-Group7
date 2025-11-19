@@ -1,9 +1,8 @@
+# tests/api/test_tasks_api.py
 import pytest
 import requests
 
-pytestmark = pytest.mark.integration
-
-BASE_URL = "http://127.0.0.1:5000/api/tasks"
+BASE_URL = "http://localhost:5000/api/tasks"
 
 def test_add_and_get_tasks_end_to_end():
     """TC-RF008-001/002: Add a task via POST, then retrieve via GET"""
@@ -26,26 +25,26 @@ def test_add_and_get_tasks_end_to_end():
     assert any(t["title"] == "Integration Test Task" for t in tasks)
     
 def test_complete_task_end_to_end():
-    """TC-RF008-003: Complete a task via PUT"""
-    # First, create a task to complete
-    resp = requests.post(BASE_URL, json={"title": "Task to complete"})
-    assert resp.status_code == 201
-    task = resp.json()
-    task_id = task["id"]
-    assert task["completed"] is False
+  """TC-RF008-003: Complete a task via PUT"""
+  # First, create a task to complete
+  resp = requests.post(BASE_URL, json={"title": "Task to complete"})
+  assert resp.status_code == 201
+  task = resp.json()
+  task_id = task["id"]
+  assert task["completed"] is False
 
-    # Complete the task
-    resp2 = requests.put(f"{BASE_URL}/{task_id}")
-    assert resp2.status_code == 200
-    updated = resp2.json()
-    assert updated["id"] == task_id
-    assert updated["completed"] is True
+  # Complete the task
+  resp2 = requests.put(f"{BASE_URL}/{task_id}")
+  assert resp2.status_code == 200
+  updated = resp2.json()
+  assert updated["id"] == task_id
+  assert updated["completed"] is True
 
-    # Verify via GET that the task is now completed
-    resp3 = requests.get(BASE_URL)
-    tasks = resp3.json()
-    completed_task = next((t for t in tasks if t["id"] == task_id), None)
-    assert completed_task is not None
+  # Verify via GET that the task is now completed
+  resp3 = requests.get(BASE_URL)
+  tasks = resp3.json()
+  completed_task = next((t for t in tasks if t["id"] == task_id), None)
+  assert completed_task is not None
 
 def test_delete_task_end_to_end():
     """TC-RF008-004: Delete a task via DELETE"""

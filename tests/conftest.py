@@ -27,8 +27,6 @@ import os
 import json
 import pytest
 import requests
-import threading
-import time
 
 from app import create_app
 from sqlalchemy import create_engine
@@ -82,6 +80,10 @@ class MockTaskService:
         self._tasks = []
         self._next_id = 1
 
+@pytest.fixture
+def mock_service():
+    return MockTaskService()
+
 # -----------------------------
 # 🔧 Mock for TimeService
 # -----------------------------
@@ -97,15 +99,10 @@ class MockTimeService:
             "source": "MockTimeService (Development Testing)"
         }
 
-
 @pytest.fixture
 def mock_time_service():
     """Returns a mock TimeService for injection."""
     return MockTimeService()
-
-@pytest.fixture
-def mock_service():
-    return MockTaskService()
 
 # Main app fixture for pytest-flask (session scope for live_server compatibility)
 @pytest.fixture(scope='session')
@@ -123,7 +120,6 @@ def client(app):
 TASKS_FILE = os.path.join("app", "data", "tasks.json")
 
 # Reset tasks before and after each test (for file-backed service)
-# Reset tasks before and after each test (works with both file and database storage)
 # Reset tasks before and after each test (works with both file and database storage)
 @pytest.fixture(autouse=True)
 def reset_tasks(request):
@@ -253,41 +249,3 @@ def cleanup_engine():
     yield
     if hasattr(app, "database_engine"):
         app.database_engine.dispose()
-
-
-@pytest.fixture(scope="session", autouse=True)
-def start_flask_server():
-    """Start the real Flask app in a background thread for tests that need a live server
-
-    This fixture runs for the whole test session. It disables the reloader and debug mode
-    so the server stays stable while pytest runs. It also ensures TESTING is set so the
-    app uses the expected `/tmp/tasks.db` path.
-    """
-    # Ensure tests use the testing DB path
-    os.environ.setdefault('TESTING', 'true')
-
-    # Import and create the app
-    from app import create_app
-    app = create_app()
-
-    # Run Flask app in a daemon thread without the reloader
-    def _run_app():
-        # debug=False and use_reloader=False to avoid spawning a child process
-        app.run(host='127.0.0.1', port=5000, debug=False, use_reloader=False)
-
-    thread = threading.Thread(target=_run_app, daemon=True)
-    thread.start()
-
-    # Wait for the health endpoint to become available
-    base = "http://127.0.0.1:5000"
-    for _ in range(20):
-        try:
-            resp = requests.get(f"{base}/api/health", timeout=1)
-            if resp.status_code == 200:
-                break
-        except Exception:
-            time.sleep(0.2)
-
-    yield
-
-    # Teardown: daemon thread will exit when process ends; no explicit stop required

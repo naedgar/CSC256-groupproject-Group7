@@ -1,15 +1,11 @@
 # tests/test_blueprint_routing.py
- # All major routes work after blueprint modularization.
- # None return 404.
- # Functional responses are returned.
+# All major routes work after blueprint modularization.
+# None return 404.
+# Functional responses are returned.
 import pytest
 from app import create_app
 
 
-def client():
-    app = create_app()
-    app.config['TESTING'] = True
-    return app.test_client()
 
 def test_routes_accessible_via_blueprint(client):
     """

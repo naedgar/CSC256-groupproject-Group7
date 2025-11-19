@@ -1,5 +1,5 @@
 # scripts/bdd_pytest.sh
-#
+
 # BDD pytest wrapper script for Linux/macOS (equivalent to bdd_pytest.ps1)
 #
 # Examples:

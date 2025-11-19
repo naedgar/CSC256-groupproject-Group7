@@ -1,3 +1,5 @@
+# db_reset_helper.py - Helper for database reset
+
 """
 🎭 db_reset_helper.py provides shared test environment setup and database reset logic for all test types,
 including BDD (pytest-bdd), standalone UI tests (Selenium, Playwright), and other scripts that do not use pytest's configuration.

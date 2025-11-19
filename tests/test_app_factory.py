@@ -32,11 +32,6 @@ the new expected behavior. The old test was checking for behavior that no longer
 This is a normal part of software development - as features evolve, tests evolve too!
 """
 
-import pytest
-
-pytestmark = pytest.mark.unit
-
-
 def test_create_app_returns_flask_instance():
     """
     tc-us000-002: The create_app function should return a Flask app instance.

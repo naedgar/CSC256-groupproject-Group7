@@ -1,18 +1,9 @@
+# tests/tasks/test_task_service_task_add_integration.py
+# Integration tests for TaskService using Task objects (refactor/modern approach)
+
 import pytest
 from app.services.task_service import TaskService
 from app.models.task import Task
-
-@pytest.fixture(autouse=True)
-def clean_task_service():
-    # If _tasks is a list, clear it before each test
-    TaskService()._tasks.clear()
-    # If using a singleton, re-instantiate or reset its state here
-    TaskService._instance = None
-
-import pytest
-
-pytestmark = pytest.mark.integration
-
 
 def test_add_task_creates_and_stores_task_object():
     """

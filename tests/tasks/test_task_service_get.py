@@ -1,16 +1,6 @@
+# tests/tasks/test_task_service_get.py
 import pytest
 from app.services.task_service import TaskService
-
-@pytest.fixture(autouse=True)
-def clean_task_service():
-    # If _tasks is a list, clear it before each test
-    TaskService()._tasks.clear()
-    # If using a singleton, re-instantiate or reset its state here
-    TaskService._instance = None
-import pytest
-
-pytestmark = pytest.mark.unit
-
 
 def test_get_tasks_when_none_exist():
     """

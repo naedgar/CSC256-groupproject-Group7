@@ -1,9 +1,4 @@
 # test_basics.py
-import pytest
-
-pytestmark = pytest.mark.unit
-
-
 def test_addition():
     """
     This test verifies that the testing environment is set up correctly.

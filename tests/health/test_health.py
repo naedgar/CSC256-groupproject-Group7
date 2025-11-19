@@ -1,11 +1,6 @@
 # tests/test_health.py
 from app import create_app
 
-import pytest
-
-pytestmark = pytest.mark.unit
-
-
 def test_health_check():
     """
     tc-us001-001: The /api/health endpoint should return a 200 OK with {"status": "ok"}.

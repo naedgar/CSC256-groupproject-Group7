@@ -1,29 +1,8 @@
+# tests/error/test_error_handling.py
+
 import pytest
 from app.main import app
 from app.services.task_storage import save_tasks
-
-
-def client():
-    """
-    Provides a test client for the application.
-    """
-    app.config['TESTING'] = True
-    with app.test_client() as client:
-        yield client
-
-
-def reset_tasks():
-    """
-    Reset the tasks before each test to ensure test isolation.
-    """
-    save_tasks([])
-    yield
-    save_tasks([])
-
-import pytest
-
-pytestmark = pytest.mark.integration
-
 
 def test_invalid_json_returns_400(client):
     """

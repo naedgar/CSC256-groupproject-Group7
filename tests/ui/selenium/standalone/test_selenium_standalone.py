@@ -75,11 +75,6 @@ def setup_driver():
     driver.implicitly_wait(10)
     return driver
 
-import pytest
-
-pytestmark = pytest.mark.e2e
-
-
 def test_add_task():
     """
     Test adding a task through the UI.

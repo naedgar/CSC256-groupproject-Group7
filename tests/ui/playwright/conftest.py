@@ -1,3 +1,5 @@
+# tests/ui/playwright/conftest.py
+
 """
 Playwright Test Configuration and Fixtures
 
@@ -25,16 +27,7 @@ HOW TO RUN FROM ROOT DIRECTORY:
 
 import pytest
 import os
-
-# Playwright is an optional dependency for running UI tests. If it's not
-# installed in the environment (for example a minimal CI/test environment
-# or when the developer doesn't want browser tests), skip the entire
-# Playwright test collection instead of causing an import error.
-try:
-    from playwright.sync_api import sync_playwright
-except ModuleNotFoundError:
-    # Skip this module at collection time when Playwright is not available
-    pytest.skip("Playwright not installed - skipping Playwright UI tests", allow_module_level=True)
+from playwright.sync_api import sync_playwright
 
 @pytest.fixture(scope="session")
 def learning_mode():
@@ -127,7 +120,7 @@ def firefox_page(playwright_instance, browser_launch_options):
     # Remove Chrome-specific args for Firefox
     if 'args' in firefox_options:
         firefox_options['args'] = [arg for arg in firefox_options['args'] 
-                                if arg not in ['--no-sandbox', '--disable-dev-shm-usage']]
+                                  if arg not in ['--no-sandbox', '--disable-dev-shm-usage']]
     
     browser = playwright_instance.firefox.launch(**firefox_options)
     context = browser.new_context(
