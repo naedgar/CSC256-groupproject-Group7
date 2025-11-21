@@ -36,6 +36,7 @@ from sqlalchemy.orm import sessionmaker
 from app.models.sqlalchemy_task import Base
 from app.repositories.database_task_repository import DatabaseTaskRepository
 from app.services.task_service import TaskService
+from app.exceptions import TaskValidationError
 
 
 BASE_URL = "http://localhost:5000/api/tasks"
@@ -43,7 +44,10 @@ BASE_URL = "http://localhost:5000/api/tasks"
 
 # Mock service for isolated route tests (keep for unit/mocked tests)
 class MockTaskService:
-    """Mock implementation of TaskService for testing routes without file I/O."""
+    """Mock implementation of TaskService for testing routes without file I/O.
+    
+    ✅ PR-5: Now uses centralized validation (TaskValidationError)
+    """
     def __init__(self):
         self._tasks = []
         self._next_id = 1
@@ -52,9 +56,15 @@ class MockTaskService:
         return [task.copy() for task in self._tasks]
 
     def add_task(self, title, description=None):
-        title = (title or "").strip()
-        if not title:
-            raise ValueError("Title is required")
+        # ✅ PR-5: Use centralized validation from TaskCreate schema
+        from app.schemas import TaskCreate
+        try:
+            validated = TaskCreate(title=title, description=description or "")
+            title = validated.title
+            description = validated.description
+        except TaskValidationError:
+            raise
+        
         new_task = {
             "id": self._next_id,
             "title": title,

@@ -1,5 +1,6 @@
 # app/routes/tasks.py
 from flask import Blueprint, request, jsonify, current_app
+from app.exceptions import TaskValidationError
 # ✅ Phase 2: Remove direct storage imports - we'll use injected service instead
 # from app.services.task_storage import load_tasks, save_tasks
 # 
@@ -7,8 +8,9 @@ from flask import Blueprint, request, jsonify, current_app
 # All routes now use current_app.task_service instead of direct storage function calls.
 # This enables better testing, mock storage, and cleaner architecture.
 # 
-# 📋 NEXT LAB: We can remove the get_next_id() helper and move ID generation 
-# into TaskService for even cleaner separation of concerns.
+# ✅ VALIDATION CENTRALIZATION (PR-5):
+# Validation is now centralized in TaskService using Pydantic schemas.
+# Routes catch TaskValidationError and return consistent error responses.
 
 tasks_bp = Blueprint('tasks', __name__, url_prefix='/api/tasks')
 
@@ -37,20 +39,34 @@ def reset_tasks():
 def add_task():
     """ Create a task or return a validation error.
 
-    Valid Request
+    ✅ PR-5: Centralized validation via TaskService using Pydantic schemas.
+    
+    Valid Request:
+        {"title": "Buy milk", "description": "..."}
+    
     Invalid:
         - Missing title
         - Empty title      
+        - Title too long (>255 chars)
+        - Non-string title
     """
     data = request.get_json() or {}
-    title = data.get("title")
-    if not data or "title" not in data or not data["title"] or data["title"].strip() == "":
-        return jsonify({"error": "Title is required"}), 400
     
-    # Use injected service to add task
-    description = data.get("description", "")
-    new_task = current_app.task_service.add_task(title, description)
-    return jsonify(new_task), 201
+    try:
+        # Extract from JSON - TaskService.add_task will validate
+        title = data.get("title")
+        description = data.get("description", "")
+        
+        # Service layer now does ALL validation via Pydantic schema
+        new_task = current_app.task_service.add_task(title, description)
+        return jsonify(new_task), 201
+        
+    except TaskValidationError as e:
+        # Consistent error response for validation failures
+        return jsonify(e.to_dict()), 400
+    except Exception as e:
+        # Unexpected errors
+        return jsonify({"error": f"Internal error: {str(e)}"}), 500
 
 @tasks_bp.route('', methods=['GET'])
 def list_tasks():
