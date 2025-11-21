@@ -12,7 +12,6 @@ Blueprints allow modular application structure and URL prefixing.
 - POST routes: Process form submissions (create_task, delete_task, complete_task)
 - Redirects: Post-Redirect-Get pattern for form handling
 - URL parameters: Dynamic routes with <int:task_id>
-
 💡 VALIDATION STRATEGY:
 - Frontend: HTML 'required' attribute (user experience)
 - Backend: Python validation (security and data integrity)
@@ -24,6 +23,7 @@ Blueprints allow modular application structure and URL prefixing.
   - Pros: single source of truth, reuse across UI and API, easier to test, clearer contract for business rules.
   - Suggestion: have controllers perform only minimal syntactic checks (trim/required) and let `TaskService` raise a semantic `ValidationError` for domain rules.
   - Adopt a custom `ValidationError`, update tests and controllers to catch that class rather than broad `Exception`.
+
 
 🔗 BACKEND INTEGRATION:
 All routes use current_app.task_service for business logic,

@@ -1,5 +1,6 @@
 import pytest
 from app.services.task_service import TaskService
+from app.exceptions import TaskValidationError
 
 pytestmark = pytest.mark.unit
 
@@ -36,16 +37,20 @@ def test_add_task_empty_title():
     """
     TC-US002-002
     Unit test for TaskService.add_task() with empty title
+    
+    ✅ PR-5: Now raises TaskValidationError via centralized schema
     """
     service = TaskService(storage=None)
-    with pytest.raises(ValueError):
+    with pytest.raises(TaskValidationError):
         service.add_task("", "No title")
 
 def test_add_task_none_title():
     """
     TC-US002-003
     Unit test for TaskService.add_task() with None title
+    
+    ✅ PR-5: Now raises TaskValidationError via centralized schema
     """
     service = TaskService(storage=None)
-    with pytest.raises(ValueError):
+    with pytest.raises(TaskValidationError):
         service.add_task(None, "No title")
