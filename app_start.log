@@ -1,0 +1,45 @@
+[DEBUG] TESTING=None, CI=None, db_path=./tasks.db
+✅ Database tables created by Base.metadata.create_all(engine)
+ * Serving Flask app 'app'
+ * Debug mode: off
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.1.82:5000
+[33mPress CTRL+C to quit[0m
+127.0.0.1 - - [21/Nov/2025 16:21:15] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "[31m[1mPOST /api/tasks HTTP/1.1[0m" 400 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "[31m[1mPOST /api/tasks HTTP/1.1[0m" 400 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "[31m[1mPOST /api/tasks HTTP/1.1[0m" 400 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:15] "[31m[1mPOST /api/tasks HTTP/1.1[0m" 400 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "[35m[1mPOST /api/tasks HTTP/1.1[0m" 201 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "GET /api/tasks HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "PUT /api/tasks/1 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "[35m[1mPOST /api/tasks HTTP/1.1[0m" 201 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "GET /api/tasks HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "[35m[1mPOST /api/tasks HTTP/1.1[0m" 201 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "GET /api/tasks HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "GET /api/tasks HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "[35m[1mPOST /api/tasks HTTP/1.1[0m" 201 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "GET /api/tasks HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "[35m[1mPOST /api/tasks HTTP/1.1[0m" 201 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "DELETE /api/tasks/1 HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "GET /api/tasks HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "[33mDELETE /api/tasks/9999 HTTP/1.1[0m" 404 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "POST /api/tasks/reset HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:16] "[33mPUT /api/tasks/9999 HTTP/1.1[0m" 404 -
+127.0.0.1 - - [21/Nov/2025 16:21:17] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:17] "GET /api/time HTTP/1.1" 200 -
+127.0.0.1 - - [21/Nov/2025 16:21:18] "GET /api/time HTTP/1.1" 200 -

@@ -1,0 +1,1350 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on darwin)" generated="2025-11-21T14:03:06.801984" rpa="false" schemaversion="5">
+<suite id="s1" name="Suites" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/tests/robot/suites">
+<suite id="s1-s1" name="Tasks" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/tests/robot/suites/tasks.robot">
+<kw name="Run Keywords" owner="BuiltIn" type="SETUP">
+<kw name="Start App" owner="keywords">
+<kw name="Start Process" owner="Process">
+<msg time="2025-11-21T14:03:06.852953" level="INFO">Starting process:
+python3 -m app.main</msg>
+<msg time="2025-11-21T14:03:06.854534" level="INFO">${handle} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<var>${handle}</var>
+<arg>python3</arg>
+<arg>-m</arg>
+<arg>app.main</arg>
+<arg>stdout=NONE</arg>
+<arg>stderr=NONE</arg>
+<arg>shell=False</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2025-11-21T14:03:06.852842" elapsed="0.001742"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-11-21T14:03:06.855116" level="INFO">${APP_PROC} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<arg>${APP_PROC}</arg>
+<arg>${handle}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-11-21T14:03:06.854758" elapsed="0.000382"/>
+</kw>
+<kw name="Wait For Server" owner="keywords">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:06.855455" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:06.855603" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:06.855447" elapsed="0.001196">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:06.856693" elapsed="0.000008"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:06.855398" elapsed="0.001353">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:08.860064" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:08.860763" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:08.859999" elapsed="0.002046">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:08.862341" elapsed="0.000043"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:08.859365" elapsed="0.003232">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:10.866189" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:10.866841" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:10.866129" elapsed="0.001915">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:10.868337" elapsed="0.000044"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:10.865577" elapsed="0.002990">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:12.871176" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:12.871832" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:12.871120" elapsed="0.001868">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:12.873259" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:12.870589" elapsed="0.002900">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:14.875399" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:14.876035" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:14.875342" elapsed="0.001843">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:14.877454" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:14.874819" elapsed="0.002858">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:16.879118" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:16.879764" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:16.879041" elapsed="0.001904">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:16.881226" elapsed="0.000059"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:16.878461" elapsed="0.003014">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:18.882981" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:18.883633" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:18.882922" elapsed="0.001879">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:18.885073" elapsed="0.000053"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:18.882355" elapsed="0.003165">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:20.887088" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:20.887757" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:20.887032" elapsed="0.001924">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:20.889227" elapsed="0.000042"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:20.886483" elapsed="0.002966">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:22.891453" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:22.892104" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:22.891397" elapsed="0.001878">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:22.893547" elapsed="0.000039"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:22.890830" elapsed="0.002945">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:24.896949" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:24.897585" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:24.896891" elapsed="0.001860">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:24.899011" elapsed="0.000039"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:24.896348" elapsed="0.002884">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:26.901487" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:26.901789" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:26.901439" elapsed="0.000834">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:26.902397" elapsed="0.000038"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:26.901201" elapsed="0.001312">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:28.907433" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:28.907954" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:28.906201" elapsed="0.002560">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:28.908942" elapsed="0.000019"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:28.905225" elapsed="0.003841">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:30.911776" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:30.912455" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:30.911718" elapsed="0.001963">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:30.913959" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:30.911132" elapsed="0.003049">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:32.915681" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:32.916181" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:32.915646" elapsed="0.001378">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:32.917176" elapsed="0.000020"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:32.915196" elapsed="0.002100">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:34.919965" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:34.920631" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:34.919903" elapsed="0.001937">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:34.922128" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:34.919357" elapsed="0.002944">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:36.925519" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:36.927342" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:36.925455" elapsed="0.003125">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:36.928832" elapsed="0.000032"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:36.924878" elapsed="0.004126">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:38.931493" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:38.932211" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:38.931427" elapsed="0.002023">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:38.933747" elapsed="0.000044"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:38.930826" elapsed="0.003115">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:40.936985" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:40.937621" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:40.936941" elapsed="0.001640">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:40.938773" elapsed="0.000030"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:40.936480" elapsed="0.002452">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:42.942310" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:42.942986" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:42.942242" elapsed="0.001639">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:42.944074" elapsed="0.000029"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:42.941683" elapsed="0.002548">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:44.946166" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:44.946862" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:44.946102" elapsed="0.001970">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:44.948314" elapsed="0.000040"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:44.945557" elapsed="0.002982">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:46.950709" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:46.951410" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:46.950641" elapsed="0.002041">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:46.952972" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:46.950068" elapsed="0.003141">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:48.956042" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:48.956729" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:48.955979" elapsed="0.001946">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:48.958213" elapsed="0.000043"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:48.955401" elapsed="0.003049">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:50.959833" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:50.960515" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:50.959772" elapsed="0.001942">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:50.962007" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:50.959212" elapsed="0.003025">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:52.965422" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:52.966100" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:52.965358" elapsed="0.001935">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:52.967751" elapsed="0.000045"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:52.964799" elapsed="0.003191">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:54.969680" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:54.970360" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:54.969613" elapsed="0.001914">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:54.971713" elapsed="0.000027"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:54.968982" elapsed="0.002884">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:56.973601" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:56.974173" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:56.973548" elapsed="0.001685">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:56.975504" elapsed="0.000040"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:56.973065" elapsed="0.002662">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:03:58.977430" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:58.978228" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:03:58.977366" elapsed="0.002077">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:03:58.979748" elapsed="0.000044"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:58.976806" elapsed="0.003177">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:00.982086" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:00.982783" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:00.982022" elapsed="0.001789">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:00.984024" elapsed="0.000027"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:00.981433" elapsed="0.002768">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:02.987549" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:02.988222" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:02.987481" elapsed="0.001778">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:02.989473" elapsed="0.000029"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:02.985722" elapsed="0.003910">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:04.992711" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:04.993378" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:04.992653" elapsed="0.001839">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:04.994738" elapsed="0.000035"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:04.992112" elapsed="0.002810">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:06.996934" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:06.997766" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:06.996874" elapsed="0.001968">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:06.999161" elapsed="0.000046"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:06.996306" elapsed="0.003059">Non-existing index or alias 'api'.</status>
+</kw>
+<msg time="2025-11-21T14:04:06.999516" level="FAIL">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</msg>
+<arg>1 min</arg>
+<arg>2 sec</arg>
+<arg>Get Health Should Be Ok</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="FAIL" start="2025-11-21T14:03:06.855301" elapsed="60.144350">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:06.855221" elapsed="60.144532">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:06.852767" elapsed="60.147065">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</kw>
+<arg>Start App</arg>
+<arg>AND</arg>
+<arg>Start Session</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="FAIL" start="2025-11-21T14:03:06.852637" elapsed="60.148190">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</kw>
+<test id="s1-s1-t1" name="Complete Task Workflow - Create, Complete, and Verify" line="9">
+<status status="FAIL" start="2025-11-21T14:04:07.001011" elapsed="0.000680">Parent suite setup failed:
+Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</test>
+<test id="s1-s1-t2" name="Simple Task Creation Workflow" line="22">
+<status status="FAIL" start="2025-11-21T14:04:07.001928" elapsed="0.000282">Parent suite setup failed:
+Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</test>
+<test id="s1-s1-t3" name="Task Creation And Verification" line="31">
+<status status="FAIL" start="2025-11-21T14:04:07.002382" elapsed="0.000209">Parent suite setup failed:
+Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</test>
+<kw name="Stop App" owner="keywords" type="TEARDOWN">
+<kw name="Run Keyword If" owner="BuiltIn">
+<msg time="2025-11-21T14:04:07.003916" level="FAIL">Evaluating expression "'&lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;'" failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</msg>
+<arg>'${APP_PROC}'</arg>
+<arg>Terminate Process</arg>
+<arg>${APP_PROC}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-11-21T14:04:07.003575" elapsed="0.000443">Evaluating expression "'&lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;'" failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</status>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-21T14:04:07.505554" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-21T14:04:07.004126" elapsed="0.501742"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:07.003334" elapsed="0.502901">Evaluating expression "'&lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;'" failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</status>
+</kw>
+<status status="FAIL" start="2025-11-21T14:03:06.812665" elapsed="60.693781">Suite setup failed:
+Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.
+
+Also suite teardown failed:
+Evaluating expression "'&lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;'" failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</status>
+</suite>
+<suite id="s1-s2" name="Time" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/tests/robot/suites/time.robot">
+<kw name="Run Keywords" owner="BuiltIn" type="SETUP">
+<kw name="Start App" owner="keywords">
+<kw name="Start Process" owner="Process">
+<msg time="2025-11-21T14:04:07.512593" level="INFO">Starting process:
+python3 -m app.main</msg>
+<msg time="2025-11-21T14:04:07.521623" level="INFO">${handle} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<var>${handle}</var>
+<arg>python3</arg>
+<arg>-m</arg>
+<arg>app.main</arg>
+<arg>stdout=NONE</arg>
+<arg>stderr=NONE</arg>
+<arg>shell=False</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2025-11-21T14:04:07.511988" elapsed="0.009820"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-11-21T14:04:07.523313" level="INFO">${APP_PROC} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<arg>${APP_PROC}</arg>
+<arg>${handle}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-11-21T14:04:07.522375" elapsed="0.000989"/>
+</kw>
+<kw name="Wait For Server" owner="keywords">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:07.524226" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:07.524706" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:07.524209" elapsed="0.001410">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:07.525802" elapsed="0.000030"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:07.524099" elapsed="0.001853">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:09.528371" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:09.529075" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:09.528306" elapsed="0.002083">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:09.530640" elapsed="0.000040"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:09.527636" elapsed="0.003201">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:11.534412" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:11.535023" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:11.534359" elapsed="0.001396">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:11.535901" elapsed="0.000022"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:11.533803" elapsed="0.002224">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:13.539286" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:13.539954" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:13.539225" elapsed="0.001640">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:13.541053" elapsed="0.000025"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:13.538637" elapsed="0.002560">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:15.543367" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:15.544023" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:15.543304" elapsed="0.001615">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:15.545112" elapsed="0.000025"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:15.542492" elapsed="0.002776">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:17.548165" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:17.549009" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:17.548072" elapsed="0.002205">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:17.550575" elapsed="0.000045"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:17.547384" elapsed="0.003437">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:19.552791" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:19.553475" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:19.552730" elapsed="0.001775">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:19.554727" elapsed="0.000028"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:19.552121" elapsed="0.002760">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:21.556750" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:21.557430" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:21.556691" elapsed="0.001943">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:21.558819" elapsed="0.000022"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:21.556105" elapsed="0.002890">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:23.560768" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:23.561448" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:23.560704" elapsed="0.001999">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:23.562980" elapsed="0.000042"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:23.560115" elapsed="0.003098">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:25.566377" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:25.567060" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:25.566307" elapsed="0.002056">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:25.568654" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:25.564282" elapsed="0.004547">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:27.570760" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:27.571430" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:27.570703" elapsed="0.001940">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:27.572927" elapsed="0.000040"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:27.570168" elapsed="0.002995">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:29.575849" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:29.576520" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:29.575794" elapsed="0.001807">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:29.577774" elapsed="0.000029"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:29.575233" elapsed="0.002710">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:31.579747" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:31.580409" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:31.579692" elapsed="0.001622">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:31.581665" elapsed="0.000027"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:31.579136" elapsed="0.002678">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:33.583250" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:33.583881" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:33.583210" elapsed="0.001862">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:33.585352" elapsed="0.000039"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:33.582775" elapsed="0.002804">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:35.587113" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:35.587745" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:35.587064" elapsed="0.001578">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:35.588824" elapsed="0.000025"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:35.586580" elapsed="0.002393">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:37.591247" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:37.591923" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:37.591185" elapsed="0.001896">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:37.593245" elapsed="0.000022"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:37.590609" elapsed="0.002768">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:39.596350" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:39.597204" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:39.596254" elapsed="0.002040">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:39.598572" elapsed="0.000038"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:39.595626" elapsed="0.003129">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:41.600143" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:41.600837" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:41.600083" elapsed="0.002003">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:41.602368" elapsed="0.000044"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:41.599511" elapsed="0.003104">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:43.605725" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:43.606427" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:43.605660" elapsed="0.001967">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:43.607917" elapsed="0.000040"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:43.605097" elapsed="0.003045">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:45.610157" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:45.610845" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:45.610098" elapsed="0.001718">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:45.612017" elapsed="0.000063"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:45.609530" elapsed="0.002724">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:47.614353" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:47.615041" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:47.614292" elapsed="0.001748">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:47.616242" elapsed="0.000026"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:47.613733" elapsed="0.002823">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:49.619486" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:49.620151" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:49.619428" elapsed="0.001892">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:49.621602" elapsed="0.000042"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:49.618874" elapsed="0.002966">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:51.623738" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:51.624456" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:51.623683" elapsed="0.002013">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:51.625998" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:51.623086" elapsed="0.003142">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:53.628740" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:53.629432" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:53.628676" elapsed="0.001759">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:53.630723" elapsed="0.000047"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:53.628112" elapsed="0.002852">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:55.632542" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:55.633253" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:55.632487" elapsed="0.002055">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:55.634831" elapsed="0.000041"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:55.631935" elapsed="0.003141">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:57.636577" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:57.637268" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:57.636519" elapsed="0.002006">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:57.638809" elapsed="0.000039"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:57.635943" elapsed="0.003105">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:04:59.642465" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:59.643206" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:04:59.641127" elapsed="0.003270">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:04:59.644683" elapsed="0.000043"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:59.640572" elapsed="0.004353">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:05:01.646723" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:05:01.647402" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:05:01.646662" elapsed="0.001773">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:05:01.648643" elapsed="0.000046"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:05:01.646120" elapsed="0.002714">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:05:03.652309" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:05:03.652824" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:05:03.652250" elapsed="0.001413">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:05:03.653895" elapsed="0.000032"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:05:03.651733" elapsed="0.002345">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:05:05.657282" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:05:05.658169" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:05:05.657223" elapsed="0.002013">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:05:05.659404" elapsed="0.000022"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:05:05.656677" elapsed="0.002857">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Get Request" owner="RequestsLibrary">
+<msg time="2025-11-21T14:05:07.660890" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:05:07.661594" level="FAIL">Non-existing index or alias 'api'.</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>*DEPRECATED* Please use `GET On Session` instead.</doc>
+<status status="FAIL" start="2025-11-21T14:05:07.660827" elapsed="0.001965">Non-existing index or alias 'api'.</status>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="NOT RUN" start="2025-11-21T14:05:07.663086" elapsed="0.000047"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:05:07.660268" elapsed="0.003064">Non-existing index or alias 'api'.</status>
+</kw>
+<msg time="2025-11-21T14:05:07.663468" level="FAIL">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</msg>
+<arg>1 min</arg>
+<arg>2 sec</arg>
+<arg>Get Health Should Be Ok</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="FAIL" start="2025-11-21T14:04:07.523879" elapsed="60.139715">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:07.523633" elapsed="60.140091">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:07.511762" elapsed="60.152042">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</kw>
+<arg>Start App</arg>
+<arg>AND</arg>
+<arg>Start Session</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="FAIL" start="2025-11-21T14:04:07.511405" elapsed="60.152469">Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</kw>
+<test id="s1-s2-t1" name="Time Service Returns datetime and timezone" line="7">
+<status status="FAIL" start="2025-11-21T14:05:07.664067" elapsed="0.000650">Parent suite setup failed:
+Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</test>
+<test id="s1-s2-t2" name="Time Service Graceful Error Handling" line="11">
+<status status="FAIL" start="2025-11-21T14:05:07.664962" elapsed="0.000279">Parent suite setup failed:
+Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.</status>
+</test>
+<kw name="Stop App" owner="keywords" type="TEARDOWN">
+<kw name="Run Keyword If" owner="BuiltIn">
+<msg time="2025-11-21T14:05:07.666344" level="FAIL">Evaluating expression "'&lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;'" failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</msg>
+<arg>'${APP_PROC}'</arg>
+<arg>Terminate Process</arg>
+<arg>${APP_PROC}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="FAIL" start="2025-11-21T14:05:07.666026" elapsed="0.000405">Evaluating expression "'&lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;'" failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</status>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-11-21T14:05:08.167898" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-11-21T14:05:07.666531" elapsed="0.501664"/>
+</kw>
+<status status="FAIL" start="2025-11-21T14:05:07.665750" elapsed="0.502830">Evaluating expression "'&lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;'" failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</status>
+</kw>
+<status status="FAIL" start="2025-11-21T14:04:07.507661" elapsed="60.661108">Suite setup failed:
+Keyword 'Get Health Should Be Ok' failed after retrying for 1 minute. The last error was: Non-existing index or alias 'api'.
+
+Also suite teardown failed:
+Evaluating expression "'&lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;'" failed: SyntaxError: invalid syntax (&lt;string&gt;, line 1)</status>
+</suite>
+<status status="FAIL" start="2025-11-21T14:03:06.802713" elapsed="121.367292"/>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="5" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Suites" id="s1" pass="0" fail="5" skip="0">Suites</stat>
+<stat name="Tasks" id="s1-s1" pass="0" fail="3" skip="0">Suites.Tasks</stat>
+<stat name="Time" id="s1-s2" pass="0" fail="2" skip="0">Suites.Time</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-11-21T14:03:06.855455" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:08.860064" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:10.866189" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:12.871176" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:14.875399" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:16.879118" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:18.882981" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:20.887088" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:22.891453" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:24.896949" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:26.901487" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:28.907433" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:30.911776" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:32.915681" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:34.919965" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:36.925519" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:38.931493" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:40.936985" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:42.942310" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:44.946166" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:46.950709" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:48.956042" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:50.959833" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:52.965422" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:54.969680" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:56.973601" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:03:58.977430" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:00.982086" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:02.987549" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:04.992711" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:06.996934" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:07.524226" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:09.528371" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:11.534412" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:13.539286" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:15.543367" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:17.548165" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:19.552791" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:21.556750" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:23.560768" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:25.566377" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:27.570760" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:29.575849" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:31.579747" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:33.583250" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:35.587113" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:37.591247" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:39.596350" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:41.600143" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:43.605725" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:45.610157" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:47.614353" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:49.619486" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:51.623738" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:53.628740" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:55.632542" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:57.636577" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:04:59.642465" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:05:01.646723" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:05:03.652309" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:05:05.657282" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+<msg time="2025-11-21T14:05:07.660890" level="WARN">Keyword 'RequestsLibrary.Get Request' is deprecated. Please use `GET On Session` instead.</msg>
+</errors>
+</robot>
