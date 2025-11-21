@@ -1,0 +1,37 @@
+name: Selenium E2E Tests
+
+on:
+  push:
+    paths:
+      - 'tests/ui/**'
+      - 'app/**'
+  pull_request:
+    paths:
+      - 'tests/ui/**'
+      - 'app/**'
+  workflow_dispatch: {}
+
+jobs:
+  selenium-e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt || true
+          pip install -r tests/requirements-dev.txt || pip install selenium webdriver-manager pytest
+
+      - name: Run Selenium E2E tests
+        env:
+          PYTHONWARNINGS: default
+        run: |
+          pytest tests/ui/selenium -m e2e -q
