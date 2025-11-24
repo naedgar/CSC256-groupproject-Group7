@@ -1,4 +1,4 @@
-# Task Tracker Application - Sprint 4
+# Task Tracker Application - Group Project Sprint 2
 
 A comprehensive Flask-based task management application demonstrating modern software engineering practices, including Test-Driven Development (TDD), Behavior-Driven Development (BDD), and comprehensive automated testing.
 
@@ -117,6 +117,110 @@ pytest --cov=app --cov-report=html --cov-report=term-missing
 - ✅ **Optimizes Performance**: Main test suite runs fast (80+ tests in ~30 seconds)
 - ✅ **Professional Practice**: Different test types serve different purposes
 - ✅ **Clear Boundaries**: Unit/integration tests vs. end-to-end acceptance tests
+
+### Hybrid Test Organization (PR-3)
+
+This repository uses a hybrid test organization: tests are grouped by concern (folder structure) and by scope using pytest markers. That makes tests easy to find and quick to run by scope.
+
+- Folder structure (examples): `tests/api/`, `tests/storage/`, `tests/ui/playwright/`, `tests/ui/selenium/`, `tests/time/`.
+- Pytest markers: `unit`, `integration`, `e2e` (registered in `pytest.ini`).
+
+Add the following to `pytest.ini` (already present in this project) to register markers:
+
+```ini
+[pytest]
+markers =
+   unit: fast, isolated function/class tests
+   integration: database, file, or service interaction tests
+   e2e: end-to-end UI/browser tests (Playwright, Selenium, Robot)
+```
+
+Run tests by scope (examples):
+
+```bash
+# run only unit tests
+pytest -m unit
+
+# run only integration tests
+pytest -m integration
+
+# run only end-to-end (UI) tests
+pytest -m e2e
+
+# run unit OR integration
+pytest -m "unit or integration"
+```
+
+Documentation and evidence:
+- Save text outputs, HTML reports or terminal screenshots in `docs/screenshots/` (e.g., `pytest-unit-output.txt`, `unit-report.html`, `pytest-unit-terminal.png`).
+- Reference these artifacts in your Test Plan and PR description.
+
+### PR-4: Automated Testing of Time Service
+
+This project implements PR-4 by adding a focused test suite and CI workflows for the Time Service feature. Summary of changes made:
+
+- **New tests added**: Unit and integration tests and end-to-end UI tests for the Time Service were added under the `tests/time/` and `tests/ui/` directories:
+   - `tests/time/test_time_unit_additional.py` — additional unit tests (fallback and format checks).
+   - `tests/api/test_time_integration_additional.py` — integration test verifying graceful API behavior on service failure.
+   - `tests/ui/playwright/test_time_e2e.py` — Playwright E2E test that verifies the `/time` UI displays UTC time and updates.
+   - `tests/ui/selenium/test_time_selenium.py` — Selenium E2E test (headless Chrome) that validates the UI time and update behavior.
+
+- **Service robustness**: The API route handling time was made resilient to service errors:
+   - `app/routes/time.py` now catches exceptions from `TimeService` and returns a graceful JSON error (keeps prior behavior of returning JSON so existing clients/tests stay compatible).
+
+- **Dev/test dependencies**:
+   - Added `tests/requirements-dev.txt` containing `pytest-playwright`, `playwright`, `selenium`, `webdriver-manager`, and other development-only packages used by the new tests.
+
+- **CI workflows**:
+   - Added separate GitHub Actions workflows for Playwright and Selenium:
+      - `.github/workflows/playwright-e2e.yml` — installs Playwright browsers and runs Playwright tests in `tests/ui/playwright`.
+      - `.github/workflows/selenium-e2e.yml` — runs Selenium E2E tests in `tests/ui/selenium`.
+   - Workflows are configured with `paths` filters and `workflow_dispatch` to support automatic runs on relevant changes and manual runs by reviewers.
+
+- **Test fixtures**: Playwright fixtures in `tests/ui/playwright/conftest.py` were used by the new Playwright test to avoid async/sync conflicts and ensure reliable browser setup.
+
+- **How to run Time Service tests locally**:
+   1. Install dev dependencies (recommended in an activated virtualenv):
+
+       ```bash
+       pip install -r requirements.txt
+       pip install -r tests/requirements-dev.txt
+       python -m playwright install --with-deps
+       ```
+
+   2. Run unit and integration tests:
+
+       ```bash
+       pytest -m unit
+       pytest -m integration
+       ```
+
+   3. Run Playwright E2E (make sure the app server is available — `tests/ui/playwright/conftest.py` performs a health check):
+
+       ```bash
+       pytest tests/ui/playwright -m e2e -q
+       ```
+
+   4. Run Selenium E2E (uses `webdriver-manager` to install ChromeDriver automatically):
+
+       ```bash
+       pytest tests/ui/selenium -m e2e -q
+       ```
+
+- **Evidence & artifacts**:
+   - Test outputs, HTML coverage, and screen recordings/screenshots (Playwright) should be saved under `test-results/` or `docs/screenshots/` as part of the run pipeline.
+   - Example artifacts in this repo after running tests: `htmlcov/` (coverage) and `test-results/videos` / `test-results/screenshots`.
+
+- **Notes**:
+   - Playwright tests use custom fixtures to avoid the async/sync loop error. If you see `It looks like you are using Playwright Sync API inside the asyncio loop`, make sure to run Playwright tests in their own collection (`tests/ui/playwright`) and use the provided fixtures.
+   - If you see a Selenium `WebDriver.__init__() got multiple values for argument 'options'` error, ensure ChromeDriver is created via `Service(...)` and passed using keyword `options=` as implemented in `tests/ui/selenium/test_time_selenium.py`.
+
+- **Backlog update**: Update `tt_user_stories.md` to mark PR-4 completed and point to these files and CI workflow runs as evidence.
+
+CI behavior (recommended):
+- Primary workflow (`.github/workflows/python-app.yml`) runs only `unit` + `integration` tests (this repo runs `pytest -m "unit or integration"` in the coverage step).
+- E2E/UI and Robot workflows should be in separate workflow files (e.g. `.github/workflows/e2e-tests.yml`) with path filters, `workflow_dispatch` for manual runs, and an optional PR-label override to force runs when needed.
+
 
 ## 📁 Project Structure
 
@@ -371,4 +475,3 @@ For issues or questions:
 
 ---
 
-**Sprint 4 - Complete Test Automation Suite with Professional Test Separation** 🎯

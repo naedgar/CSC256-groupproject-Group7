@@ -1,6 +1,11 @@
 import pytest
 from app.services.task_storage import save_tasks, load_tasks
 
+import pytest
+
+pytestmark = pytest.mark.integration
+
+
 def test_save_and_load_tasks():
     """Test that tasks can be saved and loaded from the default storage."""
     test_tasks = [{"id": 1, "title": "Persisted Task",  "completed": False}]

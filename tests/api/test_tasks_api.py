@@ -1,6 +1,8 @@
 import pytest
 import requests
 
+pytestmark = pytest.mark.integration
+
 BASE_URL = "http://127.0.0.1:5000/api/tasks"
 
 def test_add_and_get_tasks_end_to_end():

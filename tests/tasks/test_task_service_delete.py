@@ -1,6 +1,8 @@
 import pytest
 from app.services.task_service import TaskService
 
+pytestmark = pytest.mark.unit
+
 
 @pytest.fixture(autouse=True)
 def clean_task_service():

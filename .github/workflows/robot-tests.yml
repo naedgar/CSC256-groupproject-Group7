@@ -1,0 +1,35 @@
+name: Robot Tests
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'tests/robot/**'
+      - 'app/**'
+
+jobs:
+  robot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install robotframework-requests
+      - name: Start app
+        run: |
+          python -m app.main &
+          sleep 2
+      - name: Run Robot
+        run: |
+          robot --outputdir robot-reports --pythonpath . --loglevel DEBUG tests/robot/suites
+      - name: Upload reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: robot-reports
+          path: robot-reports

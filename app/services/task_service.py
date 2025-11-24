@@ -1,5 +1,7 @@
 from app.services.task_storage import load_tasks, save_tasks
 from app.models.task import Task
+from app.schemas import TaskCreate
+from app.exceptions import TaskValidationError
 
 # This class encapsulates all task operations (create, read, update, delete) with flexible storage support
 class TaskService:
@@ -56,19 +58,38 @@ class TaskService:
         return [t.to_dict() for t in self._tasks]
 
     def add_task(self, title, description=None):
-        """Add a new task with auto-incrementing ID."""
-        # Validate title
-        if not title or title is None:
-            raise ValueError("Title cannot be empty or None")
-
+        """Add a new task with centralized validation.
+        
+        This method now centralizes all task validation using the TaskCreate schema.
+        Both UI and API routes call this same method, ensuring consistent validation.
+        
+        Args:
+            title: Task title (required)
+            description: Task description (optional)
+            
+        Returns:
+            dict: The created task as a dictionary
+            
+        Raises:
+            TaskValidationError: If validation fails (title empty, too long, etc.)
+        """
+        # ✅ Validate using centralized schema
+        try:
+            # Create validated task data using schema
+            # This handles: trimming, type checking, length validation, required fields
+            validated_data = TaskCreate(title=title, description=description or "")
+        except TaskValidationError as e:
+            # Re-raise our custom validation error with full context
+            raise e
+        
         # Find the next available ID
         next_id = 1
         if self._tasks:
             next_id = max(task.id for task in self._tasks) + 1
 
-        # Create new Task object
+        # Create new Task object with validated data
         new_task_obj = Task(
-            next_id, title, description if description is not None else "", False
+            next_id, validated_data.title, validated_data.description, False
         )
         self._tasks.append(new_task_obj)
 

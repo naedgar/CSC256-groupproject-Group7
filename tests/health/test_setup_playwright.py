@@ -25,6 +25,11 @@ import sys
 import os
 
 
+import pytest
+
+pytestmark = pytest.mark.e2e
+
+
 def test_playwright_imports():
     """Test that all required Playwright modules can be imported."""
     print("🎭 Testing Playwright Imports...")
