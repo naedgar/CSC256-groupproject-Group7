@@ -1,0 +1,2044 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on darwin)" generated="2025-11-25T23:03:40.221554" rpa="false" schemaversion="5">
+<suite id="s1" name="Task Management" source="/Users/dillonkondylas/Documents/GitHub/CSC256-groupproject-Group7/tests/acceptance/robot_framework/task_management.robot">
+<kw name="Initialize Test Environment" type="SETUP">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.251565" level="INFO">Creating Session using : alias=app, url=http://localhost:5000, headers={},                     cookies={}, auth=None, timeout=5, proxies=None, verify=False,                     debug=0 </msg>
+<arg>app</arg>
+<arg>${BASE_URL}</arg>
+<arg>timeout=5</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-11-25T23:03:40.251457" elapsed="0.000192"/>
+</kw>
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.258039" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.258088" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.258148" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.251800" elapsed="0.006361"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.258382" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.258215" elapsed="0.000187"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.251733" elapsed="0.006694"/>
+</kw>
+<doc>Setup test environment and reset state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.251221" elapsed="0.007222"/>
+</kw>
+<test id="s1-t1" name="TC-ACC-001 Add Valid Task Via API" line="42">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.260427" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.260452" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.260490" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.258699" elapsed="0.001800"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.260686" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.260542" elapsed="0.000162"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.258624" elapsed="0.002099"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.260849" level="INFO">${payload} = {'title': 'Buy groceries', 'description': 'Milk and eggs'}</msg>
+<var>${payload}</var>
+<arg>title=Buy groceries</arg>
+<arg>description=Milk and eggs</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.260761" elapsed="0.000096"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.262746" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '58', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Buy groceries", "description": "Milk and eggs"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.262769" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '81', 'Connection': 'close'} 
+ body={"completed":false,"description":"Milk and eggs","id":1,"title":"Buy groceries"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.262806" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.260889" elapsed="0.001925"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.263035" level="INFO">${data} = {'completed': False, 'description': 'Milk and eggs', 'id': 1, 'title': 'Buy groceries'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.262859" elapsed="0.000185"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${data}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263078" elapsed="0.000049"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${data}</arg>
+<arg>title</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263156" elapsed="0.000042"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${data}</arg>
+<arg>description</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263226" elapsed="0.000036"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${data}</arg>
+<arg>completed</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263289" elapsed="0.000035"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${data}[title]</arg>
+<arg>Buy groceries</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263354" elapsed="0.000048"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${data}[description]</arg>
+<arg>Milk and eggs</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263433" elapsed="0.000045"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${data}[completed]</arg>
+<arg>${False}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263506" elapsed="0.000049"/>
+</kw>
+<doc>Acceptance: User can add a valid task via API</doc>
+<tag>acceptance</tag>
+<tag>create</tag>
+<tag>tasks</tag>
+<status status="PASS" start="2025-11-25T23:03:40.258466" elapsed="0.005128"/>
+</test>
+<test id="s1-t2" name="TC-ACC-002 Add Task Without Description" line="60">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.265590" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.265610" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.265641" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263893" elapsed="0.001756"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.265822" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.265684" elapsed="0.000155"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.263824" elapsed="0.002034"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.265944" level="INFO">${payload} = {'title': 'Call Mom'}</msg>
+<var>${payload}</var>
+<arg>title=Call Mom</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.265891" elapsed="0.000060"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.267771" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '21', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Call Mom"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.267795" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '63', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":1,"title":"Call Mom"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.267834" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.265978" elapsed="0.001865"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.268075" level="INFO">${data} = {'completed': False, 'description': '', 'id': 1, 'title': 'Call Mom'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.267891" elapsed="0.000193"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${data}[title]</arg>
+<arg>Call Mom</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.268122" elapsed="0.000054"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${data}[description]</arg>
+<arg>${EMPTY}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.268207" elapsed="0.000146"/>
+</kw>
+<doc>Acceptance: User can add task with optional description</doc>
+<tag>acceptance</tag>
+<tag>create</tag>
+<tag>tasks</tag>
+<status status="PASS" start="2025-11-25T23:03:40.263668" elapsed="0.004718"/>
+</test>
+<test id="s1-t3" name="TC-ACC-003 Reject Empty Title" line="72">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.270318" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.270340" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.270377" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.268642" elapsed="0.001742"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.270582" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.270429" elapsed="0.000172"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.268583" elapsed="0.002039"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.270828" level="INFO">${payload} = {'title': '', 'description': 'No title'}</msg>
+<var>${payload}</var>
+<arg>title=${EMPTY}</arg>
+<arg>description=No title</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.270661" elapsed="0.000176"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.272132" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '40', 'Content-Type': 'application/json'} 
+ body=b'{"title": "", "description": "No title"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.272155" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=400, reason=BAD REQUEST 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '46', 'Connection': 'close'} 
+ body={"error":"Title is required","field":"title"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.272192" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.270870" elapsed="0.001330"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.272420" level="INFO">${data} = {'error': 'Title is required', 'field': 'title'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.272252" elapsed="0.000176"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${data}</arg>
+<arg>error</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.272462" elapsed="0.000052"/>
+</kw>
+<doc>Acceptance: System rejects tasks with empty title</doc>
+<tag>acceptance</tag>
+<tag>tasks</tag>
+<tag>validation</tag>
+<status status="PASS" start="2025-11-25T23:03:40.268456" elapsed="0.004092"/>
+</test>
+<test id="s1-t4" name="TC-ACC-004 Reject Missing Title Field" line="83">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.274837" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.274859" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.274900" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.272857" elapsed="0.002052"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.275086" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.274949" elapsed="0.000155"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.272789" elapsed="0.002335"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.275211" level="INFO">${payload} = {'description': 'No title field'}</msg>
+<var>${payload}</var>
+<arg>description=No title field</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.275157" elapsed="0.000062"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.276222" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '33', 'Content-Type': 'application/json'} 
+ body=b'{"description": "No title field"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.276244" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=400, reason=BAD REQUEST 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '46', 'Connection': 'close'} 
+ body={"error":"Title is required","field":"title"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.276279" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=400</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.275248" elapsed="0.001039"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.276497" level="INFO">${data} = {'error': 'Title is required', 'field': 'title'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.276331" elapsed="0.000174"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${data}</arg>
+<arg>error</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.276539" elapsed="0.000047"/>
+</kw>
+<doc>Acceptance: System rejects tasks without title field</doc>
+<tag>acceptance</tag>
+<tag>tasks</tag>
+<tag>validation</tag>
+<status status="PASS" start="2025-11-25T23:03:40.272617" elapsed="0.004003"/>
+</test>
+<test id="s1-t5" name="TC-ACC-005 Get Empty Task List" line="94">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.278396" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.278418" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.278452" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.276892" elapsed="0.001569"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.278645" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.278500" elapsed="0.000166"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.276823" elapsed="0.001865"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.279635" level="INFO">GET Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.279655" level="INFO">GET Response : url=http://localhost:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'close'} 
+ body=[]
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.279688" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.278720" elapsed="0.000975"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.279900" level="INFO">${data} = []</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.279739" elapsed="0.000169"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.279984" level="INFO">Length is 0.</msg>
+<arg>${data}</arg>
+<arg>0</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.279941" elapsed="0.000056"/>
+</kw>
+<doc>Acceptance: User can fetch empty task list</doc>
+<tag>acceptance</tag>
+<tag>read</tag>
+<tag>tasks</tag>
+<status status="PASS" start="2025-11-25T23:03:40.276686" elapsed="0.003344"/>
+</test>
+<test id="s1-t6" name="TC-ACC-006 Get Non-Empty Task List" line="104">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.281906" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.281947" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.282073" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.280277" elapsed="0.001822"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.282314" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.282152" elapsed="0.000181"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.280215" elapsed="0.002139"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.282448" level="INFO">${payload1} = {'title': 'Task 1'}</msg>
+<var>${payload1}</var>
+<arg>title=Task 1</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.282391" elapsed="0.000065"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.282526" level="INFO">${payload2} = {'title': 'Task 2'}</msg>
+<var>${payload2}</var>
+<arg>title=Task 2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.282486" elapsed="0.000046"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.282595" level="INFO">${payload3} = {'title': 'Task 3'}</msg>
+<var>${payload3}</var>
+<arg>title=Task 3</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.282559" elapsed="0.000042"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.284583" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task 1"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.284609" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '61', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":1,"title":"Task 1"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload1}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.282626" elapsed="0.002007"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.286290" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task 2"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.286309" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '61', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":2,"title":"Task 2"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload2}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.284688" elapsed="0.001644"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.287883" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task 3"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.287903" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '61', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":3,"title":"Task 3"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload3}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.286371" elapsed="0.001556"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.288976" level="INFO">GET Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.289002" level="INFO">GET Response : url=http://localhost:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '185', 'Connection': 'close'} 
+ body=[{"completed":false,"description":"","id":1,"title":"Task 1"},{"completed":false,"description":"","id":2,"title":"Task 2"},{"completed":false,"description":"","id":3,"title":"Task 3"}]
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.289051" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.287971" elapsed="0.001089"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.289318" level="INFO">${data} = [{'completed': False, 'description': '', 'id': 1, 'title': 'Task 1'}, {'completed': False, 'description': '', 'id': 2, 'title': 'Task 2'}, {'completed': False, 'description': '', 'id': 3, 'title': 'Ta...</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.289110" elapsed="0.000217"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.289408" level="INFO">Length is 3.</msg>
+<arg>${data}</arg>
+<arg>3</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.289364" elapsed="0.000056"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.289560" elapsed="0.000070"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>title</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.289711" elapsed="0.000098"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>description</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.289852" elapsed="0.000038"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>completed</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.289917" elapsed="0.000033"/>
+</kw>
+<var name="${task}">{'completed': False, 'description': '', 'id': 1, 'title': 'Task 1'}</var>
+<status status="PASS" start="2025-11-25T23:03:40.289525" elapsed="0.000435"/>
+</iter>
+<iter>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290024" elapsed="0.000073"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>title</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290122" elapsed="0.000033"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>description</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290179" elapsed="0.000031"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>completed</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290233" elapsed="0.000030"/>
+</kw>
+<var name="${task}">{'completed': False, 'description': '', 'id': 2, 'title': 'Task 2'}</var>
+<status status="PASS" start="2025-11-25T23:03:40.290002" elapsed="0.000270"/>
+</iter>
+<iter>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>id</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290321" elapsed="0.000033"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>title</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290377" elapsed="0.000030"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>description</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290430" elapsed="0.000032"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${task}</arg>
+<arg>completed</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290483" elapsed="0.000029"/>
+</kw>
+<var name="${task}">{'completed': False, 'description': '', 'id': 3, 'title': 'Task 3'}</var>
+<status status="PASS" start="2025-11-25T23:03:40.290301" elapsed="0.000219"/>
+</iter>
+<var>${task}</var>
+<value>@{data}</value>
+<status status="PASS" start="2025-11-25T23:03:40.289451" elapsed="0.001077"/>
+</for>
+<doc>Acceptance: User can fetch list of created tasks</doc>
+<tag>acceptance</tag>
+<tag>read</tag>
+<tag>tasks</tag>
+<status status="PASS" start="2025-11-25T23:03:40.280088" elapsed="0.010474"/>
+</test>
+<test id="s1-t7" name="TC-ACC-007 Mark Task Complete" line="131">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.292706" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.292735" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.292780" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290806" elapsed="0.001983"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.293018" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.292843" elapsed="0.000194"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.290746" elapsed="0.002313"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.293157" level="INFO">${payload} = {'title': 'Do homework'}</msg>
+<var>${payload}</var>
+<arg>title=Do homework</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.293097" elapsed="0.000068"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.295075" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '24', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Do homework"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.295098" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '66', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":1,"title":"Do homework"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.295138" level="INFO">${create_response} = &lt;Response [201]&gt;</msg>
+<var>${create_response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.293197" elapsed="0.001950"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-25T23:03:40.295360" level="INFO">${task_id} = 1</msg>
+<var>${task_id}</var>
+<arg>${create_response.json()}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.295191" elapsed="0.000177"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.297265" level="INFO">PUT Request : url=http://localhost:5000/api/tasks/1 
+ path_url=/api/tasks/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.297293" level="INFO">PUT Response : url=http://localhost:5000/api/tasks/1 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '65', 'Connection': 'close'} 
+ body={"completed":true,"description":"","id":1,"title":"Do homework"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.297337" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/${task_id}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.295399" elapsed="0.001945"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.297590" level="INFO">${data} = {'completed': True, 'description': '', 'id': 1, 'title': 'Do homework'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.297403" elapsed="0.000196"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${data}[completed]</arg>
+<arg>${True}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.297640" elapsed="0.000063"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${data}[id]</arg>
+<arg>${task_id}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.297735" elapsed="0.000050"/>
+</kw>
+<doc>Acceptance: User can mark task as complete</doc>
+<tag>acceptance</tag>
+<tag>tasks</tag>
+<tag>update</tag>
+<status status="PASS" start="2025-11-25T23:03:40.290623" elapsed="0.007198"/>
+</test>
+<test id="s1-t8" name="TC-ACC-008 Cannot Complete Nonexistent Task" line="148">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.299719" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.299745" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.299784" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.298134" elapsed="0.001659"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.299988" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.299837" elapsed="0.000168"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.298072" elapsed="0.001954"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.301056" level="INFO">PUT Request : url=http://localhost:5000/api/tasks/9999 
+ path_url=/api/tasks/9999 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.301073" level="INFO">PUT Response : url=http://localhost:5000/api/tasks/9999 
+ status=404, reason=NOT FOUND 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={"error":"Task not found"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.301103" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/9999</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.300057" elapsed="0.001053"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.301291" level="INFO">${data} = {'error': 'Task not found'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.301147" elapsed="0.000151"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${data}</arg>
+<arg>error</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.301331" elapsed="0.000045"/>
+</kw>
+<doc>Acceptance: System rejects marking nonexistent task complete</doc>
+<tag>acceptance</tag>
+<tag>error</tag>
+<tag>tasks</tag>
+<status status="PASS" start="2025-11-25T23:03:40.297922" elapsed="0.003485"/>
+</test>
+<test id="s1-t9" name="TC-ACC-009 Delete Task" line="158">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.303169" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.303186" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.303213" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.301650" elapsed="0.001570"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.303386" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.303253" elapsed="0.000150"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.301583" elapsed="0.001839"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.303514" level="INFO">${payload} = {'title': 'Task to delete'}</msg>
+<var>${payload}</var>
+<arg>title=Task to delete</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.303457" elapsed="0.000065"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.305382" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '27', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task to delete"}' 
+ </msg>
+<msg time="2025-11-25T23:03:40.305401" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '69', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":1,"title":"Task to delete"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.305434" level="INFO">${create_response} = &lt;Response [201]&gt;</msg>
+<var>${create_response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.303553" elapsed="0.001887"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-25T23:03:40.305622" level="INFO">${task_id} = 1</msg>
+<var>${task_id}</var>
+<arg>${create_response.json()}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.305477" elapsed="0.000152"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.306687" level="INFO">GET Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.306713" level="INFO">GET Response : url=http://localhost:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '71', 'Connection': 'close'} 
+ body=[{"completed":false,"description":"","id":1,"title":"Task to delete"}]
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.306759" level="INFO">${get_response} = &lt;Response [200]&gt;</msg>
+<var>${get_response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.305658" elapsed="0.001108"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.307004" level="INFO">Length is 1.</msg>
+<msg time="2025-11-25T23:03:40.307027" level="INFO">${tasks_before} = 1</msg>
+<var>${tasks_before}</var>
+<arg>${get_response.json()}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.306847" elapsed="0.000187"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.308618" level="INFO">DELETE Request : url=http://localhost:5000/api/tasks/1 
+ path_url=/api/tasks/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.308635" level="INFO">DELETE Response : url=http://localhost:5000/api/tasks/1 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={"message":"Task deleted"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.308663" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/${task_id}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.307066" elapsed="0.001605"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.309654" level="INFO">GET Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.309679" level="INFO">GET Response : url=http://localhost:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'close'} 
+ body=[]
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.309726" level="INFO">${get_response} = &lt;Response [200]&gt;</msg>
+<var>${get_response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.308705" elapsed="0.001030"/>
+</kw>
+<kw name="Get Length" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.309968" level="INFO">Length is 0.</msg>
+<msg time="2025-11-25T23:03:40.309994" level="INFO">${tasks_after} = 0</msg>
+<var>${tasks_after}</var>
+<arg>${get_response.json()}</arg>
+<doc>Returns and logs the length of the given item as an integer.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.309786" elapsed="0.000215"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${tasks_after}</arg>
+<arg>${tasks_before - 1}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.310038" elapsed="0.000180"/>
+</kw>
+<doc>Acceptance: User can delete a task</doc>
+<tag>acceptance</tag>
+<tag>delete</tag>
+<tag>tasks</tag>
+<status status="PASS" start="2025-11-25T23:03:40.301466" elapsed="0.008786"/>
+</test>
+<test id="s1-t10" name="TC-ACC-010 Cannot Delete Nonexistent Task" line="180">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.312610" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.312637" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.312683" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.310556" elapsed="0.002136"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.312902" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.312740" elapsed="0.000181"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.310480" elapsed="0.002464"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.314079" level="INFO">DELETE Request : url=http://localhost:5000/api/tasks/9999 
+ path_url=/api/tasks/9999 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.314106" level="INFO">DELETE Response : url=http://localhost:5000/api/tasks/9999 
+ status=404, reason=NOT FOUND 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={"error":"Task not found"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.314149" level="INFO">${response} = &lt;Response [404]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/9999</arg>
+<arg>expected_status=404</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.312977" elapsed="0.001182"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.314393" level="INFO">${data} = {'error': 'Task not found'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.314210" elapsed="0.000192"/>
+</kw>
+<kw name="Dictionary Should Contain Key" owner="Collections">
+<arg>${data}</arg>
+<arg>error</arg>
+<doc>Fails if ``key`` is not found from ``dictionary``.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.314438" elapsed="0.000049"/>
+</kw>
+<doc>Acceptance: System rejects deleting nonexistent task</doc>
+<tag>acceptance</tag>
+<tag>error</tag>
+<tag>tasks</tag>
+<status status="PASS" start="2025-11-25T23:03:40.310325" elapsed="0.004195"/>
+</test>
+<test id="s1-t11" name="TC-ACC-101 Get Current Time" line="190">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.316266" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.316286" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.316318" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.314761" elapsed="0.001564"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.316506" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.316364" elapsed="0.000158"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.314701" elapsed="0.001853"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.789657" level="INFO">GET Request : url=http://localhost:5000/api/time 
+ path_url=/api/time 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.789727" level="INFO">GET Response : url=http://localhost:5000/api/time 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '80', 'Connection': 'close'} 
+ body={"source":"TimeAPI.io (External)","utc_datetime":"2025-11-26T04:03:40.7627873"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.789828" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/time</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.316587" elapsed="0.473256"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.790421" level="INFO">${data} = {'source': 'TimeAPI.io (External)', 'utc_datetime': '2025-11-26T04:03:40.7627873'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.789991" elapsed="0.000442"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.790538" level="INFO">Length is 2.</msg>
+<arg>${data}</arg>
+<arg>2</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.790479" elapsed="0.000076"/>
+</kw>
+<doc>Acceptance: User can fetch current server time</doc>
+<tag>acceptance</tag>
+<tag>read</tag>
+<tag>time</tag>
+<status status="PASS" start="2025-11-25T23:03:40.314582" elapsed="0.476022"/>
+</test>
+<test id="s1-t12" name="TC-ACC-102 Time Response Format" line="201">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:40.794307" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:40.794339" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:40 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:40.794388" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.791002" elapsed="0.003397"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:40.794657" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.794455" elapsed="0.000226"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:40.790914" elapsed="0.003795"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.211349" level="INFO">GET Request : url=http://localhost:5000/api/time 
+ path_url=/api/time 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.211458" level="INFO">GET Response : url=http://localhost:5000/api/time 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '80', 'Connection': 'close'} 
+ body={"source":"TimeAPI.io (External)","utc_datetime":"2025-11-26T04:03:41.1470214"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.211595" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/time</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:40.794751" elapsed="0.416858"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.212031" level="INFO">${data} = {'source': 'TimeAPI.io (External)', 'utc_datetime': '2025-11-26T04:03:41.1470214'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.211723" elapsed="0.000324"/>
+</kw>
+<kw name="Run Keyword And Return Status" owner="BuiltIn">
+<kw name="Get From Dictionary" owner="Collections">
+<arg>${data}</arg>
+<arg>utc_datetime</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.212210" elapsed="0.000064"/>
+</kw>
+<msg time="2025-11-25T23:03:41.212307" level="INFO">${has_utc_datetime} = True</msg>
+<var>${has_utc_datetime}</var>
+<arg>Get From Dictionary</arg>
+<arg>${data}</arg>
+<arg>utc_datetime</arg>
+<doc>Runs the given keyword with given arguments and returns the status as a Boolean value.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.212113" elapsed="0.000203"/>
+</kw>
+<kw name="Set Variable If" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.212427" level="INFO">${datetime_field} = 2025-11-26T04:03:41.1470214</msg>
+<var>${datetime_field}</var>
+<arg>${has_utc_datetime}</arg>
+<arg>${data}[utc_datetime]</arg>
+<arg>${data}[datetime]</arg>
+<doc>Sets variable based on the given condition.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.212357" elapsed="0.000079"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${datetime_field}</arg>
+<arg>^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.212476" elapsed="0.000145"/>
+</kw>
+<doc>Acceptance: Time response is in ISO 8601 format</doc>
+<tag>acceptance</tag>
+<tag>read</tag>
+<tag>time</tag>
+<status status="PASS" start="2025-11-25T23:03:40.790710" elapsed="0.421963"/>
+</test>
+<test id="s1-t13" name="TC-ACC-103 Time Response Has Timezone" line="216">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.215867" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.215898" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.215943" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.213076" elapsed="0.002878"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.216231" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.216009" elapsed="0.000268"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:41.212985" elapsed="0.003320"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.601439" level="INFO">GET Request : url=http://localhost:5000/api/time 
+ path_url=/api/time 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.601513" level="INFO">GET Response : url=http://localhost:5000/api/time 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '80', 'Connection': 'close'} 
+ body={"source":"TimeAPI.io (External)","utc_datetime":"2025-11-26T04:03:41.5702545"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.601623" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/time</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.216347" elapsed="0.385289"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.602121" level="INFO">${data} = {'source': 'TimeAPI.io (External)', 'utc_datetime': '2025-11-26T04:03:41.5702545'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.601762" elapsed="0.000370"/>
+</kw>
+<kw name="Convert To String" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.602254" level="INFO">${response_str} = {'source': 'TimeAPI.io (External)', 'utc_datetime': '2025-11-26T04:03:41.5702545'}</msg>
+<var>${response_str}</var>
+<arg>${data}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.602178" elapsed="0.000086"/>
+</kw>
+<kw name="Should Match Regexp" owner="BuiltIn">
+<arg>${response_str}</arg>
+<arg>(source|UTC|Z)</arg>
+<doc>Fails if ``string`` does not match ``pattern`` as a regular expression.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.602305" elapsed="0.000147"/>
+</kw>
+<doc>Acceptance: Time response includes timezone information</doc>
+<tag>acceptance</tag>
+<tag>read</tag>
+<tag>time</tag>
+<status status="PASS" start="2025-11-25T23:03:41.212769" elapsed="0.389735"/>
+</test>
+<test id="s1-t14" name="TC-ACC-201 Workflow: Create Multiple Tasks" line="228">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.606562" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.606598" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.606653" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.602980" elapsed="0.003685"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.606946" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.606730" elapsed="0.000241"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:41.602874" elapsed="0.004129"/>
+</kw>
+<for flavor="IN RANGE">
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.607285" level="INFO">${payload} = {'title': 'Task 1'}</msg>
+<var>${payload}</var>
+<arg>title=Task ${i}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.607182" elapsed="0.000113"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.610133" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task 1"}' 
+ </msg>
+<msg time="2025-11-25T23:03:41.610182" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '61', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":1,"title":"Task 1"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.607347" elapsed="0.002868"/>
+</kw>
+<var name="${i}">1</var>
+<status status="PASS" start="2025-11-25T23:03:41.607136" elapsed="0.003098"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.610414" level="INFO">${payload} = {'title': 'Task 2'}</msg>
+<var>${payload}</var>
+<arg>title=Task ${i}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.610331" elapsed="0.000092"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.612785" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task 2"}' 
+ </msg>
+<msg time="2025-11-25T23:03:41.612824" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '61', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":2,"title":"Task 2"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.610458" elapsed="0.002412"/>
+</kw>
+<var name="${i}">2</var>
+<status status="PASS" start="2025-11-25T23:03:41.610282" elapsed="0.002613"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.613073" level="INFO">${payload} = {'title': 'Task 3'}</msg>
+<var>${payload}</var>
+<arg>title=Task ${i}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.612980" elapsed="0.000103"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.615177" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task 3"}' 
+ </msg>
+<msg time="2025-11-25T23:03:41.615213" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '61', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":3,"title":"Task 3"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.613118" elapsed="0.002157"/>
+</kw>
+<var name="${i}">3</var>
+<status status="PASS" start="2025-11-25T23:03:41.612941" elapsed="0.002358"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.615508" level="INFO">${payload} = {'title': 'Task 4'}</msg>
+<var>${payload}</var>
+<arg>title=Task ${i}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.615402" elapsed="0.000116"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.617724" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task 4"}' 
+ </msg>
+<msg time="2025-11-25T23:03:41.617754" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '61', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":4,"title":"Task 4"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.615558" elapsed="0.002223"/>
+</kw>
+<var name="${i}">4</var>
+<status status="PASS" start="2025-11-25T23:03:41.615354" elapsed="0.002446"/>
+</iter>
+<iter>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.617981" level="INFO">${payload} = {'title': 'Task 5'}</msg>
+<var>${payload}</var>
+<arg>title=Task ${i}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.617896" elapsed="0.000094"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.620297" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '19', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task 5"}' 
+ </msg>
+<msg time="2025-11-25T23:03:41.620324" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '61', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":5,"title":"Task 5"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.618026" elapsed="0.002326"/>
+</kw>
+<var name="${i}">5</var>
+<status status="PASS" start="2025-11-25T23:03:41.617842" elapsed="0.002528"/>
+</iter>
+<var>${i}</var>
+<value>1</value>
+<value>6</value>
+<status status="PASS" start="2025-11-25T23:03:41.607043" elapsed="0.013341"/>
+</for>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.621556" level="INFO">GET Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.621578" level="INFO">GET Response : url=http://localhost:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '307', 'Connection': 'close'} 
+ body=[{"completed":false,"description":"","id":1,"title":"Task 1"},{"completed":false,"description":"","id":2,"title":"Task 2"},{"completed":false,"description":"","id":3,"title":"Task 3"},{"completed":false,"description":"","id":4,"title":"Task 4"},{"completed":false,"description":"","id":5,"title":"Task 5"}]
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.621627" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.620437" elapsed="0.001199"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.621931" level="INFO">${tasks} = [{'completed': False, 'description': '', 'id': 1, 'title': 'Task 1'}, {'completed': False, 'description': '', 'id': 2, 'title': 'Task 2'}, {'completed': False, 'description': '', 'id': 3, 'title': 'Ta...</msg>
+<var>${tasks}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.621683" elapsed="0.000263"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.622141" level="INFO">Length is 5.</msg>
+<arg>${tasks}</arg>
+<arg>5</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.622028" elapsed="0.000153"/>
+</kw>
+<doc>Acceptance: Complete workflow of creating multiple tasks</doc>
+<tag>acceptance</tag>
+<tag>workflow</tag>
+<status status="PASS" start="2025-11-25T23:03:41.602610" elapsed="0.019625"/>
+</test>
+<test id="s1-t15" name="TC-ACC-202 Workflow: Create, Complete, Delete" line="244">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.624652" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.624676" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.624718" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.622591" elapsed="0.002137"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.624961" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.624777" elapsed="0.000206"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:41.622507" elapsed="0.002500"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.625125" level="INFO">${payload} = {'title': 'Lifecycle task', 'description': 'Full cycle'}</msg>
+<var>${payload}</var>
+<arg>title=Lifecycle task</arg>
+<arg>description=Full cycle</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.625049" elapsed="0.000091"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.627128" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '56', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Lifecycle task", "description": "Full cycle"}' 
+ </msg>
+<msg time="2025-11-25T23:03:41.627150" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '79', 'Connection': 'close'} 
+ body={"completed":false,"description":"Full cycle","id":1,"title":"Lifecycle task"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.627188" level="INFO">${create_response} = &lt;Response [201]&gt;</msg>
+<var>${create_response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.625197" elapsed="0.002001"/>
+</kw>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-25T23:03:41.627431" level="INFO">${task_id} = 1</msg>
+<var>${task_id}</var>
+<arg>${create_response.json()}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.627243" elapsed="0.000197"/>
+</kw>
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.629372" level="INFO">PUT Request : url=http://localhost:5000/api/tasks/1 
+ path_url=/api/tasks/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.629396" level="INFO">PUT Response : url=http://localhost:5000/api/tasks/1 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '78', 'Connection': 'close'} 
+ body={"completed":true,"description":"Full cycle","id":1,"title":"Lifecycle task"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks/${task_id}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.627486" elapsed="0.001931"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.630661" level="INFO">GET Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.630689" level="INFO">GET Response : url=http://localhost:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '80', 'Connection': 'close'} 
+ body=[{"completed":true,"description":"Full cycle","id":1,"title":"Lifecycle task"}]
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.630744" level="INFO">${get_response} = &lt;Response [200]&gt;</msg>
+<var>${get_response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.629463" elapsed="0.001291"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.631039" level="INFO">${tasks} = [{'completed': True, 'description': 'Full cycle', 'id': 1, 'title': 'Lifecycle task'}]</msg>
+<var>${tasks}</var>
+<arg>${get_response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.630819" elapsed="0.000230"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.631144" level="INFO">${found} = False</msg>
+<var>${found}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.631090" elapsed="0.000062"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<msg time="2025-11-25T23:03:41.631342" level="INFO">${task_id_from_list} = 1</msg>
+<var>${task_id_from_list}</var>
+<arg>${task}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.631276" elapsed="0.000074"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.631504" level="INFO">${is_match} = True</msg>
+<var>${is_match}</var>
+<arg>${task_id_from_list} == ${task_id}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.631391" elapsed="0.000122"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.631687" level="INFO">${found} = True</msg>
+<arg>${found}</arg>
+<arg>${True}</arg>
+<doc>Makes a variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.631619" elapsed="0.000083"/>
+</kw>
+<arg>${is_match}</arg>
+<arg>Set Test Variable</arg>
+<arg>${found}</arg>
+<arg>${True}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.631554" elapsed="0.000166"/>
+</kw>
+<var name="${task}">{'completed': True, 'description': 'Full cycle', 'id': 1, 'title': 'Lifecycle task'}</var>
+<status status="PASS" start="2025-11-25T23:03:41.631243" elapsed="0.000498"/>
+</iter>
+<var>${task}</var>
+<value>@{tasks}</value>
+<status status="PASS" start="2025-11-25T23:03:41.631178" elapsed="0.000577"/>
+</for>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${found}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.631790" elapsed="0.000047"/>
+</kw>
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.633566" level="INFO">DELETE Request : url=http://localhost:5000/api/tasks/1 
+ path_url=/api/tasks/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.633588" level="INFO">DELETE Response : url=http://localhost:5000/api/tasks/1 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={"message":"Task deleted"}
+ 
+ </msg>
+<arg>app</arg>
+<arg>/api/tasks/${task_id}</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.631870" elapsed="0.001739"/>
+</kw>
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.634665" level="INFO">GET Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.634687" level="INFO">GET Response : url=http://localhost:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'close'} 
+ body=[]
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.634731" level="INFO">${get_response} = &lt;Response [200]&gt;</msg>
+<var>${get_response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>expected_status=200</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.633653" elapsed="0.001088"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.634980" level="INFO">${tasks} = []</msg>
+<var>${tasks}</var>
+<arg>${get_response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.634795" elapsed="0.000195"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.635080" level="INFO">${found} = False</msg>
+<var>${found}</var>
+<arg>${False}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.635031" elapsed="0.000058"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Get From Dictionary" owner="Collections">
+<var>${check_id}</var>
+<arg>${task}</arg>
+<arg>id</arg>
+<doc>Returns a value from the given ``dictionary`` based on the given ``key``.</doc>
+<status status="NOT RUN" start="2025-11-25T23:03:41.635190" elapsed="0.000007"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<var>${is_deleted}</var>
+<arg>${check_id} == ${task_id}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="NOT RUN" start="2025-11-25T23:03:41.635232" elapsed="0.000006"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${is_deleted}</arg>
+<arg>Set Test Variable</arg>
+<arg>${found}</arg>
+<arg>${True}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="NOT RUN" start="2025-11-25T23:03:41.635271" elapsed="0.000006"/>
+</kw>
+<var name="${task}"/>
+<status status="NOT RUN" start="2025-11-25T23:03:41.635158" elapsed="0.000131"/>
+</iter>
+<var>${task}</var>
+<value>@{tasks}</value>
+<status status="NOT RUN" start="2025-11-25T23:03:41.635112" elapsed="0.000187"/>
+</for>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${found}</arg>
+<arg>${False}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.635335" elapsed="0.000064"/>
+</kw>
+<doc>Acceptance: Complete workflow of full task lifecycle</doc>
+<tag>acceptance</tag>
+<tag>workflow</tag>
+<status status="PASS" start="2025-11-25T23:03:41.622321" elapsed="0.013120"/>
+</test>
+<test id="s1-t16" name="TC-ACC-203 Workflow: Create Task With Whitespace" line="287">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.637499" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.637527" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.637569" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.635778" elapsed="0.001801"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.637807" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.637627" elapsed="0.000203"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:41.635696" elapsed="0.002159"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.637938" level="INFO">${title_input} = Task Title</msg>
+<var>${title_input}</var>
+<arg>Task Title</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.637894" elapsed="0.000053"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.638021" level="INFO">${desc_input} = Description</msg>
+<var>${desc_input}</var>
+<arg>Description</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.637981" elapsed="0.000048"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.638176" level="INFO">${payload} = {'title': 'Task Title', 'description': 'Description'}</msg>
+<var>${payload}</var>
+<arg>title=${title_input}</arg>
+<arg>description=${desc_input}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.638068" elapsed="0.000118"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.640295" level="INFO">POST Request : url=http://localhost:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '53', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Task Title", "description": "Description"}' 
+ </msg>
+<msg time="2025-11-25T23:03:41.640318" level="INFO">POST Response : url=http://localhost:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '76', 'Connection': 'close'} 
+ body={"completed":false,"description":"Description","id":1,"title":"Task Title"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.640358" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<arg>expected_status=201</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.638223" elapsed="0.002144"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.640611" level="INFO">${data} = {'completed': False, 'description': 'Description', 'id': 1, 'title': 'Task Title'}</msg>
+<var>${data}</var>
+<arg>${response.json()}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.640416" elapsed="0.000205"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${data}[title]</arg>
+<arg>${title_input}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.640661" elapsed="0.000447"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${data}[description]</arg>
+<arg>${desc_input}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.641148" elapsed="0.000066"/>
+</kw>
+<doc>Acceptance: System trims whitespace from task input</doc>
+<tag>acceptance</tag>
+<tag>validation</tag>
+<tag>workflow</tag>
+<status status="PASS" start="2025-11-25T23:03:41.635521" elapsed="0.005730"/>
+</test>
+<kw name="Cleanup Test Environment" type="TEARDOWN">
+<kw name="Reset Tasks">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.643314" level="INFO">POST Request : url=http://localhost:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-11-25T23:03:41.643337" level="INFO">POST Response : url=http://localhost:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Wed, 26 Nov 2025 04:03:41 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-11-25T23:03:41.643376" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<var>${response}</var>
+<arg>app</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.641626" elapsed="0.001758"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-11-25T23:03:41.643618" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-11-25T23:03:41.643447" elapsed="0.000191"/>
+</kw>
+<doc>Reset tasks to clean state</doc>
+<status status="PASS" start="2025-11-25T23:03:41.641571" elapsed="0.002090"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2025-11-25T23:03:41.643717" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2025-11-25T23:03:41.643692" elapsed="0.000054"/>
+</kw>
+<doc>Cleanup after tests</doc>
+<status status="PASS" start="2025-11-25T23:03:41.641489" elapsed="0.002274"/>
+</kw>
+<doc>PR-7 Acceptance Tests - Task Management Application
+Robot Framework E2E tests with behavioral parity
+with Playwright-BDD tests from Sprint 4</doc>
+<status status="PASS" start="2025-11-25T23:03:40.222344" elapsed="1.421430"/>
+</suite>
+<statistics>
+<total>
+<stat pass="16" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="16" fail="0" skip="0">acceptance</stat>
+<stat pass="2" fail="0" skip="0">create</stat>
+<stat pass="1" fail="0" skip="0">delete</stat>
+<stat pass="2" fail="0" skip="0">error</stat>
+<stat pass="5" fail="0" skip="0">read</stat>
+<stat pass="10" fail="0" skip="0">tasks</stat>
+<stat pass="3" fail="0" skip="0">time</stat>
+<stat pass="1" fail="0" skip="0">update</stat>
+<stat pass="3" fail="0" skip="0">validation</stat>
+<stat pass="3" fail="0" skip="0">workflow</stat>
+</tag>
+<suite>
+<stat name="Task Management" id="s1" pass="16" fail="0" skip="0">Task Management</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
