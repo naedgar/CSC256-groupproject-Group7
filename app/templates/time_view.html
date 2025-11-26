@@ -2,11 +2,27 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h2>🕒 Current UTC Time</h2>
+<h2>🕒 Current Time</h2>
+
+<form method="GET" action="/time" style="margin-bottom: 20px;">
+    <label for="timezone"><strong>Select Timezone:</strong></label>
+    <select name="timezone" id="timezone" onchange="this.form.submit()" style="padding: 8px; margin-left: 10px; font-size: 14px;">
+        <option value="UTC" {% if selected_timezone == 'UTC' %}selected{% endif %}>UTC</option>
+        <option value="Eastern" {% if selected_timezone == 'Eastern' %}selected{% endif %}>Eastern (US)</option>
+        <option value="Central" {% if selected_timezone == 'Central' %}selected{% endif %}>Central (US)</option>
+        <option value="Mountain" {% if selected_timezone == 'Mountain' %}selected{% endif %}>Mountain (US)</option>
+        <option value="Pacific" {% if selected_timezone == 'Pacific' %}selected{% endif %}>Pacific (US)</option>
+        <option value="London" {% if selected_timezone == 'London' %}selected{% endif %}>London (UK)</option>
+        <option value="Beijing" {% if selected_timezone == 'Beijing' %}selected{% endif %}>Beijing (CN)</option>
+    </select>
+</form>
 
 {% if time_data.utc_datetime %}
     <div class="alert alert-success">
         <p><strong>UTC Time:</strong> {{ time_data.utc_datetime }}</p>
+        {% if selected_timezone and selected_timezone != 'UTC' and converted_time %}
+            <p><strong>{{ selected_timezone }} Time:</strong> {{ converted_time }}</p>
+        {% endif %}
         <small>{% if time_data.source %}Source: {{ time_data.source }}{% else %}Time retrieved successfully{% endif %}</small>
     </div>
 {% elif time_data.error %}
