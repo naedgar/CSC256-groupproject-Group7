@@ -1,83 +1,91 @@
-name: Python application
+name: Python — unit & integration
+
+# This workflow runs unit and integration tests.
+# Automatic runs: push to main when app/ or tests/unit or tests/integration change.
+# For pull requests we decide in-job whether to run so a PR label can override path filters.
+# PR label to force run: 'run-unit-integration'
 
 on:
   push:
-    branches: [ "main" ]
-    paths-ignore:
-      - '**.md'
-      - 'docs/**'
-      - 'README*'
+    branches: [ 'main' ]
+    paths:
+      - 'app/**'
+      - 'tests/unit/**'
+      - 'tests/integration/**'
+      - 'requirements*.txt'
+      - 'pyproject.toml'
+      - 'setup.cfg'
   pull_request:
-    branches: [ "main" ]
-    paths-ignore:
-      - '**.md'
-      - 'docs/**'
-      - 'README*'
+    branches: [ 'main' ]
+  workflow_dispatch: {}
 
-  name: Python application
-  
-  on:
-    push:
-      branches: [ "main" ]
-      paths-ignore:
-        - '**.md'           # Skip running CI if only markdown files change
-        - 'docs/**'         # Skip if only docs are updated
-        - '**.rst'          # Skip reStructuredText files
-        - 'LICENSE'         # Skip license updates
-        - '.gitignore'      # Skip gitignore-only changes
-        - 'README*'         # Skip README edits
-    pull_request:
-      branches: [ "main" ]
-      paths-ignore:
-        - '**.md'
-        - 'docs/**'
-        - '**.rst'
-        - 'LICENSE'
-        - '.gitignore'
-        - 'README*'
-  
-  jobs:
-    build:  # 🔨 Job name
-      runs-on: ubuntu-latest  # 🖥️ This job will run in a virtual machine with Ubuntu
-  
-      steps:
-        # Step 1: Get your code
-        - name: Checkout Repository
-          uses: actions/checkout@v4
-        # 📂 This downloads your repository's files into the CI environment
-  
-        # Step 2: Set up Python
-        - name: Set up Python
-          uses: actions/setup-python@v5
-          with:
-            python-version: "3.13.5"  # Python version must match your local dev environment
-  
-        # Step 3: Install dependencies
-        - name: Install dependencies
-          run: |
-            python -m pip install --upgrade pip  # Upgrade pip
-            pip install -r requirements.txt      # Install all Python packages listed in requirements.txt
-  
-        # Step 4: Run tests with coverage tracking
-        - name: Run tests with coverage (unit + integration)
-          run: |
-            # Run only unit and integration tests for the primary workflow
-            pytest -m "unit or integration" --cov=app --cov-report=term-missing
-            # This measures coverage only for unit+integration tests
-  
-        # (Optional) Step 5: Enforce a minimum test coverage percentage
-        # - name: Enforce minimum coverage
-        #   run: |
-        #     coverage report --fail-under=80
-        #     # ❌ This will fail the build if total coverage is below 80%
-  
-        # (Optional) Step 6: Save the HTML version of the coverage report as an artifact
-        # - name: Upload coverage HTML report
-        #   uses: actions/upload-artifact@v3
-        #   with:
-        #     name: coverage-html
-        #     path: htmlcov/
-        #     # 📁 This allows you to download and view the full HTML coverage report after CI runs
-        # Note: Unit + integration tests are already executed by the coverage step above.
-        # E2E/UI tests (Playwright/Selenium/Robot) should run in separate workflow files
-        # (e.g. .github/workflows/e2e-tests.yml) with path filters and manual dispatch.
+jobs:
+  decide:
+    name: Decide whether to run
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Decide (changed paths / PR label / manual)
+        id: check
+        run: |
+          run=false
+          echo "event=${{ github.event_name }}"
+          # Manual runs always run
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            run=true
+          fi
+
+          # Push runs are gated by the push.paths above — if this executes, we should run
+          if [ "${{ github.event_name }}" = "push" ]; then
+            run=true
+          fi
+
+          # For PRs we allow label override or run when files in relevant paths changed
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            labels=$(jq -r '.pull_request.labels[]?.name' $GITHUB_EVENT_PATH || true)
+            echo "PR labels: $labels"
+            echo "$labels" | grep -q "run-unit-integration" && run=true || true
+
+            # Check changed files in PR; compare base...head
+            git --no-pager fetch --no-tags --depth=1 origin ${{ github.base_ref }} || true
+            git --no-pager diff --name-only origin/${{ github.base_ref }}...${{ github.sha }} | \
+              grep -E '^(app/|tests/unit/|tests/integration/|requirements|pyproject.toml|setup.cfg)' && run=true || true
+          fi
+
+          echo "run=$run" >> $GITHUB_OUTPUT
+
+  test:
+    name: Run unit & integration tests
+    needs: decide
+    if: needs.decide.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Run unit + integration tests
+        run: |
+          pytest -m "unit or integration" --cov=app --cov-report=term-missing
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: unit-integration-results
+          path: |
+            .pytest_cache
+            htmlcov || true
