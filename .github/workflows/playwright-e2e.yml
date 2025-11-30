@@ -1,26 +1,59 @@
 name: Playwright E2E Tests
 
+# Automatic runs: push to main when app or UI tests change.
+# Pull requests: decide in-job (allows PR label override).
+# Manual run: use the 'Run workflow' button.
+# PR label to force run: 'run-e2e'
+
 on:
   push:
+    branches: [ 'main' ]
     paths:
-      - 'tests/ui/**'
       - 'app/**'
+      - 'tests/ui/**'
+      - 'tests/ui/playwright/**'
   pull_request:
-    paths:
-      - 'tests/ui/**'
-      - 'app/**'
+    branches: [ 'main' ]
   workflow_dispatch: {}
 
 jobs:
-  playwright-e2e:
+  decide:
+    name: Decide whether to run Playwright E2E
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    outputs:
+      run: ${{ steps.check.outputs.run }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Decide (changed paths / PR label / manual)
+        id: check
+        run: |
+          run=false
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then run=true; fi
+          if [ "${{ github.event_name }}" = "push" ]; then run=true; fi
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            labels=$(jq -r '.pull_request.labels[]?.name' $GITHUB_EVENT_PATH || true)
+            echo "PR labels: $labels"
+            echo "$labels" | grep -q "run-e2e" && run=true || true
+            git --no-pager fetch --no-tags --depth=1 origin ${{ github.base_ref }} || true
+            git --no-pager diff --name-only origin/${{ github.base_ref }}...${{ github.sha }} | \
+              grep -E '^(app/|tests/ui/|tests/ui/playwright/)' && run=true || true
+          fi
+          echo "run=$run" >> $GITHUB_OUTPUT
+
+  playwright-e2e:
+    name: Run Playwright E2E tests
+    needs: decide
+    if: needs.decide.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
