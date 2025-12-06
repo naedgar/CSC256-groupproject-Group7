@@ -1,77 +1,83 @@
-# Sprint 1 Issue
+# Sprint 1 Issue – Group Project
 
-## Parent Epic: Sprint 1 Completion 
+## Parent Epic: Sprint 1 Completion (PR-1 Agile Documentation)
 
-- *Title:* **Sprint 1 Acceptance Criteria** 
-- *Description:* 
-   
-    This Sprint includes foundational work on the TaskTracker project including environment setup, testing pipelines, initial API endpoints, and a CLI stub interface. Completion of Sprint 1 requires all the following criteria to be met.
+- *Title:* **Sprint 1 Agile Documentation & Project Reset**
+- *Description:*
 
-    - **Sprint-Level Completion Criteria** (Product Owner Level) (see `s1_sprint_plan`)
-    * Project environment and development workflow is set up.
-    * Core API endpoints are implemented and tested.
-    * Health check route (`/api/`) is implemented.
-    * A task is added (`POST /api/tasks`).
-    * GitHub Actions continuous intergration is established.
-    * API Documentation has begun
-    * A **CLI stub** to support task creation from the command line is added.
-    * Manual testing is introduced with curl and Postman.
-    
-    - **Definition of Done**  (applies to each user story or task) (see `s1_sprint_plan`)
+This Sprint establishes the foundation of the **Group Project phase** of TaskTracker. The team migrates the selected Individual Project into a new shared repository, resets all Agile documentation, and prepares the system for upcoming refactors, CI changes, and advanced testing.
 
-    ---
+### ✅ Sprint-Level Completion Criteria (Product Owner Level)
 
-  - 📂 Sub-Issues from EPIC
-    
-    -  Break out each of the above to be their own issue (sub-issue of EPIC)
-    
-**Sub-Issues** 
-*Core API Endpoints*
-  * [ ] All selected user stories (US000–US004) are completed and marked “Done”
-    *Use the `tt_user_stories`* Acceptance Criteria
-    * **US001 – Health Check Endpoint**:
-        * [ ] `GET /api/health` returns `{ "status": "OK" }`
-        * [ ] Response includes HTTP 200 status code
-        * [ ] Endpoint has automated test using `pytest`
-        * [ ] CI is configured to run the test on every push to `main` 
-    * **US002 – Add Task via API**: 
-        * [ ] `POST /api/tasks` accepts a JSON body with a task title
-        * [ ] Task is added to an in-memory list or temporary storage
-        * [ ] Title field is required; request fails with a 400 error if missing or empty
-        * [ ] Valid requests return 201 and include the new task in JSON
-        * [ ] All logic is covered by unit tests
-    * **US003 – View Tasks (List)**: 
-        * [ ] `GET /api/tasks` returns a JSON array of all tasks
-        * [ ] Each task includes `id`, `title`, and `completed` status
-        * [ ] Endpoint returns 200 with correct structure even when task list is empty
-        * [ ] Tests validate response structure and content
-    * **US004 - Add Task via CLI (stub)**
-        * [ ] Prompt for task title and description
-        * [ ] Add task to in-memory list (Sprint 1 only)
-        * [ ] Display confirmation message 
+- Shared **Group GitHub repository** is created and base code is migrated.
+- All **Agile documentation is recreated** for the Group Project:
+  - Sprint Plan  
+  - Test Plan  
+  - Test Cases  
+  - API Reference  
+  - Architecture Diagram  
+  - ERD & Class Diagram  
+- **Hybrid test strategy documented** (markers + concern-based folders).
+- **CI refactor plan documented** (separate workflows, conditional triggers).
+- **Robot Framework strategy documented** (not fully implemented yet).
+- **Traceability Matrix framework created**.
+- Documentation reflects **team ownership**, not the Individual Project.
 
-*Continuous Integration Setup*
-  * [ ] Continuous Integration (CI) via GitHub Actions runs on every push and passes for all merged branches
-    - [ ] #CI001 – Configure GitHub Actions for testing workflow
-    - [ ] #CI002 – Set up and verify `pytest-cov` integration and include report in CI
+### ✅ Definition of Done (applies to each task)
 
-*Manual Testing & Documentation*
-  * [ ] Test endpoints with curl and Postman
-  * [ ] Document results in README / Postman collection
-  * [ ] Begin API documentation
+- Documentation committed to GitHub
+- All files follow course templates
+- Peer-reviewed via Pull Request
+- CI remains green
+- Artifacts match current project structure
 
-*Project Environment Setup*
-  * [ ] Set up project structure and virutal environment
-  * [ ] Configure dependencies (`requirements.txt`)
-  * [ ] Confirm development workflow is working
+---
 
-**Atomic Tasks**
-* [ ] Write unit tests for `/api/` health check
-* [ ] Write unit test for `POST /api/tasks`
-* [ ] Add GitHub Actions workflow file
-* [ ] Verify task creation persists correctly
-* [ ] Document CLI usage in README 
-    
+## 📂 Sub-Issues from EPIC
 
+### 🗂 Agile Documentation Reset (PR-1)
+- [ ] Recreate **Sprint Plan**
+- [ ] Recreate **Test Plan**
+- [ ] Recreate **Test Cases**
+- [ ] Recreate **API Reference**
+- [ ] Recreate **Architecture Diagram**
+- [ ] Recreate **ERD & Class Diagram**
+- [ ] Create **Traceability Matrix**
+- [ ] Create **Robot Framework Lab Outline**
 
+---
+
+### ⚙️ Project Setup
+- [ ] New Group GitHub repo created
+- [ ] Base code migrated from Individual Project
+- [ ] Repo folder structure verified
+- [ ] Team roles assigned
+
+---
+
+### 🧪 Testing Strategy Setup
+- [ ] Hybrid test model documented (folders + markers)
+- [ ] Unit / Integration / E2E test scopes defined
+- [ ] Robot Framework acceptance plan documented
+- [ ] TimeService testing strategy documented
+
+---
+
+### 🔁 CI/CD Planning (PR-2 Prep)
+- [ ] CI refactor plan documented
+- [ ] Identify required workflows:
+  - Unit + Integration
+  - E2E
+  - BDD
+  - Robot
+- [ ] Path filters & manual triggers defined
+
+---
+
+## ✅ Atomic Tasks
+- [ ] Create all Sprint 1 Agile markdown docs
+- [ ] Add diagrams to `/docs/diagrams`
+- [ ] Add documentation links to README
+- [ ] Open PR for PR-1 documentation
+- [ ] Peer review and merge PR
 

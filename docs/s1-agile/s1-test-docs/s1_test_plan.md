@@ -1,38 +1,39 @@
-# 🍪 Sprint 1 Test Plan – Group Project Edition  
+# 🍪 Sprint 1 Test Plan – Group Project (PR-1 Agile Documentation)
 
-Understand that while *In-Scope Functionality* defines **what features are being tested**, the *Test Objectives* clarify **why** each feature is tested and **how success is measured**.  
-Including both ensures a complete plan aligned to both development goals and QA validation.
+This Sprint 1 Test Plan defines the **testing strategy and preparation** for the TaskTracker Group Project.  
+Sprint 1 focuses on **documentation, planning, and environment setup**, not full feature testing execution.
 
 ---
 
 ## 📝 Purpose  
 
-This plan documents the validation of the **migrated TaskTracker Group Project environment**, its new **hybrid testing framework**, and updated functional requirements from the following User Stories:
+This plan documents the **testing strategy for the migrated Group Project environment** and prepares the project for advanced testing in future sprints.
+
+This Sprint includes **planning and design** for testing the following upcoming features:
 
 - US0XX – Hybrid pytest Organization  
 - US0XX – Centralized Task Validation  
 - US0XX – Automated TimeService Testing  
 - US0XX – Robot Framework Acceptance Suite  
-- US0XX – Team-selected feature (from `group_projects_choice.md`)
+- US0XX – Team-selected feature (`group_projects_choice.md`)  
 
-The plan outlines both automated and manual testing strategies with a focus on:
+Sprint 1 establishes:
 
-- Establishing **pytest markers** and concern-based test folders  
-- Refactoring and validating **TaskService input rules**  
-- Verifying **TimeService** output via Playwright/Selenium  
-- Introducing **Robot Framework** acceptance testing and lab documentation  
-- Maintaining continuous integration through **GitHub Actions**  
-- Ensuring regression of existing endpoints from individual projects  
+- The **hybrid pytest strategy**
+- The **Robot Framework acceptance strategy**
+- The **TimeService testing strategy**
+- The **CI/CD testing structure**
+- The **regression testing approach**
 
-Manual verification will supplement automated coverage for UI and Robot flows; screenshots or logs are stored in `/tests/screenshots/`.
+No full feature automation is required in Sprint 1 — this sprint defines the **testing foundation**.
 
 ---
 
 ## 📅 Sprint Information  
 
-* **Sprint:** 1 – Agile Documentation & Hybrid Testing Setup  
+* **Sprint:** 1 – Agile Documentation & Testing Strategy Setup  
 * **Iteration Dates:** YYYY-MM-DD → YYYY-MM-DD  
-* **Version Under Test:** `main` branch in Group Repo  
+* **Version Under Test:** Group `main` branch (migrated baseline)  
 * **Prepared by:** [Your Name]  
 * **Last Updated:** YYYY-MM-DD  
 
@@ -42,37 +43,34 @@ Manual verification will supplement automated coverage for UI and Robot flows; s
 
 | ID | Objective | Success Metric |
 |----|------------|----------------|
-| OBJ-1 | Verify hybrid pytest organization and markers function as intended | `pytest -m unit`, `-m integration`, `-m e2e` run only targeted tests successfully |
-| OBJ-2 | Validate centralized Task validation logic in `TaskService` | Invalid or duplicate titles return 400 with error JSON; valid tasks pass |
-| OBJ-3 | Confirm TimeService automated tests update and display current time correctly | UI and API tests pass across browsers |
-| OBJ-4 | Execute Robot Framework acceptance tests for core flows | All Robot cases (log.html/report.html) show Pass |
-| OBJ-5 | Maintain CI pipeline stability | All pytest + Robot workflows green in GitHub Actions |
+| OBJ-1 | Define and document hybrid pytest organization | Testing folders and markers documented |
+| OBJ-2 | Define centralized Task validation strategy | Validation rules documented |
+| OBJ-3 | Define TimeService automated testing approach | UI and API test plan documented |
+| OBJ-4 | Define Robot Framework acceptance strategy | Robot test scope and lab outline documented |
+| OBJ-5 | Define CI testing execution plan | All testing workflows planned |
 
 ---
 
-## 📎 In-Scope Functionality by User Story  
+## 📎 In-Scope Testing Strategy by User Story  
 
 ### US001 – Hybrid pytest Organization  
-- Concern-based folder structure (`tests/api`, `tests/service`, `tests/ui`)  
-- Markers: `unit`, `integration`, `e2e`
+- Plan concern-based folder structure  
+- Plan marker usage (`unit`, `integration`, `e2e`)  
 
 ### US002 – Centralize Task Validation  
-- All validation moved to `TaskService` and `schemas.py`  
-- Same rules for API and UI inputs  
-- Edge tests for empty, too-long, duplicate titles  
+- Define validation rules  
+- Define shared schema strategy  
 
 ### US003 – Automated TimeService Testing  
-- Validate `/api/time` endpoint and browser display  
-- Check time format (HH:MM[:SS]) and auto-update  
+- Define `/api/time` test coverage  
+- Define UI browser test scope  
 
 ### US004 – Robot Framework Acceptance Suite  
-- Covers Add, List, Delete Tasks and TimeService  
-- Generates artifacts (`log.html`, `report.html`)  
-- Taught through Robot Framework Lab  
+- Define core user journeys  
+- Define expected Robot artifacts  
 
 ### US005 – Team Choice Feature  
-- Feature as defined in `group_projects_choice.md`  
-- Corresponding unit, integration, and Robot tests  
+- Define test expectations and coverage  
 
 ---
 
@@ -80,13 +78,13 @@ Manual verification will supplement automated coverage for UI and Robot flows; s
 
 | Type | Description |
 |------|--------------|
-| Unit Tests | Validate functions and service logic in isolation |
-| Integration/API Tests | Use Flask test client to verify endpoints and DB interactions |
-| UI/E2E Tests | Playwright or Selenium browser tests for TimeService |
-| Acceptance Tests | Robot Framework behavioral flows |
-| Edge Tests | Boundary cases for title length, duplicates, etc. |
-| CI Tests | Workflows validate build and test status on each push |
-| Manual Tests | Optional visual validation for UI and Robot lab steps |
+| Unit Tests | Function and service-level tests |
+| Integration Tests | API and service-to-storage tests |
+| UI/E2E Tests | Browser verification |
+| Acceptance Tests | Robot Framework user journeys |
+| Edge Tests | Boundary and negative input tests |
+| CI Tests | Workflow enforcement |
+| Manual Tests | Visual and lab verification |
 
 ---
 
@@ -94,24 +92,22 @@ Manual verification will supplement automated coverage for UI and Robot flows; s
 
 | Tool | Purpose |
 |------|-----------|
-| `pytest` | Core test framework |
+| `pytest` | Core testing framework |
 | `pytest-cov` | Coverage tracking |
-| `Flask Test Client` | Simulate HTTP requests |
-| `Playwright` / `Selenium` | Automate UI flows (TimeService) |
-| `Robot Framework` | Acceptance tests + lab |
-| `GitHub Actions` | CI/CD automation |
-| `Postman` | Manual API validation |
-| `MS Teams` | Defect and status communication |
+| `Flask Test Client` | API testing |
+| `Playwright` / `Selenium` | UI automation |
+| `Robot Framework` | Acceptance testing |
+| `GitHub Actions` | CI/CD |
+| `Postman` | Manual API testing |
 
 ---
 
 ## ⚙️ Test Environment Setup  
 
-* **OS:** Ubuntu runner (CI) and local Windows/macOS dev machines  
-* **Python:** 3.11 (required for course CI)  
-* **Dependencies:** Installed via `requirements.txt`  
-* **Virtual Env:** `.venv` per developer  
-* **App Start:** `flask --app app run` (local only)  
-* **Run Tests:**  
+* **OS:** Ubuntu CI runner + local dev machines  
+* **Python:** 3.11 (course requirement)  
+* **Dependencies:** `requirements.txt`  
+* **Virtual Environment:** `.venv`  
+* **Local App Start:**  
   ```bash
-  pytest -v --cov=app
+  flask --app app run
