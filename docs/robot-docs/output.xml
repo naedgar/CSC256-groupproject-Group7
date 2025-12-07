@@ -1,0 +1,2325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.3.2 (Python 3.13.7 on darwin)" generated="2025-12-06T18:26:15.361229" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/robot/tests">
+<suite id="s1-s1" name="Debug" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/robot/tests/debug">
+<suite id="s1-s1-s1" name="Debug Health" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/robot/tests/debug/debug_health.robot">
+<test id="s1-s1-s1-t1" name="Health Endpoint Direct Test" line="5">
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.412097" level="INFO">${base} = http://127.0.0.1:5000</msg>
+<var>${base}</var>
+<arg>http://127.0.0.1:5000</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.412013" elapsed="0.000100"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.412231" level="INFO">${alias} = debug_session</msg>
+<var>${alias}</var>
+<arg>debug_session</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.412183" elapsed="0.000057"/>
+</kw>
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:15.412345" level="INFO">Creating Session using : alias=debug_session, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${alias}</arg>
+<arg>${base}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-12-06T18:26:15.412285" elapsed="0.000124"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.415074" level="INFO">${proxies} = {}</msg>
+<var>${proxies}</var>
+<arg>__import__('requests').utils.get_environ_proxies('${base}')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.412453" elapsed="0.002637"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.415226" level="INFO">proxies={}</msg>
+<arg>proxies=${proxies}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.415155" elapsed="0.000087"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:15.417198" level="INFO">GET Request : url=http://127.0.0.1:5000/api/health 
+ path_url=/api/health 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:15.417252" level="INFO">GET Response : url=http://127.0.0.1:5000/api/health 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:15 GMT', 'Content-Type': 'application/json', 'Content-Length': '16', 'Connection': 'close'} 
+ body={"status":"ok"}
+ 
+ </msg>
+<arg>${alias}</arg>
+<arg>/api/health</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.415339" elapsed="0.001944"/>
+</kw>
+<msg time="2025-12-06T18:26:15.417328" level="INFO">${status} = PASS</msg>
+<msg time="2025-12-06T18:26:15.417342" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<var>${status}</var>
+<var>${result}</var>
+<arg>GET On Session</arg>
+<arg>${alias}</arg>
+<arg>/api/health</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.415293" elapsed="0.002057"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.417458" level="INFO">health_status=PASS</msg>
+<arg>health_status=${status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.417403" elapsed="0.000068"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.417547" level="INFO">health_result=&lt;Response [200]&gt;</msg>
+<arg>health_result=${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.417507" elapsed="0.000055"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.417844" level="INFO">status_code=200</msg>
+<arg>status_code=${result.status_code}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.417677" elapsed="0.000179"/>
+</kw>
+<arg>'${status}' == 'PASS'</arg>
+<arg>Log</arg>
+<arg>status_code=${result.status_code}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.417600" elapsed="0.000271"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.418118" level="INFO">body={"status":"ok"}
+</msg>
+<arg>body=${result.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.417982" elapsed="0.000149"/>
+</kw>
+<arg>'${status}' == 'PASS'</arg>
+<arg>Log</arg>
+<arg>body=${result.text}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.417923" elapsed="0.000223"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${status}' != 'PASS'</arg>
+<arg>Fail</arg>
+<arg>GET on session failed: ${result}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.418189" elapsed="0.000042"/>
+</kw>
+<doc>Create a session and call /api/health directly to debug RequestsLibrary behavior.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.411668" elapsed="0.006611"/>
+</test>
+<status status="PASS" start="2025-12-06T18:26:15.370555" elapsed="0.047860"/>
+</suite>
+<status status="PASS" start="2025-12-06T18:26:15.370155" elapsed="0.048413"/>
+</suite>
+<suite id="s1-s2" name="Suites" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/robot/tests/suites">
+<suite id="s1-s2-s1" name="Edge Cases" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/robot/tests/suites/edge_cases.robot">
+<kw name="Run Keywords" owner="BuiltIn" type="SETUP">
+<kw name="Start Session" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:15.425236" level="INFO">Creating Session using : alias=api, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-12-06T18:26:15.425179" elapsed="0.000121"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.425107" elapsed="0.000222"/>
+</kw>
+<kw name="Start App" owner="keywords">
+<kw name="Start Process" owner="Process">
+<msg time="2025-12-06T18:26:15.425554" level="INFO">Starting process:
+python3 -m app.main</msg>
+<msg time="2025-12-06T18:26:15.427197" level="INFO">${handle} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<var>${handle}</var>
+<arg>python3</arg>
+<arg>-m</arg>
+<arg>app.main</arg>
+<arg>stdout=NONE</arg>
+<arg>stderr=NONE</arg>
+<arg>shell=False</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.425429" elapsed="0.001814"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.427645" level="INFO">${APP_PROC} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<arg>${APP_PROC}</arg>
+<arg>${handle}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.427373" elapsed="0.000290"/>
+</kw>
+<kw name="Wait For Server" owner="keywords">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.428101" level="INFO">${http_proxy} = </msg>
+<var>${http_proxy}</var>
+<arg>__import__('os').environ.get('HTTP_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.428014" elapsed="0.000096"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.428191" level="INFO">${https_proxy} = </msg>
+<var>${https_proxy}</var>
+<arg>__import__('os').environ.get('HTTPS_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.428141" elapsed="0.000058"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.428274" level="INFO">${no_proxy} = </msg>
+<var>${no_proxy}</var>
+<arg>__import__('os').environ.get('NO_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.428228" elapsed="0.000053"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.428369" level="INFO">HTTP_PROXY= HTTPS_PROXY= NO_PROXY=</msg>
+<arg>HTTP_PROXY=${http_proxy} HTTPS_PROXY=${https_proxy} NO_PROXY=${no_proxy}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.428308" elapsed="0.000073"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:15.429962" level="INFO">GET Request : url=http://127.0.0.1:5000/api/health 
+ path_url=/api/health 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:15.429992" level="INFO">GET Response : url=http://127.0.0.1:5000/api/health 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:15 GMT', 'Content-Type': 'application/json', 'Content-Length': '16', 'Connection': 'close'} 
+ body={"status":"ok"}
+ 
+ </msg>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.428451" elapsed="0.001590"/>
+</kw>
+<msg time="2025-12-06T18:26:15.430089" level="INFO">${status} = PASS</msg>
+<msg time="2025-12-06T18:26:15.430105" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<var>${status}</var>
+<var>${result}</var>
+<arg>GET On Session</arg>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.428412" elapsed="0.001701"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.430218" level="INFO">Health call status=PASS</msg>
+<arg>Health call status=${status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.430158" elapsed="0.000074"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.430306" level="INFO">Health call result=&lt;Response [200]&gt;</msg>
+<arg>Health call result=${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.430265" elapsed="0.000054"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${status}' != 'PASS'</arg>
+<arg>Fail</arg>
+<arg>Health request failed: ${result}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.430354" elapsed="0.000056"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.430487" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${result}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.430445" elapsed="0.000050"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.430845" level="INFO">{"status":"ok"}
+</msg>
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.430523" elapsed="0.000335"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.431000" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.430886" elapsed="0.000142"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.427962" elapsed="0.003090"/>
+</kw>
+<arg>1 min</arg>
+<arg>2 sec</arg>
+<arg>Get Health Should Be Ok</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.427807" elapsed="0.003260"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.427741" elapsed="0.003374"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.425378" elapsed="0.005762"/>
+</kw>
+<arg>Start Session</arg>
+<arg>AND</arg>
+<arg>Start App</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.425000" elapsed="0.006176"/>
+</kw>
+<test id="s1-s2-s1-t1" name="Create Task - Missing Title Returns 400" line="9">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:15.433564" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:15.433590" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:15 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:15.433630" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.431515" elapsed="0.002124"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.433850" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.433684" elapsed="0.000184"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.431424" elapsed="0.002462"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.434090" level="INFO">${payload} = {}</msg>
+<var>${payload}</var>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.433952" elapsed="0.000154"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.435256" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>__import__('requests').post('${BASE_URL}' + '/api/tasks', json=${payload})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.434172" elapsed="0.001094"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.435449" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.435311" elapsed="0.000155"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.435674" level="INFO">${body} = {'error': 'Title is required', 'field': 'title'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${resp.text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.435508" elapsed="0.000201"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${body}</arg>
+<arg>error</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.435752" elapsed="0.000045"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${body}</arg>
+<arg>field</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.435834" elapsed="0.000102"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${body['field']}</arg>
+<arg>title</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.435995" elapsed="0.000172"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.431219" elapsed="0.005005"/>
+</test>
+<test id="s1-s2-s1-t2" name="Create Task - Empty Title Returns 400" line="18">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:15.437874" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:15.437897" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:15 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:15.437932" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.436497" elapsed="0.001445"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.438136" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.437982" elapsed="0.000176"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.436425" elapsed="0.001753"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.438359" level="INFO">${payload} = {'title': '', 'description': 'some'}</msg>
+<var>${payload}</var>
+<arg>title=</arg>
+<arg>description=some</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.438270" elapsed="0.000098"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.439536" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>__import__('requests').post('${BASE_URL}' + '/api/tasks', json=${payload})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.438415" elapsed="0.001136"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.439774" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.439611" elapsed="0.000185"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.440097" level="INFO">${body} = {'error': 'Title is required', 'field': 'title'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${resp.text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.439846" elapsed="0.000305"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${body}</arg>
+<arg>error</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.440401" elapsed="0.000058"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${body['field']}</arg>
+<arg>title</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.440585" elapsed="0.000152"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.436302" elapsed="0.004533"/>
+</test>
+<test id="s1-s2-s1-t3" name="Create Task - Title Too Long Returns 400" line="26">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:15.442948" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:15.442974" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:15 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:15.443012" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.441366" elapsed="0.001655"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.443235" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.443069" elapsed="0.000184"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.441276" elapsed="0.001996"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.443380" level="INFO">${long_title} = xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...</msg>
+<var>${long_title}</var>
+<arg>'x'*300</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.443326" elapsed="0.000062"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.443510" level="INFO">${payload} = {'title': 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx...</msg>
+<var>${payload}</var>
+<arg>title=${long_title}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.443433" elapsed="0.000085"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.444498" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>__import__('requests').post('${BASE_URL}' + '/api/tasks', json=${payload})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.443554" elapsed="0.000954"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.444687" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.444550" elapsed="0.000154"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.444933" level="INFO">${body} = {'error': 'Title must not exceed 255 characters', 'field': 'title', 'length': 300, 'max': 255}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${resp.text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.444772" elapsed="0.000170"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${body}</arg>
+<arg>error</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.444981" elapsed="0.000040"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${body['field']}</arg>
+<arg>title</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.445059" elapsed="0.000129"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.441047" elapsed="0.004182"/>
+</test>
+<test id="s1-s2-s1-t4" name="Create Task - Description Too Long Returns 400" line="35">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:15.446763" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:15.446787" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:15 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:15.446824" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.445468" elapsed="0.001364"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.447005" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.446872" elapsed="0.000152"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.445402" elapsed="0.001642"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.447178" level="INFO">${long_desc} = dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd...</msg>
+<var>${long_desc}</var>
+<arg>'d'*600</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.447091" elapsed="0.000096"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.447302" level="INFO">${payload} = {'title': 'Valid Title', 'description': 'ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd...</msg>
+<var>${payload}</var>
+<arg>title=Valid Title</arg>
+<arg>description=${long_desc}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.447230" elapsed="0.000079"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.448457" level="INFO">${resp} = &lt;Response [400]&gt;</msg>
+<var>${resp}</var>
+<arg>__import__('requests').post('${BASE_URL}' + '/api/tasks', json=${payload})</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.447346" elapsed="0.001122"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.448642" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>400</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.448516" elapsed="0.000142"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:15.448849" level="INFO">${body} = {'error': 'Description must not exceed 500 characters', 'field': 'description', 'length': 600, 'max': 500}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${resp.text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.448699" elapsed="0.000158"/>
+</kw>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${body}</arg>
+<arg>error</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.448894" elapsed="0.000039"/>
+</kw>
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${body['field']}</arg>
+<arg>description</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.448969" elapsed="0.000123"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.445291" elapsed="0.003842"/>
+</test>
+<kw name="Stop App" owner="keywords" type="TEARDOWN">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Terminate Process" owner="Process">
+<msg time="2025-12-06T18:26:15.449483" level="INFO">Gracefully terminating process.</msg>
+<msg time="2025-12-06T18:26:15.554698" level="INFO">Process completed.</msg>
+<arg>${APP_PROC}</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.449389" elapsed="0.105373"/>
+</kw>
+<arg>${APP_PROC}</arg>
+<arg>Terminate Process</arg>
+<arg>${APP_PROC}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.449338" elapsed="0.105463"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.057469" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-12-06T18:26:15.554876" elapsed="0.502887"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.449280" elapsed="0.608678"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:15.419023" elapsed="0.639027"/>
+</suite>
+<suite id="s1-s2-s2" name="Tasks" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/robot/tests/suites/tasks.robot">
+<kw name="Run Keywords" owner="BuiltIn" type="SETUP">
+<kw name="Start Session" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.063223" level="INFO">Creating Session using : alias=api, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-12-06T18:26:16.063077" elapsed="0.000369"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.062919" elapsed="0.000583"/>
+</kw>
+<kw name="Start App" owner="keywords">
+<kw name="Start Process" owner="Process">
+<msg time="2025-12-06T18:26:16.064972" level="INFO">Starting process:
+python3 -m app.main</msg>
+<msg time="2025-12-06T18:26:16.070169" level="INFO">${handle} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<var>${handle}</var>
+<arg>python3</arg>
+<arg>-m</arg>
+<arg>app.main</arg>
+<arg>stdout=NONE</arg>
+<arg>stderr=NONE</arg>
+<arg>shell=False</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.063726" elapsed="0.006599"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.071650" level="INFO">${APP_PROC} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<arg>${APP_PROC}</arg>
+<arg>${handle}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.070749" elapsed="0.000947"/>
+</kw>
+<kw name="Wait For Server" owner="keywords">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.073300" level="INFO">${http_proxy} = </msg>
+<var>${http_proxy}</var>
+<arg>__import__('os').environ.get('HTTP_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.072994" elapsed="0.000333"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.073550" level="INFO">${https_proxy} = </msg>
+<var>${https_proxy}</var>
+<arg>__import__('os').environ.get('HTTPS_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.073408" elapsed="0.000163"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.073769" level="INFO">${no_proxy} = </msg>
+<var>${no_proxy}</var>
+<arg>__import__('os').environ.get('NO_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.073644" elapsed="0.000145"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.074031" level="INFO">HTTP_PROXY= HTTPS_PROXY= NO_PROXY=</msg>
+<arg>HTTP_PROXY=${http_proxy} HTTPS_PROXY=${https_proxy} NO_PROXY=${no_proxy}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.073859" elapsed="0.000202"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.077452" level="INFO">GET Request : url=http://127.0.0.1:5000/api/health 
+ path_url=/api/health 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.077496" level="INFO">GET Response : url=http://127.0.0.1:5000/api/health 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '16', 'Connection': 'close'} 
+ body={"status":"ok"}
+ 
+ </msg>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.074244" elapsed="0.003312"/>
+</kw>
+<msg time="2025-12-06T18:26:16.077639" level="INFO">${status} = PASS</msg>
+<msg time="2025-12-06T18:26:16.077668" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<var>${status}</var>
+<var>${result}</var>
+<arg>GET On Session</arg>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.074140" elapsed="0.003544"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.077876" level="INFO">Health call status=PASS</msg>
+<arg>Health call status=${status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.077763" elapsed="0.000136"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.078033" level="INFO">Health call result=&lt;Response [200]&gt;</msg>
+<arg>Health call result=${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.077953" elapsed="0.000104"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${status}' != 'PASS'</arg>
+<arg>Fail</arg>
+<arg>Health request failed: ${result}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.078120" elapsed="0.000102"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.078359" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${result}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.078281" elapsed="0.000094"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.078722" level="INFO">{"status":"ok"}
+</msg>
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.078429" elapsed="0.000317"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.079029" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.078802" elapsed="0.000267"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.072847" elapsed="0.006261"/>
+</kw>
+<arg>1 min</arg>
+<arg>2 sec</arg>
+<arg>Get Health Should Be Ok</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.072519" elapsed="0.006619"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.072119" elapsed="0.007056"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.063604" elapsed="0.015600"/>
+</kw>
+<arg>Start Session</arg>
+<arg>AND</arg>
+<arg>Start App</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.062644" elapsed="0.016583"/>
+</kw>
+<test id="s1-s2-s2-t1" name="Complete Task Workflow - Create, Complete, and Verify" line="9">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.082461" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.082497" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.082551" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.079760" elapsed="0.002803"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.082843" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.082626" elapsed="0.000243"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.079629" elapsed="0.003271"/>
+</kw>
+<kw name="Create Task" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.083348" level="INFO">${payload} = {'title': 'Playwright BDD Integration Task', 'description': 'Created using Playwright BDD'}</msg>
+<var>${payload}</var>
+<arg>title=${title}</arg>
+<arg>description=${description}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.083215" elapsed="0.000147"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.086710" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '91', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Playwright BDD Integration Task", "description": "Created using Playwright BDD"}' 
+ </msg>
+<msg time="2025-12-06T18:26:16.086772" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '114', 'Connection': 'close'} 
+ body={"completed":false,"description":"Created using Playwright BDD","id":1,"title":"Playwright BDD Integration Task"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.086822" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.083413" elapsed="0.003420"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.087087" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.086891" elapsed="0.000221"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.087358" level="INFO">${body_text} = {"completed":false,"description":"Created using Playwright BDD","id":1,"title":"Playwright BDD Integration Task"}
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.087159" elapsed="0.000212"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.087526" level="INFO">${body} = {'completed': False, 'description': 'Created using Playwright BDD', 'id': 1, 'title': 'Playwright BDD Integration Task'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.087422" elapsed="0.000115"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.087569" elapsed="0.000043"/>
+</return>
+<msg time="2025-12-06T18:26:16.087673" level="INFO">${created} = {'completed': False, 'description': 'Created using Playwright BDD', 'id': 1, 'title': 'Playwright BDD Integration Task'}</msg>
+<var>${created}</var>
+<arg>Playwright BDD Integration Task</arg>
+<arg>Created using Playwright BDD</arg>
+<status status="PASS" start="2025-12-06T18:26:16.083042" elapsed="0.004642"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.087970" level="INFO">${id} = 1</msg>
+<var>${id}</var>
+<arg>${created['id']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.087748" elapsed="0.000240"/>
+</kw>
+<kw name="Get Tasks" owner="keywords">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.089669" level="INFO">GET Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.089699" level="INFO">GET Response : url=http://127.0.0.1:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '116', 'Connection': 'close'} 
+ body=[{"completed":false,"description":"Created using Playwright BDD","id":1,"title":"Playwright BDD Integration Task"}]
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.089746" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.088309" elapsed="0.001449"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.090052" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.089816" elapsed="0.000275"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.090662" level="INFO">${body_text} = [{"completed":false,"description":"Created using Playwright BDD","id":1,"title":"Playwright BDD Integration Task"}]
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.090261" elapsed="0.000418"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.090872" level="INFO">${body} = [{'completed': False, 'description': 'Created using Playwright BDD', 'id': 1, 'title': 'Playwright BDD Integration Task'}]</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.090744" elapsed="0.000140"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.090908" elapsed="0.000025"/>
+</return>
+<msg time="2025-12-06T18:26:16.090995" level="INFO">${tasks} = [{'completed': False, 'description': 'Created using Playwright BDD', 'id': 1, 'title': 'Playwright BDD Integration Task'}]</msg>
+<var>${tasks}</var>
+<status status="PASS" start="2025-12-06T18:26:16.088123" elapsed="0.002882"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.091131" level="INFO">${titles} = []</msg>
+<var>${titles}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.091075" elapsed="0.000067"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${titles}</arg>
+<arg>${t['title']}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.091457" elapsed="0.000275"/>
+</kw>
+<var name="${t}">{'completed': False, 'description': 'Created using Playwright BDD', 'id': 1, 'title': 'Playwright BDD Integration Task'}</var>
+<status status="PASS" start="2025-12-06T18:26:16.091404" elapsed="0.000354"/>
+</iter>
+<var>${t}</var>
+<value>@{tasks}</value>
+<status status="PASS" start="2025-12-06T18:26:16.091290" elapsed="0.000488"/>
+</for>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${titles}</arg>
+<arg>Playwright BDD Integration Task</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.091852" elapsed="0.000075"/>
+</kw>
+<kw name="Complete Task" owner="keywords">
+<kw name="PUT On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.094500" level="INFO">PUT Request : url=http://127.0.0.1:5000/api/tasks/1 
+ path_url=/api/tasks/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.094530" level="INFO">PUT Response : url=http://127.0.0.1:5000/api/tasks/1 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '113', 'Connection': 'close'} 
+ body={"completed":true,"description":"Created using Playwright BDD","id":1,"title":"Playwright BDD Integration Task"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.094574" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/${task_id}</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.092202" elapsed="0.002383"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.094827" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.094638" elapsed="0.000213"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.095110" level="INFO">${body_text} = {"completed":true,"description":"Created using Playwright BDD","id":1,"title":"Playwright BDD Integration Task"}
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.094927" elapsed="0.000195"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.095261" level="INFO">${body} = {'completed': True, 'description': 'Created using Playwright BDD', 'id': 1, 'title': 'Playwright BDD Integration Task'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.095167" elapsed="0.000105"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.095292" elapsed="0.000017"/>
+</return>
+<msg time="2025-12-06T18:26:16.095358" level="INFO">${updated} = {'completed': True, 'description': 'Created using Playwright BDD', 'id': 1, 'title': 'Playwright BDD Integration Task'}</msg>
+<var>${updated}</var>
+<arg>${id}</arg>
+<status status="PASS" start="2025-12-06T18:26:16.092074" elapsed="0.003293"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.095604" level="INFO">${completed} = True</msg>
+<var>${completed}</var>
+<arg>${updated['completed']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.095425" elapsed="0.000190"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${completed}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.095681" elapsed="0.000055"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.079289" elapsed="0.016505"/>
+</test>
+<test id="s1-s2-s2-t2" name="Simple Task Creation Workflow" line="22">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.097900" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.097940" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.097999" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.096125" elapsed="0.001887"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.098340" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.098089" elapsed="0.000278"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.096031" elapsed="0.002367"/>
+</kw>
+<kw name="Create Task" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.098784" level="INFO">${payload} = {'title': 'Quick Playwright BDD Task', 'description': 'Testing Playwright BDD functionality'}</msg>
+<var>${payload}</var>
+<arg>title=${title}</arg>
+<arg>description=${description}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.098660" elapsed="0.000136"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.100994" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '93', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Quick Playwright BDD Task", "description": "Testing Playwright BDD functionality"}' 
+ </msg>
+<msg time="2025-12-06T18:26:16.101021" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '116', 'Connection': 'close'} 
+ body={"completed":false,"description":"Testing Playwright BDD functionality","id":1,"title":"Quick Playwright BDD Task"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.101062" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.098842" elapsed="0.002231"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.101312" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.101123" elapsed="0.000211"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.101549" level="INFO">${body_text} = {"completed":false,"description":"Testing Playwright BDD functionality","id":1,"title":"Quick Playwright BDD Task"}
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.101376" elapsed="0.000184"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.101688" level="INFO">${body} = {'completed': False, 'description': 'Testing Playwright BDD functionality', 'id': 1, 'title': 'Quick Playwright BDD Task'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.101600" elapsed="0.000098"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.101717" elapsed="0.000018"/>
+</return>
+<msg time="2025-12-06T18:26:16.101781" level="INFO">${created} = {'completed': False, 'description': 'Testing Playwright BDD functionality', 'id': 1, 'title': 'Quick Playwright BDD Task'}</msg>
+<var>${created}</var>
+<arg>Quick Playwright BDD Task</arg>
+<arg>Testing Playwright BDD functionality</arg>
+<status status="PASS" start="2025-12-06T18:26:16.098515" elapsed="0.003274"/>
+</kw>
+<kw name="Get Tasks" owner="keywords">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.102837" level="INFO">GET Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.102859" level="INFO">GET Response : url=http://127.0.0.1:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '118', 'Connection': 'close'} 
+ body=[{"completed":false,"description":"Testing Playwright BDD functionality","id":1,"title":"Quick Playwright BDD Task"}]
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.102893" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.101958" elapsed="0.000968"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.103125" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.102971" elapsed="0.000179"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.103351" level="INFO">${body_text} = [{"completed":false,"description":"Testing Playwright BDD functionality","id":1,"title":"Quick Playwright BDD Task"}]
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.103191" elapsed="0.000170"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.103484" level="INFO">${body} = [{'completed': False, 'description': 'Testing Playwright BDD functionality', 'id': 1, 'title': 'Quick Playwright BDD Task'}]</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.103402" elapsed="0.000093"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.103514" elapsed="0.000014"/>
+</return>
+<msg time="2025-12-06T18:26:16.103573" level="INFO">${tasks} = [{'completed': False, 'description': 'Testing Playwright BDD functionality', 'id': 1, 'title': 'Quick Playwright BDD Task'}]</msg>
+<var>${tasks}</var>
+<status status="PASS" start="2025-12-06T18:26:16.101872" elapsed="0.001710"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.103693" level="INFO">${titles} = []</msg>
+<var>${titles}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.103632" elapsed="0.000089"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${titles}</arg>
+<arg>${t['title']}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.103909" elapsed="0.000222"/>
+</kw>
+<var name="${t}">{'completed': False, 'description': 'Testing Playwright BDD functionality', 'id': 1, 'title': 'Quick Playwright BDD Task'}</var>
+<status status="PASS" start="2025-12-06T18:26:16.103866" elapsed="0.000284"/>
+</iter>
+<var>${t}</var>
+<value>@{tasks}</value>
+<status status="PASS" start="2025-12-06T18:26:16.103776" elapsed="0.000391"/>
+</for>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${titles}</arg>
+<arg>Quick Playwright BDD Task</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.104226" elapsed="0.000059"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.095882" elapsed="0.008459"/>
+</test>
+<test id="s1-s2-s2-t3" name="Task Creation And Verification" line="31">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.106298" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.106326" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.106367" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.104656" elapsed="0.001720"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.106683" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.106425" elapsed="0.000352"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.104566" elapsed="0.002297"/>
+</kw>
+<kw name="Create Task" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.107458" level="INFO">${payload} = {'title': 'Playwright Verification Task', 'description': ''}</msg>
+<var>${payload}</var>
+<arg>title=${title}</arg>
+<arg>description=${description}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.107328" elapsed="0.000144"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.109940" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '60', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Playwright Verification Task", "description": ""}' 
+ </msg>
+<msg time="2025-12-06T18:26:16.109973" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '83', 'Connection': 'close'} 
+ body={"completed":false,"description":"","id":1,"title":"Playwright Verification Task"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.110022" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.107592" elapsed="0.002440"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.110300" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.110092" elapsed="0.000230"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.110537" level="INFO">${body_text} = {"completed":false,"description":"","id":1,"title":"Playwright Verification Task"}
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.110366" elapsed="0.000181"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.110674" level="INFO">${body} = {'completed': False, 'description': '', 'id': 1, 'title': 'Playwright Verification Task'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.110586" elapsed="0.000097"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.110702" elapsed="0.000018"/>
+</return>
+<msg time="2025-12-06T18:26:16.110764" level="INFO">${created} = {'completed': False, 'description': '', 'id': 1, 'title': 'Playwright Verification Task'}</msg>
+<var>${created}</var>
+<arg>Playwright Verification Task</arg>
+<status status="PASS" start="2025-12-06T18:26:16.107088" elapsed="0.003684"/>
+</kw>
+<kw name="Get Tasks" owner="keywords">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.112190" level="INFO">GET Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.112242" level="INFO">GET Response : url=http://127.0.0.1:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '85', 'Connection': 'close'} 
+ body=[{"completed":false,"description":"","id":1,"title":"Playwright Verification Task"}]
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.112284" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.111271" elapsed="0.001023"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.112494" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.112336" elapsed="0.000178"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.112700" level="INFO">${body_text} = [{"completed":false,"description":"","id":1,"title":"Playwright Verification Task"}]
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.112552" elapsed="0.000157"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.112823" level="INFO">${body} = [{'completed': False, 'description': '', 'id': 1, 'title': 'Playwright Verification Task'}]</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.112745" elapsed="0.000087"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.112848" elapsed="0.000014"/>
+</return>
+<msg time="2025-12-06T18:26:16.112902" level="INFO">${tasks} = [{'completed': False, 'description': '', 'id': 1, 'title': 'Playwright Verification Task'}]</msg>
+<var>${tasks}</var>
+<status status="PASS" start="2025-12-06T18:26:16.110859" elapsed="0.002051"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.112992" level="INFO">${titles} = []</msg>
+<var>${titles}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.112956" elapsed="0.000044"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${titles}</arg>
+<arg>${t['title']}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.113111" elapsed="0.000153"/>
+</kw>
+<var name="${t}">{'completed': False, 'description': '', 'id': 1, 'title': 'Playwright Verification Task'}</var>
+<status status="PASS" start="2025-12-06T18:26:16.113084" elapsed="0.000193"/>
+</iter>
+<var>${t}</var>
+<value>@{tasks}</value>
+<status status="PASS" start="2025-12-06T18:26:16.113031" elapsed="0.000258"/>
+</for>
+<kw name="Should Contain" owner="BuiltIn">
+<arg>${titles}</arg>
+<arg>Playwright Verification Task</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.113332" elapsed="0.000047"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.104421" elapsed="0.009006"/>
+</test>
+<test id="s1-s2-s2-t4" name="Get Tasks - Empty Then Non-Empty" line="40">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.115340" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.115366" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.115403" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.113722" elapsed="0.001690"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.115615" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.115458" elapsed="0.000177"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.113621" elapsed="0.002035"/>
+</kw>
+<kw name="Get Tasks" owner="keywords">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.116672" level="INFO">GET Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.116701" level="INFO">GET Response : url=http://127.0.0.1:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'close'} 
+ body=[]
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.116745" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.115810" elapsed="0.000945"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.116992" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.116809" elapsed="0.000205"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.117217" level="INFO">${body_text} = []
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.117057" elapsed="0.000170"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.117344" level="INFO">${body} = []</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.117263" elapsed="0.000089"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.117369" elapsed="0.000015"/>
+</return>
+<msg time="2025-12-06T18:26:16.117426" level="INFO">${tasks} = []</msg>
+<var>${tasks}</var>
+<status status="PASS" start="2025-12-06T18:26:16.115735" elapsed="0.001698"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.117526" level="INFO">Length is 0.</msg>
+<arg>${tasks}</arg>
+<arg>0</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.117480" elapsed="0.000060"/>
+</kw>
+<kw name="Create Task" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.117809" level="INFO">${payload} = {'title': 'Post-Get Task', 'description': 'created for get test'}</msg>
+<var>${payload}</var>
+<arg>title=${title}</arg>
+<arg>description=${description}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.117717" elapsed="0.000126"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.119404" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '65', 'Content-Type': 'application/json'} 
+ body=b'{"title": "Post-Get Task", "description": "created for get test"}' 
+ </msg>
+<msg time="2025-12-06T18:26:16.119425" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '88', 'Connection': 'close'} 
+ body={"completed":false,"description":"created for get test","id":1,"title":"Post-Get Task"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.119457" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.117879" elapsed="0.001586"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.119646" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.119503" elapsed="0.000162"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.119847" level="INFO">${body_text} = {"completed":false,"description":"created for get test","id":1,"title":"Post-Get Task"}
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.119699" elapsed="0.000157"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.119961" level="INFO">${body} = {'completed': False, 'description': 'created for get test', 'id': 1, 'title': 'Post-Get Task'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.119889" elapsed="0.000083"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.119987" elapsed="0.000012"/>
+</return>
+<msg time="2025-12-06T18:26:16.120039" level="INFO">${created} = {'completed': False, 'description': 'created for get test', 'id': 1, 'title': 'Post-Get Task'}</msg>
+<var>${created}</var>
+<arg>Post-Get Task</arg>
+<arg>created for get test</arg>
+<status status="PASS" start="2025-12-06T18:26:16.117614" elapsed="0.002432"/>
+</kw>
+<kw name="Get Tasks" owner="keywords">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.121166" level="INFO">GET Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.121187" level="INFO">GET Response : url=http://127.0.0.1:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '90', 'Connection': 'close'} 
+ body=[{"completed":false,"description":"created for get test","id":1,"title":"Post-Get Task"}]
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.121219" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.120295" elapsed="0.000932"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.121436" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.121265" elapsed="0.000196"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.121693" level="INFO">${body_text} = [{"completed":false,"description":"created for get test","id":1,"title":"Post-Get Task"}]
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.121507" elapsed="0.000196"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.121819" level="INFO">${body} = [{'completed': False, 'description': 'created for get test', 'id': 1, 'title': 'Post-Get Task'}]</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.121741" elapsed="0.000087"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.121845" elapsed="0.000014"/>
+</return>
+<msg time="2025-12-06T18:26:16.121902" level="INFO">${tasks2} = [{'completed': False, 'description': 'created for get test', 'id': 1, 'title': 'Post-Get Task'}]</msg>
+<var>${tasks2}</var>
+<status status="PASS" start="2025-12-06T18:26:16.120111" elapsed="0.001798"/>
+</kw>
+<kw name="Length Should Be" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.122002" level="INFO">Length is 1.</msg>
+<arg>${tasks2}</arg>
+<arg>1</arg>
+<doc>Verifies that the length of the given item is correct.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.121958" elapsed="0.000059"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.113496" elapsed="0.008570"/>
+</test>
+<test id="s1-s2-s2-t5" name="Delete Task - Valid ID Removes Task" line="49">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.124241" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.124275" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.124323" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.122345" elapsed="0.001987"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.124564" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.124388" elapsed="0.000196"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.122269" elapsed="0.002340"/>
+</kw>
+<kw name="Create Task" owner="keywords">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.124892" level="INFO">${payload} = {'title': 'To Be Deleted', 'description': 'delete test'}</msg>
+<var>${payload}</var>
+<arg>title=${title}</arg>
+<arg>description=${description}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.124800" elapsed="0.000100"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.126607" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '56', 'Content-Type': 'application/json'} 
+ body=b'{"title": "To Be Deleted", "description": "delete test"}' 
+ </msg>
+<msg time="2025-12-06T18:26:16.126633" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '79', 'Connection': 'close'} 
+ body={"completed":false,"description":"delete test","id":1,"title":"To Be Deleted"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.126674" level="INFO">${resp} = &lt;Response [201]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.124951" elapsed="0.001732"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.126910" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.126737" elapsed="0.000193"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.127123" level="INFO">${body_text} = {"completed":false,"description":"delete test","id":1,"title":"To Be Deleted"}
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.126970" elapsed="0.000162"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.127245" level="INFO">${body} = {'completed': False, 'description': 'delete test', 'id': 1, 'title': 'To Be Deleted'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.127168" elapsed="0.000085"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.127271" elapsed="0.000016"/>
+</return>
+<msg time="2025-12-06T18:26:16.127331" level="INFO">${created} = {'completed': False, 'description': 'delete test', 'id': 1, 'title': 'To Be Deleted'}</msg>
+<var>${created}</var>
+<arg>To Be Deleted</arg>
+<arg>delete test</arg>
+<status status="PASS" start="2025-12-06T18:26:16.124696" elapsed="0.002642"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.127576" level="INFO">${id} = 1</msg>
+<var>${id}</var>
+<arg>${created['id']}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.127388" elapsed="0.000197"/>
+</kw>
+<kw name="Delete Task" owner="keywords">
+<kw name="DELETE On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.129004" level="INFO">DELETE Request : url=http://127.0.0.1:5000/api/tasks/1 
+ path_url=/api/tasks/1 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.129024" level="INFO">DELETE Response : url=http://127.0.0.1:5000/api/tasks/1 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '27', 'Connection': 'close'} 
+ body={"message":"Task deleted"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.129058" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/${task_id}</arg>
+<doc>Sends a DELETE request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.127745" elapsed="0.001321"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.129261" level="INFO">${code} = 200</msg>
+<var>${code}</var>
+<arg>${resp.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.129108" elapsed="0.000161"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="No Operation" owner="BuiltIn">
+<doc>Does absolutely nothing.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.129379" elapsed="0.000028"/>
+</kw>
+<arg>'${code}' == '200'</arg>
+<arg>No Operation</arg>
+<arg>ELSE</arg>
+<arg>Fail</arg>
+<arg>Task delete failed with status ${code}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.129306" elapsed="0.000117"/>
+</kw>
+<arg>${id}</arg>
+<status status="PASS" start="2025-12-06T18:26:16.127658" elapsed="0.001784"/>
+</kw>
+<kw name="Get Tasks" owner="keywords">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.130262" level="INFO">GET Request : url=http://127.0.0.1:5000/api/tasks 
+ path_url=/api/tasks 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.130279" level="INFO">GET Response : url=http://127.0.0.1:5000/api/tasks 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '3', 'Connection': 'close'} 
+ body=[]
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.130305" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.129570" elapsed="0.000742"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.130469" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.130344" elapsed="0.000143"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.130644" level="INFO">${body_text} = []
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.130518" elapsed="0.000134"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.130749" level="INFO">${body} = []</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.130683" elapsed="0.000074"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:16.130773" elapsed="0.000013"/>
+</return>
+<msg time="2025-12-06T18:26:16.130821" level="INFO">${tasks} = []</msg>
+<var>${tasks}</var>
+<status status="PASS" start="2025-12-06T18:26:16.129505" elapsed="0.001323"/>
+</kw>
+<kw name="Create List" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.130900" level="INFO">${titles} = []</msg>
+<var>${titles}</var>
+<doc>Returns a list containing given items.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.130866" elapsed="0.000041"/>
+</kw>
+<for flavor="IN">
+<iter>
+<kw name="Append To List" owner="Collections">
+<arg>${titles}</arg>
+<arg>${t['title']}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="NOT RUN" start="2025-12-06T18:26:16.131005" elapsed="0.000006"/>
+</kw>
+<var name="${t}"/>
+<status status="NOT RUN" start="2025-12-06T18:26:16.130981" elapsed="0.000040"/>
+</iter>
+<var>${t}</var>
+<value>@{tasks}</value>
+<status status="NOT RUN" start="2025-12-06T18:26:16.130936" elapsed="0.000110"/>
+</for>
+<kw name="Should Not Contain" owner="BuiltIn">
+<arg>${titles}</arg>
+<arg>To Be Deleted</arg>
+<doc>Fails if ``container`` contains ``item`` one or more times.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.131086" elapsed="0.000043"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.122136" elapsed="0.009040"/>
+</test>
+<test id="s1-s2-s2-t6" name="Delete Task - Invalid ID Returns 404" line="60">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.132714" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.132772" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.132814" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.131418" elapsed="0.001404"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.133032" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.132870" elapsed="0.000182"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.131354" elapsed="0.001720"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.134005" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<var>${resp}</var>
+<arg>__import__('requests').delete('${BASE_URL}' + '/api/tasks/9999')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.133128" elapsed="0.000890"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.134214" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.134078" elapsed="0.000155"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.131241" elapsed="0.003038"/>
+</test>
+<test id="s1-s2-s2-t7" name="Complete Task - Invalid ID Returns 404" line="64">
+<kw name="Reset Tasks Data" owner="keywords" type="SETUP">
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.135634" level="INFO">POST Request : url=http://127.0.0.1:5000/api/tasks/reset 
+ path_url=/api/tasks/reset 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.135653" level="INFO">POST Response : url=http://127.0.0.1:5000/api/tasks/reset 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '39', 'Connection': 'close'} 
+ body={"message":"Tasks reset successfully"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:16.135684" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/tasks/reset</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.134525" elapsed="0.001167"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.135852" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.135726" elapsed="0.000143"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.134455" elapsed="0.001431"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.137021" level="INFO">${resp} = &lt;Response [404]&gt;</msg>
+<var>${resp}</var>
+<arg>__import__('requests').put('${BASE_URL}' + '/api/tasks/9999')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.135928" elapsed="0.001104"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.137231" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>404</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.137087" elapsed="0.000162"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.134342" elapsed="0.002951"/>
+</test>
+<kw name="Stop App" owner="keywords" type="TEARDOWN">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Terminate Process" owner="Process">
+<msg time="2025-12-06T18:26:16.137610" level="INFO">Gracefully terminating process.</msg>
+<msg time="2025-12-06T18:26:16.241505" level="INFO">Process completed.</msg>
+<arg>${APP_PROC}</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.137544" elapsed="0.104024"/>
+</kw>
+<arg>${APP_PROC}</arg>
+<arg>Terminate Process</arg>
+<arg>${APP_PROC}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.137490" elapsed="0.104113"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.742980" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.241673" elapsed="0.501612"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.137431" elapsed="0.606048"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.059294" elapsed="0.684257"/>
+</suite>
+<suite id="s1-s2-s3" name="Time" source="/Users/nateedgar/Documents/GitHub/CSC256-groupproject-Group7/robot/tests/suites/time.robot">
+<kw name="Run Keywords" owner="BuiltIn" type="SETUP">
+<kw name="Start Session" owner="keywords">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.748612" level="INFO">Creating Session using : alias=api, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>${SESSION}</arg>
+<arg>${BASE_URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2025-12-06T18:26:16.748443" elapsed="0.000423"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.748249" elapsed="0.000682"/>
+</kw>
+<kw name="Start App" owner="keywords">
+<kw name="Start Process" owner="Process">
+<msg time="2025-12-06T18:26:16.749602" level="INFO">Starting process:
+python3 -m app.main</msg>
+<msg time="2025-12-06T18:26:16.755523" level="INFO">${handle} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<var>${handle}</var>
+<arg>python3</arg>
+<arg>-m</arg>
+<arg>app.main</arg>
+<arg>stdout=NONE</arg>
+<arg>stderr=NONE</arg>
+<arg>shell=False</arg>
+<doc>Starts a new process on background.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.749192" elapsed="0.006592"/>
+</kw>
+<kw name="Set Suite Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.757688" level="INFO">${APP_PROC} = &lt;Popen: returncode: None args: ['python3', '-m', 'app.main']&gt;</msg>
+<arg>${APP_PROC}</arg>
+<arg>${handle}</arg>
+<doc>Makes a variable available everywhere within the scope of the current suite.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.756597" elapsed="0.001323"/>
+</kw>
+<kw name="Wait For Server" owner="keywords">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Get Health Should Be Ok" owner="keywords">
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.759371" level="INFO">${http_proxy} = </msg>
+<var>${http_proxy}</var>
+<arg>__import__('os').environ.get('HTTP_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.758901" elapsed="0.000520"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.759802" level="INFO">${https_proxy} = </msg>
+<var>${https_proxy}</var>
+<arg>__import__('os').environ.get('HTTPS_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.759569" elapsed="0.000263"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.760091" level="INFO">${no_proxy} = </msg>
+<var>${no_proxy}</var>
+<arg>__import__('os').environ.get('NO_PROXY','')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.759932" elapsed="0.000182"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.760410" level="INFO">HTTP_PROXY= HTTPS_PROXY= NO_PROXY=</msg>
+<arg>HTTP_PROXY=${http_proxy} HTTPS_PROXY=${https_proxy} NO_PROXY=${no_proxy}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.760200" elapsed="0.000249"/>
+</kw>
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:16.764221" level="INFO">GET Request : url=http://127.0.0.1:5000/api/health 
+ path_url=/api/health 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:16.764282" level="INFO">GET Response : url=http://127.0.0.1:5000/api/health 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '16', 'Connection': 'close'} 
+ body={"status":"ok"}
+ 
+ </msg>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.760664" elapsed="0.003711"/>
+</kw>
+<msg time="2025-12-06T18:26:16.764478" level="INFO">${status} = PASS</msg>
+<msg time="2025-12-06T18:26:16.764511" level="INFO">${result} = &lt;Response [200]&gt;</msg>
+<var>${status}</var>
+<var>${result}</var>
+<arg>GET On Session</arg>
+<arg>${SESSION}</arg>
+<arg>/api/health</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible error.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.760538" elapsed="0.003991"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.764777" level="INFO">Health call status=PASS</msg>
+<arg>Health call status=${status}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.764634" elapsed="0.000170"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.764961" level="INFO">Health call result=&lt;Response [200]&gt;</msg>
+<arg>Health call result=${result}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.764868" elapsed="0.000119"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${status}' != 'PASS'</arg>
+<arg>Fail</arg>
+<arg>Health request failed: ${result}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.765062" elapsed="0.000183"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.765417" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${result}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.765319" elapsed="0.000120"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.765851" level="INFO">{"status":"ok"}
+</msg>
+<arg>${resp.text}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.765503" elapsed="0.000377"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2025-12-06T18:26:16.766226" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resp.status_code}</arg>
+<arg>200</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.765943" elapsed="0.000327"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.758773" elapsed="0.007545"/>
+</kw>
+<arg>1 min</arg>
+<arg>2 sec</arg>
+<arg>Get Health Should Be Ok</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.758477" elapsed="0.007879"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.758230" elapsed="0.008168"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.749057" elapsed="0.017369"/>
+</kw>
+<arg>Start Session</arg>
+<arg>AND</arg>
+<arg>Start App</arg>
+<doc>Executes all the given keywords in a sequence.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.747984" elapsed="0.018473"/>
+</kw>
+<test id="s1-s2-s3-t1" name="Time Service Returns datetime and timezone" line="7">
+<kw name="Get Time" owner="keywords">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:17.156588" level="INFO">GET Request : url=http://127.0.0.1:5000/api/time 
+ path_url=/api/time 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:17.156715" level="INFO">GET Response : url=http://127.0.0.1:5000/api/time 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:17 GMT', 'Content-Type': 'application/json', 'Content-Length': '80', 'Connection': 'close'} 
+ body={"source":"TimeAPI.io (External)","utc_datetime":"2025-12-06T23:26:17.1151286"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:17.156868" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/time</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:16.767091" elapsed="0.389806"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.157630" level="INFO">${code} = 200</msg>
+<var>${code}</var>
+<arg>${resp.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.157083" elapsed="0.000571"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${code}' != '200'</arg>
+<arg>Fail</arg>
+<arg>Time endpoint returned status ${code}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.157769" elapsed="0.000158"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.158368" level="INFO">${body_text} = {"source":"TimeAPI.io (External)","utc_datetime":"2025-12-06T23:26:17.1151286"}
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.158013" elapsed="0.000376"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.158639" level="INFO">${body} = {'source': 'TimeAPI.io (External)', 'utc_datetime': '2025-12-06T23:26:17.1151286'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.158463" elapsed="0.000194"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:17.158783" elapsed="0.000056"/>
+</return>
+<msg time="2025-12-06T18:26:17.158936" level="INFO">${body} = {'source': 'TimeAPI.io (External)', 'utc_datetime': '2025-12-06T23:26:17.1151286'}</msg>
+<var>${body}</var>
+<status status="PASS" start="2025-12-06T18:26:16.766948" elapsed="0.392004"/>
+</kw>
+<kw name="Assert Time Fields Present" owner="keywords">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'error' in str(${body})</arg>
+<arg>Fail</arg>
+<arg>TimeService returned error: ${body}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.159342" elapsed="0.000120"/>
+</kw>
+<kw name="Run Keyword Unless" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.159561" level="WARN">Keyword 'BuiltIn.Run Keyword Unless' is deprecated. </msg>
+<arg>'datetime' in str(${body}) or 'utc_datetime' in str(${body})</arg>
+<arg>Fail</arg>
+<arg>TimeService returned unexpected payload: ${body}</arg>
+<doc>*DEPRECATED since RF 5.0. Use Native IF/ELSE or `Run Keyword If` instead.*</doc>
+<status status="PASS" start="2025-12-06T18:26:17.159534" elapsed="0.000260"/>
+</kw>
+<arg>${body}</arg>
+<status status="PASS" start="2025-12-06T18:26:17.159147" elapsed="0.000689"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.766528" elapsed="0.393409"/>
+</test>
+<test id="s1-s2-s3-t2" name="Time Service Graceful Error Handling" line="11">
+<kw name="Get Time" owner="keywords">
+<kw name="GET On Session" owner="RequestsLibrary">
+<msg time="2025-12-06T18:26:17.658761" level="INFO">GET Request : url=http://127.0.0.1:5000/api/time 
+ path_url=/api/time 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg time="2025-12-06T18:26:17.658909" level="INFO">GET Response : url=http://127.0.0.1:5000/api/time 
+ status=200, reason=OK 
+ headers={'Server': 'Werkzeug/3.1.3 Python/3.13.7', 'Date': 'Sat, 06 Dec 2025 23:26:17 GMT', 'Content-Type': 'application/json', 'Content-Length': '80', 'Connection': 'close'} 
+ body={"source":"TimeAPI.io (External)","utc_datetime":"2025-12-06T23:26:17.6205907"}
+ 
+ </msg>
+<msg time="2025-12-06T18:26:17.659115" level="INFO">${resp} = &lt;Response [200]&gt;</msg>
+<var>${resp}</var>
+<arg>${SESSION}</arg>
+<arg>/api/time</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.160490" elapsed="0.498658"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.660117" level="INFO">${code} = 200</msg>
+<var>${code}</var>
+<arg>${resp.status_code}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.659397" elapsed="0.000748"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'${code}' != '200'</arg>
+<arg>Fail</arg>
+<arg>Time endpoint returned status ${code}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.660286" elapsed="0.000174"/>
+</kw>
+<kw name="Set Variable" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.660960" level="INFO">${body_text} = {"source":"TimeAPI.io (External)","utc_datetime":"2025-12-06T23:26:17.6205907"}
+</msg>
+<var>${body_text}</var>
+<arg>${resp.text}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.660548" elapsed="0.000433"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.661256" level="INFO">${body} = {'source': 'TimeAPI.io (External)', 'utc_datetime': '2025-12-06T23:26:17.6205907'}</msg>
+<var>${body}</var>
+<arg>__import__('json').loads(r'''${body_text}''')</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.661064" elapsed="0.000213"/>
+</kw>
+<return>
+<value>${body}</value>
+<status status="PASS" start="2025-12-06T18:26:17.661333" elapsed="0.000056"/>
+</return>
+<msg time="2025-12-06T18:26:17.661512" level="INFO">${body} = {'source': 'TimeAPI.io (External)', 'utc_datetime': '2025-12-06T23:26:17.6205907'}</msg>
+<var>${body}</var>
+<status status="PASS" start="2025-12-06T18:26:17.160350" elapsed="0.501181"/>
+</kw>
+<kw name="Evaluate" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.661925" level="INFO">${has_error} = False</msg>
+<var>${has_error}</var>
+<arg>'error' in ${body}</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.661710" elapsed="0.000235"/>
+</kw>
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>${has_error}</arg>
+<arg>Should Contain</arg>
+<arg>${body}['error']</arg>
+<arg>Unable</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.662077" elapsed="0.000083"/>
+</kw>
+<kw name="Run Keyword Unless" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.662294" level="WARN">Keyword 'BuiltIn.Run Keyword Unless' is deprecated. </msg>
+<kw name="Assert Time Fields Present" owner="keywords">
+<kw name="Run Keyword If" owner="BuiltIn">
+<arg>'error' in str(${body})</arg>
+<arg>Fail</arg>
+<arg>TimeService returned error: ${body}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.662841" elapsed="0.000150"/>
+</kw>
+<kw name="Run Keyword Unless" owner="BuiltIn">
+<msg time="2025-12-06T18:26:17.663087" level="WARN">Keyword 'BuiltIn.Run Keyword Unless' is deprecated. </msg>
+<arg>'datetime' in str(${body}) or 'utc_datetime' in str(${body})</arg>
+<arg>Fail</arg>
+<arg>TimeService returned unexpected payload: ${body}</arg>
+<doc>*DEPRECATED since RF 5.0. Use Native IF/ELSE or `Run Keyword If` instead.*</doc>
+<status status="PASS" start="2025-12-06T18:26:17.663070" elapsed="0.000273"/>
+</kw>
+<arg>${body}</arg>
+<status status="PASS" start="2025-12-06T18:26:17.662597" elapsed="0.000801"/>
+</kw>
+<arg>${has_error}</arg>
+<arg>Assert Time Fields Present</arg>
+<arg>${body}</arg>
+<doc>*DEPRECATED since RF 5.0. Use Native IF/ELSE or `Run Keyword If` instead.*</doc>
+<status status="PASS" start="2025-12-06T18:26:17.662270" elapsed="0.001167"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:17.160069" elapsed="0.503503"/>
+</test>
+<kw name="Stop App" owner="keywords" type="TEARDOWN">
+<kw name="Run Keyword If" owner="BuiltIn">
+<kw name="Terminate Process" owner="Process">
+<msg time="2025-12-06T18:26:17.664499" level="INFO">Gracefully terminating process.</msg>
+<msg time="2025-12-06T18:26:17.664771" level="INFO">Process completed.</msg>
+<arg>${APP_PROC}</arg>
+<doc>Stops the process gracefully or forcefully.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.664303" elapsed="0.000508"/>
+</kw>
+<arg>${APP_PROC}</arg>
+<arg>Terminate Process</arg>
+<arg>${APP_PROC}</arg>
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.664173" elapsed="0.000680"/>
+</kw>
+<kw name="Sleep" owner="BuiltIn">
+<msg time="2025-12-06T18:26:18.165206" level="INFO">Slept 500 milliseconds.</msg>
+<arg>0.5s</arg>
+<doc>Pauses the test executed for the given time.</doc>
+<status status="PASS" start="2025-12-06T18:26:17.664931" elapsed="0.500569"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:17.664019" elapsed="0.501682"/>
+</kw>
+<status status="PASS" start="2025-12-06T18:26:16.744779" elapsed="1.420984"/>
+</suite>
+<status status="PASS" start="2025-12-06T18:26:15.418670" elapsed="2.748382"/>
+</suite>
+<status status="PASS" start="2025-12-06T18:26:15.361710" elapsed="2.805893"/>
+</suite>
+<statistics>
+<total>
+<stat pass="14" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="14" fail="0" skip="0">Tests</stat>
+<stat name="Debug" id="s1-s1" pass="1" fail="0" skip="0">Tests.Debug</stat>
+<stat name="Debug Health" id="s1-s1-s1" pass="1" fail="0" skip="0">Tests.Debug.Debug Health</stat>
+<stat name="Suites" id="s1-s2" pass="13" fail="0" skip="0">Tests.Suites</stat>
+<stat name="Edge Cases" id="s1-s2-s1" pass="4" fail="0" skip="0">Tests.Suites.Edge Cases</stat>
+<stat name="Tasks" id="s1-s2-s2" pass="7" fail="0" skip="0">Tests.Suites.Tasks</stat>
+<stat name="Time" id="s1-s2-s3" pass="2" fail="0" skip="0">Tests.Suites.Time</stat>
+</suite>
+</statistics>
+<errors>
+<msg time="2025-12-06T18:26:17.159561" level="WARN">Keyword 'BuiltIn.Run Keyword Unless' is deprecated. </msg>
+<msg time="2025-12-06T18:26:17.662294" level="WARN">Keyword 'BuiltIn.Run Keyword Unless' is deprecated. </msg>
+<msg time="2025-12-06T18:26:17.663087" level="WARN">Keyword 'BuiltIn.Run Keyword Unless' is deprecated. </msg>
+</errors>
+</robot>
