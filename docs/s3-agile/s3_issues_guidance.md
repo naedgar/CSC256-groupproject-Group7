@@ -1,118 +1,131 @@
-# 📌 Sprint 3 Issue Guidance – OOP & Integration Testing 
+# 📌 Sprint 3 Issue Guidance – OOP, Dependency Injection & API Automation
 
 ## Epic: Sprint 3 Acceptance Criteria
 
-📁 **Title:** Sprint 3 Acceptance Criteria
-📄 **Description:**
-This Sprint focuses on transitioning the procedural Flask app to a more scalable architecture using **object-oriented programming**, **dependency injection**, and **automated API tests**. Completion of Sprint 3 requires the following:
+📁 **Title:** Sprint 3 Acceptance Criteria  
+📄 **Description:**  
+This sprint transforms the TaskTracker app from procedural code into a clean, scalable architecture using **Object-Oriented Programming (OOP)**, **Dependency Injection (DI)**, **JSON persistence**, and **automated API testing** using `requests`.
 
-* [ ] Refactor into `TaskService` and `Task` classes
-* [ ] Apply full Dependency Injection via `TaskStorage`, `__init__.py`, and Blueprint updates
-* [ ] Add unit tests for `TaskService` logic
-* [ ] Add integration tests using `requests` library
-* [ ] Replace manual tests with automated mock and real service tests
-* [ ] CLI interface is finalized and deprecated for individual labs (still usable for group work with full test coverage)
+Completion of Sprint 3 requires the following:
+
+* [ ] Implement `Task` and `TaskService` classes (PR2)  
+* [ ] Add JSON persistence through `FileTaskRepository` (PR6)  
+* [ ] Apply Dependency Injection via `create_app()` and route refactors (PR6)  
+* [ ] Update all API routes to use `current_app.task_service` (PR6)  
+* [ ] Implement PUT and DELETE endpoints (PR7)  
+* [ ] Add automated API tests using `requests` (PR8)  
+* [ ] Ensure CLI supports complete/delete through TaskService  
 
 ---
 
 ## 🧩 User Stories & Refactor Stories (Sub-Issues)
-#### US0003-01 - Manage tasks
-As a developer, I want tasks to be represented as objects so that they can be managed with attributes.
 
-#### US003-02 - Centralize task business logic
-As a developer, I want a TaskService class with methods so that the application's task logic is encapsulated in one place
+#### US003-01 – Represent tasks as objects  
+As a developer, I want tasks to be represented as objects so that they can carry attributes consistently.
 
-#### US003-03 - Use dependency injection for storage
-As a developer, I want to wrap storage logic into a TaskStorage class so that storage can be swapped, mocked, extended without changing business logic.
+#### US003-02 – Centralize business logic  
+As a developer, I want a `TaskService` class so that task logic is encapsulated, testable, and reusable.
 
-#### US003-04 – Inject service into app factory
+#### US003-03 – Enable dependency injection for storage  
+As a developer, I want storage wrapped in a repository class so business logic can remain independent of file format.
 
-As a developer, I want the TaskService to be injected into create_app() so that routes can access it through current_app.task_service without tight coupling.
+#### US003-04 – Inject TaskService into the app factory  
+As a developer, I want the service injected through `create_app()` so routes can access it via `current_app.task_service`.
 
-#### US003-05 – Ensure API endpoints use service layer
+#### US003-05 – API routes must use service layer  
+As a user of the API, I want consistent behavior through the service so logic stays unified.
 
-As a user of the API, I want task endpoints to call the TaskService so that business logic is consistent across the system.
+#### US003-06 – Verify behavior with automated tests  
+As a developer, I want unit, integration, and API-level tests to confirm all components work after refactor.
 
-#### US003-06 – Verify app behavior with automated tests
+---
 
-As a developer, I want both unit tests and integration tests using mocks and requests so that I can confirm the app works correctly without relying on manual testing.
+## 🔧 Refactor Stories
 
-### 🔧 Refactor Stories
+### 🔹 #RF004 – Task & TaskService OOP Refactor (PR2)
+* [ ] Create `Task` class with id/title/description/completed  
+* [ ] Create `TaskService` class (add/view/complete/delete)  
+* [ ] Write unit tests for service methods  
+* [ ] Validate Task objects correctly instantiated  
 
-#### 🔹 #RF004 – TaskService OOP Refactor
+---
 
-* [ ] Create `Task` class with `id`, `title`, `description`, `completed`
-* [ ] Create `TaskService` class with `add_task`, `get_tasks`, `complete_task`, `delete_task`
-* [ ] Write unit tests for `TaskService` methods
-* [ ] Validate correct instantiation of `Task` objects
+### 🔹 #RF005 – Update Routes to Use TaskService (PR2 → PR6)
+* [ ] Refactor all task routes to call TaskService  
+* [ ] Remove direct JSON or list manipulation in routes  
+* [ ] Add service-based integration tests  
 
-#### 🔹 #RF005 – Use TaskService as Main Task Logic
+---
 
-* [ ] Update all task routes to call `TaskService` methods
-* [ ] Remove direct usage of storage functions from `routes/tasks.py`
-* [ ] Add unit tests for service-based route behavior
+### 🔹 #RF006A – Add FileTaskRepository for DI (PR6)
+* [ ] Create `FileTaskRepository` with load/save methods  
+* [ ] Replace old storage functions  
+* [ ] Ensure compatibility with TaskService  
+* [ ] Add repository-level tests  
 
-#### 🔹 #RF006A – Add `TaskStorage` Wrapper for Dependency Injection
+---
 
-* [ ] Add `TaskStorage` class to wrap existing `load_tasks()` and `save_tasks()`
-* [ ] Expose a singleton `task_storage` instance
-* [ ] Ensure compatibility with existing service logic
-* [ ] Test TaskService using this wrapper
+### 🔹 #RF006B – Inject TaskService in App Factory (PR6)
+* [ ] Modify `create_app()` to attach service instance  
+* [ ] Store service in `app.task_service`  
+* [ ] Verify app starts without errors  
 
-#### 🔹 #RF006B – Inject `TaskService` in `__init__.py`
+---
 
-* [ ] Modify `create_app()` to create and inject `TaskService(task_storage)`
-* [ ] Attach service to `app.task_service`
-* [ ] Confirm app starts and routes still function
+### 🔹 #RF006C – Refactor Routes for DI (PR6)
+* [ ] Remove imports of storage or TaskService from routes  
+* [ ] Replace with `from flask import current_app`  
+* [ ] Validate functionality through integration tests  
 
-#### 🔹 #RF006C – Refactor Routes for Dependency Injection
+---
 
-* [ ] Remove all direct imports from `task_storage` in `routes/tasks.py`
-* [ ] Use `current_app.task_service` in route functions
-* [ ] Confirm functionality and backward compatibility
+### 🔹 #RF007 – Implement PUT & DELETE Endpoints (PR7)
+* [ ] Add `/api/tasks/<id>` PUT for mark complete  
+* [ ] Add `/api/tasks/<id>` DELETE for remove task  
+* [ ] Write tests for success & 404 error handling  
 
-#### 🔹 #RF008 – Mock + Requests API Tests
+---
 
-* [ ] Create test module for `requests` tests with real server
-* [ ] Use `MockTaskService` in test config
-* [ ] Add tests for API behavior (add, get, complete, delete) using both mock and requests
+### 🔹 #RF008 – API Automation Using `requests` (PR8)
+* [ ] Add automated API tests using `requests`  
+* [ ] Add mocking tests with `MockTaskService`  
+* [ ] Validate end-to-end workflow: add → complete → delete  
 
 ---
 
 ## 🔍 Automated Testing Coverage (Atomic Tasks)
 
-| Test Case ID  | Summary                                  | Responsible Test File                        |
-| ------------- | ---------------------------------------- | -------------------------------------------- |
-| TC-RF004-001  | Unit test TaskService `add_task()`       | `tests/tasks/test_task_service_add.py`       |
-| TC-RF004-002  | Unit test TaskService `complete_task()`  | `tests/tasks/test_task_service_complete.py`  |
-| TC-RF004-003  | Unit test TaskService `delete_task()`    | `tests/tasks/test_task_service_delete.py`    |
-| TC-RF004-004  | Test `Task` class instantiation          | `tests/tasks/test_task_model.py`             |
-| TC-RF005-001  | Route uses service `add_task()`          | `tests/tasks/test_routes_add.py`             |
-| TC-RF005-002  | Route uses service `get_tasks()`         | `tests/tasks/test_routes_get.py`             |
-| TC-RF005-003  | Route uses service `complete_task()`     | `tests/tasks/test_routes_complete.py`        |
-| TC-RF005-004  | Route uses service `delete_task()`       | `tests/tasks/test_routes_delete.py`          |
-| TC-RF006A-001 | TaskStorage wrapper created + callable   | `tests/storage/test_task_storage_wrapper.py` |
-| TC-RF006B-001 | `create_app()` injects service correctly | `tests/test_app_factory.py`                  |
-| TC-RF006C-001 | Routes call `current_app.task_service`   | `tests/tasks/test_dependency_routes.py`      |
-| TC-RF008-001  | Add task via `requests.post()`           | `tests/tasks/test_api_requests.py`           |
-| TC-RF008-002  | View tasks via `requests.get()`          | `tests/tasks/test_api_requests.py`           |
-| TC-RF008-003  | Complete task via `requests.put()`       | `tests/tasks/test_api_requests.py`           |
-| TC-RF008-004  | Delete task via `requests.delete()`      | `tests/tasks/test_api_requests.py`           |
-| TC-RF008-005  | Inject `MockTaskService` via conftest    | `tests/conftest.py`                          |
-| TC-RF008-006  | Mock add task unit test                  | `tests/tasks/test_mock_service_add.py`       |
-| TC-RF008-007  | Mock complete task unit test             | `tests/tasks/test_mock_service_complete.py`  |
-| TC-RF008-008  | Mock delete task unit test               | `tests/tasks/test_mock_service_delete.py`    |
+| Test Case ID  | Summary                                          | Responsible Test File                        |
+|---------------|--------------------------------------------------|----------------------------------------------|
+| TC-RF004-001  | Unit test TaskService `add_task()`               | `tests/services/test_task_service_add.py`    |
+| TC-RF004-002  | Unit test TaskService `complete_task()`          | `tests/services/test_task_service_complete.py` |
+| TC-RF004-003  | Unit test TaskService `delete_task()`            | `tests/services/test_task_service_delete.py` |
+| TC-RF004-004  | Test `Task` class instantiation                  | `tests/services/test_task_model.py`          |
+| TC-RF005-001  | Route uses service `add_task()`                  | `tests/routes/test_routes_add.py`            |
+| TC-RF005-002  | Route uses service `get_all_tasks()`             | `tests/routes/test_routes_get.py`            |
+| TC-RF005-003  | Route uses service `complete_task()`             | `tests/routes/test_routes_complete.py`       |
+| TC-RF005-004  | Route uses service `delete_task()`               | `tests/routes/test_routes_delete.py`         |
+| TC-RF006A-001 | FileTaskRepository wrapper load/save behavior    | `tests/storage/test_repository.py`           |
+| TC-RF006B-001 | `create_app()` injects TaskService correctly     | `tests/test_app_factory.py`                  |
+| TC-RF006C-001 | Routes use `current_app.task_service`            | `tests/routes/test_dependency_routes.py`     |
+| TC-RF007-001  | PUT completes task                               | `tests/api/test_put_request.py`              |
+| TC-RF007-002  | DELETE removes task                              | `tests/api/test_delete_request.py`           |
+| TC-RF008-001  | Add task via `requests.post()`                   | `tests/api/test_requests_flow.py`            |
+| TC-RF008-002  | View tasks via `requests.get()`                  | `tests/api/test_requests_flow.py`            |
+| TC-RF008-003  | Complete task via `requests.put()`               | `tests/api/test_requests_flow.py`            |
+| TC-RF008-004  | Delete task via `requests.delete()`              | `tests/api/test_requests_flow.py`            |
+| TC-RF008-005  | Use `MockTaskService` injected via conftest      | `tests/conftest.py`                          |
 
 ---
 
 ## 📊 Sprint Board Setup
 
-Create a **Sprint 3 Project Board** in GitHub using the following columns:
+Create a **Sprint 3 Project Board** in GitHub with these columns:
 
-1. **Backlog**
-2. **Ready**
-3. **In Progress**
-4. **Review**
+1. **Backlog**  
+2. **Ready**  
+3. **In Progress**  
+4. **Review**  
 5. **Done**
 
-
+Each of the refactor stories (#RF004–#RF008) should be individual cards with matching user stories and test case IDs.

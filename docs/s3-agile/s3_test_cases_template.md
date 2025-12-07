@@ -2,424 +2,307 @@
 
 ## 🧪 Test Type Legend
 
-| Type             | Meaning                                                                 |
-|------------------|-------------------------------------------------------------------------|
-| **Static**        | Read-only inspection of codebase (no execution)                        |
-| **Manual**        | Performed by a user via browser, CLI, Postman, etc.                    |
-| **Automated**     | Run via test code (e.g., pytest) and asserts actual behavior           |
-| **Static + Manual**| Code inspection followed by a manual runtime check                    |
+| Type               | Meaning                                                                 |
+|--------------------|-------------------------------------------------------------------------|
+| **Static**         | Read-only inspection of codebase (no execution)                        |
+| **Manual**         | Performed by a user via CLI, curl, Postman, etc.                       |
+| **Automated**      | Run via test code (e.g., pytest) and asserts actual behavior           |
+| **Static + Manual**| Code inspection followed by a manual runtime check                     |
 
+---
 
 ## Regression Log
 
-### ✅ User Story Test Cases
+### ✅ User Story Test Cases (Sprint 3 Focus: Full CRUD + Persistence)
 
-* 📌 US002 – Add Task
-
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US002-001     | Add valid task                       | Automated        | Basic happy path                       |
-| TC-US002-002     | Missing title                        | Automated        | Should return 400                      |
-| TC-US002-003     | Empty title                          | Automated        | Should return 400                      |
-| TC-US002-004     | Missing description                  | Automated        | Optional field                         |
+> Sprint 3 ensures **Add/View/Complete/Delete** all work end-to-end through the **TaskService + FileTaskRepository + routes**, with **requests-based API tests** and **JSON persistence**.
 
 ---
 
-* 📌 US003 – View Tasks
+### 📌 US002 – Add Task
 
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US003-001     | View tasks when none exist           | Automated        | Should return empty list (`[]`)       |
-| TC-US003-002     | View tasks when tasks exist          | Automated        | Should return list of task objects     |
-
----
-
-* 📌 US005 – Mark Task Complete
-
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US005-001     | Mark task complete (valid ID)        | Automated        | Expects 200 and `"completed": true`    |
-| TC-US005-002     | Mark task complete (nonexistent ID)  | Automated        | Expects 404 Not Found                  |
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US002-001     | Add valid task via API               | Automated   | POST `/api/tasks` → 201 + task JSON          |
+| TC-US002-002     | Missing title                        | Automated   | Should return 400 Bad Request                 |
+| TC-US002-003     | Empty/whitespace-only title          | Automated   | Should return 400 Bad Request                 |
+| TC-US002-004     | Missing description (optional)       | Automated   | Description optional; still 201 Created       |
 
 ---
 
-* 📌 US007 – Delete Task
+### 📌 US003 – View Tasks
 
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US007-001     | Delete task (valid ID)               | Automated        | Should return 200                      |
-| TC-US007-002     | Delete task (nonexistent ID)         | Automated        | Should return 404                      |
-
----
-
-* 📌 US011 – Persist Tasks (File Storage)
-
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US011-001     | Tasks persist after restart          | Automated        | Check `tasks.json` after POST          |
-| TC-US011-002     | Load tasks from file on startup      | Automated        | File used as source of truth           |
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US003-001     | View tasks when none exist           | Automated   | Should return empty list `[]`                 |
+| TC-US003-002     | View tasks when tasks exist          | Automated   | Should return list of task objects            |
 
 ---
 
-* 📌 US006 – UI for Add Task (CLI Stub)
+### 📌 US005 – Mark Task Complete (PUT /api/tasks/<id>)
 
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US006-001     | CLI prompt accepts task input        | Manual           | Uses `input()` in CLI stub             |
-| TC-US006-002     | CLI task passed to service           | Manual           | Requires verifying console output      |
-
----
-
-* 📌 US027 – View Task Report (via CLI)
-
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US027-001     | CLI lists tasks                      | Manual           | Read-only task display                 |
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US005-001     | Mark task complete (valid ID)        | Automated   | Expects 200 and `"completed": true`           |
+| TC-US005-002     | Mark task complete (nonexistent ID)  | Automated   | Expects 404 Not Found                         |
 
 ---
 
-* 📌 US028 – CLI Complete Task
+### 📌 US007 – Delete Task (DELETE /api/tasks/<id>)
 
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US028-001     | CLI marks task as complete           | Manual           | Verifies behavior of `TaskService`     |
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US007-001     | Delete task (valid ID)               | Automated   | Should return 200 and removed task            |
+| TC-US007-002     | Delete task (nonexistent ID)         | Automated   | Should return 404 Not Found                   |
 
 ---
 
-## ✅ Error Handling & Validation (US015)
+### 📌 US011 – Persist Tasks (File Storage via FileTaskRepository)
 
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-US015-001     | Invalid JSON format                  | Automated        | Expects 400 Bad Request                |
-| TC-US015-002     | Missing JSON content-type header     | Automated        | Expects 415 Unsupported Media Type     |
-| TC-US015-003     | PUT/DELETE with invalid ID           | Automated        | Expects 404 Not Found                  |
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US011-001     | Tasks persist after restart          | Automated   | POST → restart → GET shows same data          |
+| TC-US011-002     | Load tasks from `tasks.json` at startup | Automated | File is source of truth for TaskService       |
+
+---
+
+### 📌 US006 – CLI Add Task (Sprint 3 CLI Integration)
+
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US006-001     | CLI prompt accepts task input        | Manual      | Uses `input()` from CLI menu                  |
+| TC-US006-002     | CLI passes new task to TaskService   | Manual      | Verify via console output or GET `/api/tasks` |
+
+---
+
+### 📌 US027 – CLI View Task Report
+
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US027-001     | CLI lists tasks                      | Manual      | Read-only display of tasks from TaskService   |
+
+---
+
+### 📌 US028 – CLI Complete Task
+
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US028-001     | CLI marks task as complete           | Manual      | Calls `TaskService.complete_task()`           |
+
+---
+
+## ✅ Error Handling & Validation (US015 – API Robustness)
+
+> In Sprint 3, error handling must work correctly for **PUT/DELETE** and invalid JSON/payloads.
+
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-US015-001     | Invalid JSON format                  | Automated   | Expects 400 Bad Request                       |
+| TC-US015-002     | Missing JSON content-type header     | Automated   | Expects 415 or 400 (as implemented)           |
+| TC-US015-003     | PUT/DELETE with invalid ID           | Automated   | Expects 404 Not Found                         |
 
 ---
 
 ## ✅ Architecture & Refactor Test Cases
 
-### 🧱 Blueprint Routing (RF001)
+> These cover **OOP architecture, DI, persistence**, and are especially relevant after Sprint 3’s refactor.
 
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-ARCH-001      | Routes use Blueprints                | Manual/Static    | `main.py` registers blueprints only    |
-| TC-ARCH-002      | No route defined in `main.py`        | Manual/Static    | All routes moved to `routes/`          |
-| TC-NFR001-001 | Confirm all routes are available via Blueprint | Automated | GET, POST, PUT, DELETE all succeed via `/api/tasks` endpoints |
+### 🧱 Blueprint Routing (Regression from Prior Sprint)
 
----
-
-### 🧱 File Storage Refactor (RF002)
-
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-ARCH-003      | `task_storage.py` reads from file    | Automated        | Check that it returns task list        |
-| TC-ARCH-004      | `task_storage.py` writes to file     | Automated        | Should save tasks after add/delete     |
+| Test Case ID     | Description                          | Test Type        | Notes                                         |
+|------------------|--------------------------------------|------------------|-----------------------------------------------|
+| TC-ARCH-001      | Routes mounted via Blueprints        | Static + Manual  | `main.py` uses `create_app()` + `register_blueprint()` |
+| TC-ARCH-002      | No routes defined in `main.py`       | Static           | All routes must live in `routes/` modules     |
+| TC-NFR001-001    | All task endpoints available via /api/tasks | Automated  | GET, POST, PUT, DELETE all reachable          |
 
 ---
 
-### 🧱 App Factory Pattern
+### 🧱 File Storage Refactor (RF002 → FileTaskRepository in Sprint 3)
 
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-ARCH-005      | App initializes via `create_app()`   | Automated        | Used in tests via `conftest.py`        |
-| TC-ARCH-006      | Blueprint registration verified      | Automated        | Tests confirm endpoints are mounted    |
-| TC-NFR001-002 | Test `create_app()` correctly registers Blueprints | Automated | No 404 errors from misrouting; routes mounted without exception |
+| Test Case ID     | Description                               | Test Type   | Notes                                        |
+|------------------|-------------------------------------------|-------------|----------------------------------------------|
+| TC-ARCH-003      | `FileTaskRepository.load_tasks()` works   | Automated   | Returns list of tasks from `tasks.json`      |
+| TC-ARCH-004      | `FileTaskRepository.save_tasks()` works   | Automated   | Persists tasks after add/complete/delete     |
 
 ---
 
-## ✅ Manual Tests via Postman or CLI
+### 🧱 App Factory Pattern & DI
 
-| Test Case ID     | Description                          | Test Type        | Notes                                  |
-|------------------|--------------------------------------|------------------|----------------------------------------|
-| TC-MANUAL-001    | Add task via Postman/curl            | Manual           | Screenshot required                    |
-| TC-MANUAL-002    | View tasks via Postman/curl          | Manual           | Screenshot required                    |
-| TC-MANUAL-003    | Mark task complete via Postman       | Manual           | Verifies PUT endpoint                  |
-| TC-MANUAL-004    | Delete task via Postman              | Manual           | Verifies DELETE endpoint               |
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-ARCH-005      | App initializes via `create_app()`   | Automated   | Used in tests via `conftest.py`              |
+| TC-ARCH-006      | Blueprints registered correctly      | Automated   | Endpoints mount without 404                  |
+| TC-NFR001-002    | `create_app()` wires TaskService + FileTaskRepository | Automated | DI is correct; no runtime injection errors   |
+
+---
+
+## ✅ Manual Tests via Postman, curl, or CLI
+
+| Test Case ID     | Description                          | Test Type   | Notes                                         |
+|------------------|--------------------------------------|-------------|-----------------------------------------------|
+| TC-MANUAL-001    | Add task via Postman/curl            | Manual      | Screenshot/log required                       |
+| TC-MANUAL-002    | View tasks via Postman/curl          | Manual      | Screenshot/log required                       |
+| TC-MANUAL-003    | Mark task complete via Postman/curl  | Manual      | Validates PUT `/api/tasks/<id>`               |
+| TC-MANUAL-004    | Delete task via Postman/curl         | Manual      | Validates DELETE `/api/tasks/<id>`            |
 
 ---
 
 ## Summary Refactors for Sprint 3
 
+> These map directly to **PR2, PR6, PR7, PR8** and are the core of Sprint 3.
+
 | Refactor ID | Description                                                  | Notes                                                           |
-| ----------- | ------------------------------------------------------------ | --------------------------------------------------------------- |
-| RF004       | Introduce `Task` class                                       | Replace dictionary-based task model                             |
-| RF005       | Create `TaskService` class                                   | Encapsulates all logic for add/view/edit/delete                 |
-| RF006A      | Create `TaskStorage` wrapper for DI                          | Enables `load_tasks`/`save_tasks` injection into services       |
-| RF006B      | Inject `TaskService` via `__init__.py`                       | Passes service instance into Flask app context for route access |
-| RF006C      | Refactor `routes/tasks.py` to use `current_app.task_service` | Updates route handlers for DI-based architecture                |
-| RF007       | Blueprint Modularization                                     | Separate task and health routes into Blueprints                 |
-| RF008       | Introduce `MockTaskService` for test isolation               | Replaces file storage in tests for fast, isolated test behavior |
-
-
-## 🧱 Introduce `Task` Class for Domain Modeling (RF004)
-
-This refactor lays the foundation for object-oriented architecture by creating a `Task` class to represent tasks as structured objects rather than plain dictionaries. This enables better encapsulation, easier refactoring, and compatibility with future database or validation layers.
-
-### Test Cases for RF004
-
-| Test Case ID | Description                                  | Test Type | Notes                                                   |
-| ------------ | -------------------------------------------- | --------- | ------------------------------------------------------- |
-| TC-RF004-001 | Task object can be instantiated              | Automated | `Task(title, description)` creates object               |
-| TC-RF004-002 | Task object tracks completed status          | Automated | Default is `False`; `mark_complete()` updates to `True` |
-| TC-RF004-003 | Task object has correct ID, title, desc      | Automated | Validate attributes after construction                  |
-| TC-RF004-004 | Object comparison works with service methods | Automated | Used by `TaskService` to store and return objects       |
+|-------------|--------------------------------------------------------------|-----------------------------------------------------------------|
+| RF004       | Introduce `Task` class                                      | Replace dictionary-based model with structured domain object    |
+| RF005       | Implement `TaskService`                                     | Encapsulates all CRUD logic for tasks                           |
+| RF006A      | Introduce `TaskRepository` / `FileTaskRepository`           | Abstraction layer for JSON storage                              |
+| RF006B      | Inject `TaskService` via app factory (`create_app()`)       | Attaches service to Flask app instance                          |
+| RF006C      | Refactor routes to use `current_app.task_service`           | Ensures all routes use DI instead of direct imports             |
+| RF007       | Add PUT/DELETE task endpoints                               | API supports complete & delete operations                       |
+| RF008       | Introduce `MockTaskService` + `requests`-based API testing  | Enables fast, isolated tests and end-to-end API validation      |
 
 ---
 
-> ✅ Note: The `Task` class is defined in `app/models/task.py` in **Sprint 3 Lab 2**, and tested using pure unit tests. It is injected into the service layer (`TaskService`) in later steps.
+## 🧱 Introduce `Task` Class for Domain Modeling (RF004)
+
+> In Sprint 3, `Task` becomes a first-class domain object used by `TaskService` and stored via `FileTaskRepository`.
+
+### Test Cases for RF004
+
+| Test Case ID | Description                                  | Test Type   | Notes                                                   |
+|--------------|----------------------------------------------|-------------|---------------------------------------------------------|
+| TC-RF004-001 | Task object can be instantiated              | Automated   | `Task(title, description)` creates valid object         |
+| TC-RF004-002 | Task object tracks completed status          | Automated   | Default `completed=False`; update to `True` supported   |
+| TC-RF004-003 | Task object has correct ID, title, desc      | Automated   | Validate all attributes after construction              |
+| TC-RF004-004 | Task interacts correctly with TaskService    | Automated   | Stored, retrieved, and updated via service methods      |
+
+---
 
 ### TC-RF004-001: TaskService Adds Task
 
-* **Description:** Verify `add_task()` correctly stores a new task in memory
-* **Preconditions:** TaskService is initialized with empty task list
-* **Steps:**
-  1. Call `add_task("Title", "Description")`
-* **Expected:** Returns a `Task` with correct title, description, and ID=1
-* **Test Type:** Automated
+* **Description:** Verify `add_task()` correctly stores a new Task  
+* **Preconditions:** TaskService initialized with empty repository  
+* **Steps:**  
+  1. Call `add_task("Title", "Description")`  
+* **Expected:** Returns Task with correct title, description, and non-null ID  
+* **Test Type:** Automated  
 
 ### TC-RF004-002: TaskService Marks Task Complete
 
-* **Description:** Verify `complete_task()` sets a task’s `completed` field to `True`
-* **Preconditions:** Task exists in TaskService with `completed = False`
-* **Steps:**
-  1. Call `complete_task(task_id)`
-* **Expected:** `completed` field of task is updated to `True`
-* **Test Type:** Automated
+* **Description:** Verify `complete_task()` sets Task.completed to `True`  
+* **Preconditions:** Task exists with `completed=False`  
+* **Steps:**  
+  1. Call `complete_task(task_id)`  
+* **Expected:** Task’s `completed` becomes `True`  
+* **Test Type:** Automated  
 
 ### TC-RF004-003: TaskService Deletes Task
 
-* **Description:** Verify `delete_task()` removes a task by ID
-* **Preconditions:** Task with ID=1 exists in TaskService
-* **Steps:**
-  1. Call `delete_task(1)`
-* **Expected:** Task with ID=1 is no longer in the list
-* **Test Type:** Automated
+* **Description:** Verify `delete_task()` removes a Task by ID  
+* **Preconditions:** Task with ID exists  
+* **Steps:**  
+  1. Call `delete_task(task_id)`  
+* **Expected:** Task no longer appears in `get_all_tasks()`  
+* **Test Type:** Automated  
 
-### TC-RF004-004: Validate Task Class Instantiation and Attributes
+### TC-RF004-004: Validate Task Class Instantiation
 
-* **Description:** Create a `Task` object and verify attributes are correctly set
-* **Preconditions:** None
-* **Steps:**
-  1. Instantiate `Task(title="T", description="D")`
-* **Expected:** Fields `title`, `description`, `completed`, and `id` are set as expected
-* **Test Type:** Automated
+* **Description:** Create a `Task` and verify all attributes  
+* **Preconditions:** None  
+* **Steps:**  
+  1. Instantiate `Task(title="T", description="D")`  
+* **Expected:** ID assigned, `completed=False`, title/description correct  
+* **Test Type:** Automated  
 
 ---
 
 ## 🧱 TaskService Class Refactor (RF005)
 
-| Test Case ID | Description                                 | Test Type | Notes                                       |
-| ------------ | ------------------------------------------- | --------- | ------------------------------------------- |
-| TC-RF005-001 | `TaskService.add_task()` stores task        | Automated | Returns correct task with ID and title      |
-| TC-RF005-002 | `TaskService.get_tasks()` returns task list | Automated | Should return all tasks from in-memory list |
-| TC-RF005-003 | `TaskService.complete_task()` updates task    | Automated | Updates completion status to `True`         |
-| TC-RF005-004 | `TaskService.delete_task()` removes task    | Automated | Task is removed and no longer in list       |
+| Test Case ID | Description                                 | Test Type   | Notes                                       |
+|--------------|---------------------------------------------|-------------|---------------------------------------------|
+| TC-RF005-001 | `TaskService.add_task()` stores Task        | Automated   | Returns new Task with ID and correct data   |
+| TC-RF005-002 | `TaskService.get_all_tasks()` returns list  | Automated   | Includes all Tasks from repository          |
+| TC-RF005-003 | `TaskService.complete_task()` updates Task  | Automated   | Sets `completed=True`                       |
+| TC-RF005-004 | `TaskService.delete_task()` removes Task    | Automated   | Task removed from repository                |
 
-### TC-RF005-001: TaskService.add_task() Stores Task
-
-* **Description:** `add_task()` stores and returns a new task
-* **Preconditions:** Service initialized
-* **Steps:**
-  1. Call `add_task("Test", "Try")`
-* **Expected:** Returns task with ID and correct title/description
-* **Test Type:** Automated
-
-### TC-RF005-002: TaskService.get_tasks() Returns Task List
-
-* **Description:** `get_tasks()` returns full list of tasks
-* **Preconditions:** Service has multiple tasks
-* **Steps:**
-  1. Call `get_tasks()`
-* **Expected:** List of task objects returned
-* **Test Type:** Automated
-
-### TC-RF005-003: TaskService.update_task() Updates Completion Status
-
-* **Description:** `update_task()` updates the completion status of a task
-* **Preconditions:** Task exists with `completed=False`
-* **Steps:**
-  1. Call `update_task(task_id, completed=True)`
-* **Expected:** Task is marked as complete
-* **Test Type:** Automated
-
-### TC-RF005-004: TaskService.delete_task() Removes Task
-
-* **Description:** `delete_task()` deletes task with valid ID
-* **Preconditions:** Task exists
-* **Steps:**
-  1. Call `delete_task(task_id)`
-* **Expected:** Task is removed from list
-* **Test Type:** Automated
+(Descriptions consistent with RF004 details above.)
 
 ---
+
 ## 🧱 Dependency Injection Refactor (RF006A–RF006C)
 
 | Test Case ID  | Description                                          | Test Type       | Notes                                                     |
-| ------------- | ---------------------------------------------------- | --------------- | --------------------------------------------------------- |
-| TC-RF006A-001 | `TaskStorage` wrapper supports load/save             | Automated       | Abstracts file I/O for easier injection                   |
-| TC-RF006B-001 | App factory injects `TaskService` with `TaskStorage` | Automated       | DI pattern wired in `__init__.py` using factory pattern   |
-| TC-RF006B-002 | TaskService Injected in Flask App Factory            | Static          | validate the injection is implemented as expected         |
-| TC-RF006C-001 | Flask routes use `current_app.task_service`          | Static + Manual | Confirms DI usage in `routes/tasks.py` (no direct import) |
+|---------------|------------------------------------------------------|-----------------|-----------------------------------------------------------|
+| TC-RF006A-001 | FileTaskRepository supports load/save                | Automated       | Abstracts file I/O into repository class                  |
+| TC-RF006B-001 | App factory injects TaskService with repository      | Automated       | `create_app()` wires `TaskService(FileTaskRepository(...))` |
+| TC-RF006B-002 | TaskService attached to Flask app instance           | Static          | `app.task_service` or `current_app.task_service` present  |
+| TC-RF006C-001 | Routes use `current_app.task_service`                | Static + Manual | No direct imports of TaskService/Repository in routes     |
 
 ---
 
-### TC-RF006A-001: TaskStorage Wrapper Supports Load/Save
+### TC-RF006A-001: FileTaskRepository Load/Save
 
-* **Description:** Validates `TaskStorage.load_tasks()` and `save_tasks()` wrap file operations
-* **Preconditions:** `data/tasks.json` file exists
-* **Steps:**
-
-  1. Create a `TaskStorage` instance
-  2. Use `.load_tasks()` to retrieve current data
-  3. Use `.save_tasks()` to write a new task list
-* **Expected:** Loads and saves task list successfully
-* **Test Type:** Automated
-
----
-
-### TC-RF006B-001: App Injects TaskService via `__init__.py`
-
-* **Description:** Ensures Flask app is initialized with injected `TaskService` instance
-* **Preconditions:** DI is implemented in `__init__.py`
-* **Steps:**
-
-  1. Call app factory `create_app()`
-  2. Access `app.task_service`
-* **Expected:** `app.task_service` is an instance of `TaskService` with injected `TaskStorage`
-* **Test Type:** Automated
-
----
-### TC-RF006B-002: TaskService Injected in Flask App Factory
-
-* **Description:** Confirm that TaskService is created and attached to the Flask app via `create_app()`
-* **Preconditions:** Flask app factory pattern in use
-* **Steps:**
-
-  1. Inspect `__init__.py`
-  2. Confirm instance of `TaskService` is created with `TaskStorage`
-  3. Ensure it is assigned to `app.task_service`
-* **Expected:** App has injected task\_service ready for use
-* **Test Type:** Static
+* **Description:** Validates `load_tasks()` and `save_tasks()` wrap JSON file operations  
+* **Preconditions:** `tasks.json` exists or is creatable  
+* **Steps:**  
+  1. Instantiate FileTaskRepository with file path  
+  2. Call `load_tasks()`  
+  3. Modify list and call `save_tasks()`  
+* **Expected:** File updated, data read back correctly  
+* **Test Type:** Automated  
 
 ---
 
-### TC-RF006C-001: Flask Routes Use Injected TaskService
+### TC-RF006B-001: App Injects TaskService
 
-* **Description:** Verifies routes use `current_app.task_service` for all logic calls
-* **Preconditions:** App created using app factory
-* **Steps:**
+* **Description:** Ensures Flask app uses injected TaskService instance  
+* **Preconditions:** App factory implemented  
+* **Steps:**  
+  1. Call `create_app()` in test  
+  2. Assert `app.task_service` exists and is TaskService  
+* **Expected:** No errors; DI successful  
+* **Test Type:** Automated  
 
-  1. Inspect code in `routes/tasks.py`
-  2. Confirm no direct import of `task_service`
-  3. Look for `current_app.task_service` usage
-* **Expected:** All logic routed through injected instance
-* **Test Type:** Static + Manual
+---
 
+### TC-RF006B-002: Static Verification of Injection
+
+* **Description:** Confirm that TaskService is created and attached in `__init__.py`  
+* **Test Type:** Static  
+
+---
+
+### TC-RF006C-001: Routes Use Injected TaskService
+
+* **Description:** Verify `routes/tasks.py` uses `current_app.task_service` exclusively  
+* **Preconditions:** App factory + DI in place  
+* **Steps:**  
+  1. Inspect code in `routes/tasks.py`  
+  2. Confirm no direct imports of TaskService/FileTaskRepository  
+  3. Confirm usage of `current_app.task_service`  
+* **Expected:** All business logic calls go through injected service  
+* **Test Type:** Static + Manual  
 
 ---
 
 ## 🧪 Mock Service and Integration Refactor (RF008)
 
 | Test Case ID | Description                         | Test Type            | Storage Mode | Notes                                   |
-| ------------ | ----------------------------------- | -------------------- | ------------ | --------------------------------------- |
+|--------------|-------------------------------------|----------------------|--------------|-----------------------------------------|
 | TC-RF008-001 | Add task via `requests.post()`      | Automated (requests) | Real         | Integration test for POST               |
-| TC-RF008-002 | View task via `requests.get()`      | Automated (requests) | Real         | Integration test for GET                |
+| TC-RF008-002 | View tasks via `requests.get()`     | Automated (requests) | Real         | Integration test for GET                |
 | TC-RF008-003 | Complete task via `requests.put()`  | Automated (requests) | Real         | Integration test for PUT                |
 | TC-RF008-004 | Delete task via `requests.delete()` | Automated (requests) | Real         | Integration test for DELETE             |
 | TC-RF008-005 | Inject mock service into app        | Automated (unit)     | Mocked       | `conftest.py` injects `MockTaskService` |
 | TC-RF008-006 | Add task with mock service          | Automated (unit)     | Mocked       | No file I/O — memory-only               |
-| TC-RF008-007 | Complete task with mock service     | Automated (unit)     | Mocked       | Task is updated in memory               |
-| TC-RF008-008 | Delete task with mock service       | Automated (unit)     | Mocked       | Task is removed from mock list          |
-
-<!-- Detailed test cases follow -->
-
-### TC-RF008-001: Add Task via POST
-
-* **Description:** Add a task using `requests.post()`
-* **Preconditions:** Server running, no existing tasks
-* **Steps:**
-
-  1. Send POST `/api/tasks` with valid payload
-* **Expected:** Status 201, JSON response includes task
-* **Test Type:** Automated (requests)
-
-### TC-RF008-002: View Tasks via GET
-
-* **Description:** View tasks using `requests.get()`
-* **Preconditions:** Tasks exist in storage
-* **Steps:**
-
-  1. Send GET `/api/tasks`
-* **Expected:** List of tasks returned with status 200
-* **Test Type:** Automated (requests)
-
-### TC-RF008-003: Mark Task Complete via PUT
-
-* **Description:** Mark task complete using `requests.put()`
-* **Preconditions:** Task exists
-* **Steps:**
-
-  1. Send PUT `/api/tasks/1` to mark as complete
-* **Expected:** Status 200 and `"completed": true` in response
-* **Test Type:** Automated (requests)
-
-### TC-RF008-004: Delete Task via DELETE
-
-* **Description:** Delete task using `requests.delete()`
-* **Preconditions:** Task exists
-* **Steps:**
-
-  1. Send DELETE `/api/tasks/1`
-* **Expected:** Status 200, task removed
-* **Test Type:** Automated (requests)
-
-### TC-RF008-005: Inject MockTaskService
-
-* **Description:** Verify that `MockTaskService` can be injected into `app.task_service`
-* **Preconditions:** Flask app created via `create_app()`
-* **Steps:**
-
-  1. Create instance of `MockTaskService()`
-  2. Assign it to `app.task_service`
-  3. Confirm test client uses the mock for requests
-* **Expected:** All API requests interact with mock, not real file
-* **Test Type:** Automated (unit)
-
-### TC-RF008-006: Add Task Using MockTaskService
-
-* **Description:** Verify that `add_task()` on `MockTaskService` correctly adds a task in-memory
-* **Preconditions:** `MockTaskService` initialized with no tasks
-* **Steps:**
-
-  1. Create `MockTaskService` instance
-  2. Call `add_task("Write test", "Add test case for mock")`
-  3. Call `get_all_tasks()`
-* **Expected:** Task list contains one task with correct data, ID = 1, `completed = False`
-* **Test Type:** Automated (unit)
-
-### TC-RF008-007: Complete Task Using MockTaskService
-
-* **Description:** Verify `complete_task()` updates `completed` to `True`
-* **Preconditions:** Task exists with `completed = False`
-* **Steps:**
-
-  1. Call `add_task("Mock Complete", "Mark complete test")`
-  2. Call `complete_task(1)`
-  3. Retrieve updated task
-* **Expected:** Task ID = 1, `completed = True`
-* **Test Type:** Automated (unit)
-
-### TC-RF008-008: Delete Task Using MockTaskService
-
-* **Description:** Verify that `delete_task()` removes a task from mock list
-* **Preconditions:** Task with ID = 1 exists in mock
-* **Steps:**
-
-  1. Call `add_task("Delete Me", "Will be deleted")`
-  2. Call `delete_task(1)`
-  3. Call `get_all_tasks()`
-* **Expected:** List is empty; task was removed
-* **Test Type:** Automated (unit)
+| TC-RF008-007 | Complete task with mock service     | Automated (unit)     | Mocked       | Verifies `completed=True` update        |
+| TC-RF008-008 | Delete task with mock service       | Automated (unit)     | Mocked       | Removes task from mock list             |
 
 ---
 
+### High-Level Flows (RF008)
+
+- **Requests-based E2E tests** verify that the **real Flask server + JSON file** behave correctly.  
+- **MockTaskService tests** verify that business logic can run **without touching the file system**, improving speed and reliability.
+
+---
