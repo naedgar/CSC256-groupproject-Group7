@@ -42,9 +42,9 @@ def test_get_tasks_returns_added_tasks_integration():
     assert isinstance(all_tasks, list)
     assert len(all_tasks) >= 2
 
-    # Check dict structure
+    # Check dict structure (created_at may be None when no time_service is injected)
     for task in all_tasks:
-        assert set(task.keys()) == {"id", "title", "description", "completed"}
+        assert set(task.keys()) == {"id", "title", "description", "completed", "created_at"}
 
     # Check values
     titles = [task["title"] for task in all_tasks]
