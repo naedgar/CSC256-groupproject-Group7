@@ -19,7 +19,7 @@
 
 {% if time_data.utc_datetime %}
     <div class="alert alert-success">
-        <p><strong>UTC Time:</strong> {{ time_data.utc_datetime }}</p>
+        <p><strong>Time:</strong> {{ time_data.utc_datetime }}</p>
         {% if selected_timezone and selected_timezone != 'UTC' and converted_time %}
             <p><strong>{{ selected_timezone }} Time:</strong> {{ converted_time }}</p>
         {% endif %}
