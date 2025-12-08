@@ -41,9 +41,10 @@ def create_app(service=None):
         Base.metadata.create_all(engine)  # Creates database and tables
         print("✅ Database tables created by Base.metadata.create_all(engine)")
         
-        # Wire up the repository and service
+        # Wire up the repository and service with TimeService
         repo = DatabaseTaskRepository(Session)
-        service = TaskService(repo)
+        time_service = TimeService()
+        service = TaskService(repo, time_service)
         
         # Store engine reference for cleanup
         app.database_engine = engine
