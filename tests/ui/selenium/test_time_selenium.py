@@ -36,7 +36,7 @@ def test_time_ui_selenium_updates(start_flask_server):
         # Find the paragraph containing the UTC time
         elem = driver.find_element("css selector", "div.alert p")
         text1 = elem.text
-        assert "UTC Time" in text1
+        assert "Time:" in text1 and text1.endswith("Z")
 
         t1 = _parse_iso_like(text1)
 

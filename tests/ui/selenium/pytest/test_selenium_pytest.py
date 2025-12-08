@@ -111,6 +111,11 @@ def driver():
     # Cleanup happens here automatically
     try:
         driver.quit()
+        # Small delay to ensure Chrome process fully terminates
+        # Prevents "invalid session id" errors when running multiple tests
+        time.sleep(1)
+    except Exception as e:
+        print(f"⚠️ Error quitting driver: {e}")
     finally:
         # Attempt to remove the temporary profile directory created for this run.
         if user_dir:
