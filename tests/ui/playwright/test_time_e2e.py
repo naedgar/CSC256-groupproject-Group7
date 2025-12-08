@@ -26,7 +26,7 @@ def test_time_ui_displays_and_updates(chrome_page, start_flask_server, app_base_
     chrome_page.wait_for_selector("div.alert")
 
     content = chrome_page.locator("div.alert p").inner_text()
-    assert "UTC Time" in content or "UTC Time:" in content
+    assert "Time:" in content and content.endswith("Z")
 
     t1 = parse_iso_like(content)
     assert t1 is None or isinstance(t1, datetime)
