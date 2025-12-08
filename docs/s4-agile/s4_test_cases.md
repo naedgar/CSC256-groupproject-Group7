@@ -101,7 +101,7 @@ This document lists the core regression test cases for Sprint 4, aligning with P
 
 ## 🕒 Time Service – US031 (PR-4, PR-7)
 
-**TC-010 – Get Current Time (Happy Path)**
+**TC-010 – Get Current Time **
 
 - **Steps:**  
   1. GET `/api/time`.  
@@ -144,7 +144,7 @@ This document lists the core regression test cases for Sprint 4, aligning with P
 
 ---
 
-## 🧪 Hybrid Test Organization – US0XX (PR-3, PR-2, PR-7)
+## 🧪 Hybrid Test Organization – US041 (PR-3, PR-2, PR-7)
 
 **TC-014 – Run Unit Tests via Marker**
 

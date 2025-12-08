@@ -13,8 +13,7 @@ The objective of this Test Plan is to verify that all **Sprint 4 (final sprint)*
 This Test Plan directly supports:
 - **US031:** Show Current Time via External API  
 - **US039:** View Time Created in Task Summary  
-- **US0XX:** Hybrid Test Organization with pytest Markers  
-- **PR1–PR10:** All final Group Project requirements
+- **US041:** Hybrid Test Organization with pytest Markers  
 
 ---
 
@@ -112,7 +111,7 @@ Testing in Sprint 4 follows a **layered and hybrid strategy**:
 - Mark task complete and verify state update in UI
 
 ### 6.4 Acceptance Tests (Robot Framework)
-- Add Task (happy path)
+- Add Task 
 - Invalid Task Input Handling
 - Mark Task Complete
 - Delete Task
@@ -121,7 +120,7 @@ Testing in Sprint 4 follows a **layered and hybrid strategy**:
 
 ---
 
-## 7. 🧪 Hybrid Test Organization – US0XX (PR-3)
+## 7. 🧪 Hybrid Test Organization – US041 (PR-3)
 
 Sprint 4 enforces a **Hybrid Test Organization model**:
 
