@@ -49,6 +49,9 @@
                 {% if task.description %}
                   <p class="task-description">{{ task.description }}</p>
                 {% endif %}
+                {% if task.created_at %}
+                  <p class="task-timestamp"><small>Created: {{ task.created_at }}</small></p>
+                {% endif %}
               </div>
               <!-- Action buttons: Each form submits to backend routes in ui.py -->
               <div class="task-actions" role="group" aria-label="Task actions for {{ task.title }}">

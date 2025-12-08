@@ -17,8 +17,9 @@ class TaskService:
     for cleaner, more maintainable code. This hybrid approach is temporary for learning!
     """
 
-    def __init__(self, storage=None):
+    def __init__(self, storage=None, time_service=None):
         self.storage = storage
+        self.time_service = time_service
         # Load tasks from storage and convert to Task objects
         self._tasks = []
 
@@ -33,6 +34,7 @@ class TaskService:
                         t["title"],
                         t.get("description", ""),
                         t.get("completed", False),
+                        t.get("created_at", None),
                     )
                 )
 
@@ -87,9 +89,15 @@ class TaskService:
         if self._tasks:
             next_id = max(task.id for task in self._tasks) + 1
 
-        # Create new Task object with validated data
+        # Get current UTC time from TimeService
+        created_at = None
+        if self.time_service:
+            time_response = self.time_service.get_current_time("UTC")
+            created_at = time_response.get("utc_datetime")
+
+        # Create new Task object with validated data and timestamp
         new_task_obj = Task(
-            next_id, validated_data.title, validated_data.description, False
+            next_id, validated_data.title, validated_data.description, False, created_at
         )
         self._tasks.append(new_task_obj)
 

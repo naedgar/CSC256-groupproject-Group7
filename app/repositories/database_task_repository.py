@@ -103,7 +103,8 @@ class DatabaseTaskRepository(TaskRepository):
                     'id': task.id,
                     'title': task.title,
                     'description': task.description,
-                    'completed': task.completed
+                    'completed': task.completed,
+                    'created_at': task.created_at
                 }
                 for task in tasks
             ]
@@ -124,7 +125,8 @@ class DatabaseTaskRepository(TaskRepository):
                     id=task_dict.get('id'),
                     title=task_dict['title'],
                     description=task_dict.get('description'),
-                    completed=task_dict.get('completed', False)
+                    completed=task_dict.get('completed', False),
+                    created_at=task_dict.get('created_at')
                 )
                 session.add(task)
             session.commit()
