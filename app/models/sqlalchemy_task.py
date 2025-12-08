@@ -1,6 +1,7 @@
 # app/models/sqlalchemy_task.py
 
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Boolean, DateTime
+from datetime import datetime
 
 """
 This model is designed for use with SQLite as the database, using SQLAlchemy as the ORM (Object Relational Mapper).
@@ -21,6 +22,7 @@ class Task(Base):
     title = Column(String, nullable=False)
     description = Column(String)
     completed = Column(Boolean, default=False)
+    created_at = Column(String, nullable=True)  # Store as ISO 8601 string from TimeService
 
     def __repr__(self):
-        return f"<Task(id={self.id}, title='{self.title}', completed={self.completed})>"
+        return f"<Task(id={self.id}, title='{self.title}', completed={self.completed}, created_at='{self.created_at}')>"

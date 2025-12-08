@@ -1,7 +1,7 @@
 # Class Diagram – Sprint 1
 
-This diagram shows how the main parts of the project work together.  
-It helps you see what each file or class does in a simple way.
+This diagram shows how the main parts of the project work together for Sprint 1.  
+Sprint 1 includes only the baseline task functionality migrated from the Individual Project.
 
 ```mermaid
 classDiagram
@@ -14,8 +14,8 @@ classDiagram
         +get_tasks()
     }
 
-    class TimeService {
-        +get_current_time()
+    class InMemoryStore {
+        +tasks : list
     }
 
     class CLIApp {
@@ -25,5 +25,5 @@ classDiagram
     }
 
     main --> TaskService : uses
-    main --> TimeService : uses
+    TaskService --> InMemoryStore : stores tasks
     CLIApp --> TaskService : calls

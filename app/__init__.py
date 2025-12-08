@@ -1,6 +1,6 @@
 # app/__init__.py (Database-wired version)
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, session, request
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from app.models.sqlalchemy_task import Base  # ✅ Correct import
@@ -24,6 +24,9 @@ def create_app(service=None):
     Sprint 4: Database-wired Flask application
     """
     app = Flask(__name__)
+    
+    # Configure secret key for session management
+    app.config['SECRET_KEY'] = 'dev-secret-key-change-in-production'
 
     # 🔧 Database Setup (only if no service provided via dependency injection)
     if service is None:
@@ -41,9 +44,10 @@ def create_app(service=None):
         Base.metadata.create_all(engine)  # Creates database and tables
         print("✅ Database tables created by Base.metadata.create_all(engine)")
         
-        # Wire up the repository and service
+        # Wire up the repository and service with TimeService
         repo = DatabaseTaskRepository(Session)
-        service = TaskService(repo)
+        time_service = TimeService()
+        service = TaskService(repo, time_service)
         
         # Store engine reference for cleanup
         app.database_engine = engine
@@ -65,6 +69,29 @@ def create_app(service=None):
     app.task_service = service
     # Add Inject TimeService after app.task_service = service but before route registration
     app.time_service = TimeService()  # ✅ TimeService instance for fetching current time
+
+    # Context processor to inject time data into all templates
+    @app.context_processor
+    def inject_time_data():
+        """Make current time and timezone available to all templates."""
+        # Get timezone from query parameter or session, default to UTC
+        selected_timezone = request.args.get('timezone', session.get('timezone', 'UTC'))
+        
+        # Store timezone in session for persistence
+        session['timezone'] = selected_timezone
+        
+        # Get current time for the selected timezone
+        try:
+            time_data = app.time_service.get_current_time(selected_timezone)
+        except Exception:
+            time_data = {"utc_datetime": "N/A", "timezone": selected_timezone, "source": "Error"}
+        
+        return dict(
+            current_time=time_data.get('utc_datetime', 'N/A'),
+            current_timezone=selected_timezone,
+            time_source=time_data.get('source', ''),
+            available_timezones=['UTC', 'Eastern', 'Central', 'Mountain', 'Pacific', 'London', 'Beijing']
+        )
 
     # Register Blueprints
     app.register_blueprint(tasks_bp)

@@ -12,9 +12,3 @@ erDiagram
         string description
         boolean completed
     }
-
-    TIME {
-        int id PK
-        datetime current_time
-        string timezone
-    }
