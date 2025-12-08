@@ -37,9 +37,15 @@ class TimeService:
           
           response.raise_for_status()
           data = response.json()
-          # timeapi.io returns different format
+          # timeapi.io returns different format - normalize it
+          datetime_str = data.get("dateTime", "")
+          # Ensure the datetime has a Z suffix for UTC
+          if datetime_str and not datetime_str.endswith('Z'):
+              datetime_str = datetime_str + 'Z'
+          
           return {
-              "utc_datetime": data.get("dateTime"),
+              "datetime": datetime_str,
+              "utc_datetime": datetime_str,
               "timezone": timezone,
               "source": "TimeAPI.io (External)"
           }
@@ -51,6 +57,7 @@ class TimeService:
           try:
               local_utc = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S.%fZ")
               return {
+                  "datetime": local_utc,
                   "utc_datetime": local_utc,
                   "timezone": timezone,
                   "source": "System Time (Fallback)"
