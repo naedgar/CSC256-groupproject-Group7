@@ -1,42 +1,47 @@
-## 🧭 User Journey – US033: Manual Task Workflow
+## 🧭 User Journey – US033: Manual Task Workflow (Sprint 4 – Final)
 
-This user journey describes how a typical user interacts with the Task Tracker application to complete the end-to-end task management workflow. This reflects the current "as-is" state of the application, implemented in Sprint 4.
+This user journey describes how a typical end user interacts with the **TaskTracker API and UI layer** to complete the full end-to-end task management workflow. This reflects the **final “as-is” state of the Group Project system in Sprint 4**.
+
+This journey supports:
+- **US039 – View Time Created in Task Summary**
+- **US031 – Show Current Time via External API**
+- **PR-7 – Full Regression Testing**
+- **PR-8 – Robot Framework Acceptance Tests**
 
 ---
 
-### 👤 User Role: End User
+### 👤 User Role
+**End User**
 
-### 🎯 Goal: Create a task, complete it, and view a task report
+---
+
+### 🎯 Goal
+Create a task, verify its creation timestamp, complete it, and retrieve a task report while validating the current time.
+
+---
 
 ```mermaid
 journey
-    title US033 – Manual Task Workflow
+    title US033 – Manual Task Workflow (Sprint 4 – Final)
 
     section Create Task
-      Visit Home Page: 5: User
-      Click "Add Task" in Menu: 4: User
-      Fill Out Task Form: 3: User
-      Submit Task Form: 3: User
-      Redirect to Task List: 3: System
+      Send POST request to /api/tasks: 5: User
+      System validates input & generates createdAt timestamp: 3: System
+      System stores task in JSON repository: 3: System
+      System returns created task with timestamp: 4: System
+
+    section View Task List
+      Send GET request to /api/tasks: 5: User
+      System returns list of tasks with createdAt values: 4: System
 
     section Complete Task
-      Click "Mark Complete" on Task: 3: User
-      System Updates Task as Completed: 2: System
+      Send PUT request to /api/tasks/{id}: 4: User
+      System marks task as completed: 3: System
 
-    section View Report
-      Click "Report" in Menu: 3: User
-      System Displays Task Summary: 4: System
-```
+    section View Current Time
+      Send GET request to /api/time: 5: User
+      System returns current time and timezone: 4: System
 
----
-
-### 📝 Notes
-
-* This journey supports validation for **US012**, **US026**, and **US027**.
-* Each step corresponds to UI elements implemented in Flask templates.
-* The flow can be tested using automated tools like **Selenium**, **Playwright**, or **Robot Framework**.
-
-### 🔗 Linked Artifacts
-
-* Referenced in: `tt_user_stories.md` (US033)
-* Linked from: `s4_sprint_plan.md` under "User Journey – US033"
+    section Delete Task
+      Send DELETE request to /api/tasks/{id}: 4: User
+      System removes task from repository: 3: System
