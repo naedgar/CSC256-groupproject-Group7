@@ -310,6 +310,30 @@ so that the interface remains clean and readable.
 📌 **Status:** Sprint 5 👥 Assigned to Group Project
 📝 Notes: Robot Framework 
 
+**US041 – Hybrid Test Organization with pytest Markers** 👥 Group
+
+As a QA-focused developer, I want tests organized by concern and scope (unit, integration, e2e) using pytest markers and folders, so I can quickly run the right set of tests and keep the suite maintainable as the project grows.
+
+🧑‍💻 Owner: Dev / QA
+🗓️ Sprint: 3–4 (PR-3, PR-7)
+📌 Status: 👥 Group: Assigned to Group Project 
+
+**US042 – Automated TimeService Testing (API + UI)** 👥 Group
+
+As a QA engineer, I want automated tests for the TimeService at both API and UI levels so I can ensure the displayed time is correct, updates as expected, and gracefully handles failures from the external time API.
+
+🧑‍💻 Owner: QA / Dev
+🗓️ Sprint: 4 (PR-4, PR-6, PR-7)
+📌 Status: 👥 Group: Assigned to Group Project (TimeService)
+
+**US043 – Centralized Task Validation (Service Layer + Schemas)** 👥 Group
+
+As a developer, I want all task validation centralized in the service layer and shared schemas so that API, CLI, and UI all use the same business rules and error messages, reducing bugs and duplication.
+
+🧑‍💻 Owner: Backend Dev
+🗓️ Sprint: 3–4 (PR-5, PR-7)
+📌 Status: 👥 Group: Assigned to Group Project (Central Validation)
+📝 Notes:
 ----
 ----
 
